@@ -1,1 +1,149 @@
 @import "tailwindcss";
+
+@theme {
+  /* 폰트 패밀리 변수 */
+  --font-sans:
+    "Pretendard Variable", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-inter: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-roboto: "Roboto", "sans-serif";
+
+  /*main color-light*/
+  --color-blue-900: #010d33;
+  --color-blue-850: #01134c;
+  --color-blue-800: #011966;
+  --color-blue-700: #022699;
+  --color-blue-600: #0232cc;
+  --color-blue-500: #033fff;
+  --color-blue-400: #3565ff;
+  --color-blue-300: #688cff;
+  --color-blue-200: #688cff;
+  --color-blue-150: #b3c5ff;
+  --color-blue-100: #cdd9ff;
+  --color-blue-50: #e6ecff;
+
+  /*sub color*/
+  --color-sub-900: #b2bdcc;
+  --color-sub-800: #c2cad6;
+  --color-sub-700: #c2cad6;
+  --color-sub-600: #e0e4eb;
+  --color-sub-500: #f0f2f5;
+  --color-sub-400: #f0f2f5;
+
+  /*point color*/
+  --color-point1: #00c7be;
+  --color-point2: #e3faf8;
+
+  /*status Color*/
+  --color-alert: #f33326;
+  --color-caution: #f33326;
+  --color-positive: #f33326;
+
+  /*text color*/
+  --color-strong: #000000;
+  --color-normal: #171717;
+  --color-alternative: #595959;
+  --color-assistive: #595959;
+  --color-disabled: #d9d9d9;
+
+  /*etc*/
+  --color-kakao: #fee500;
+  /* --color-apple: #fee500; */
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+  #root {
+    /* overflow: hidden; */
+    /* 헤더 스크롤이 안되서 임시 주석 */
+  }
+  /* 
+  body::-webkit-scrollbar {
+    display: none;
+  } */
+}
+
+@layer utilities {
+  .font-inter {
+    font-family: var(--font-inter);
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+    background: transparent;
+  }
+
+  /*typography*/
+
+  .large-title {
+    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
+  .large-title-32 {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
+
+  .title1 {
+    font-family: var(--font-sans);
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem; /* 114.286% */
+  }
+  .title-sb-24 {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem; /* 133.333% */
+  }
+  .subtitle-sb-20 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.75rem; /* 140% */
+  }
+  /*body*/
+  .body-r-18 {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+  }
+  .body-r-16 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem; /* 125% */
+  }
+  .button-r-14 {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.125rem; /* 128.571% */
+  }
+  .detail-r-12 {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.875rem; /* 116.667% */
+  }
+}
