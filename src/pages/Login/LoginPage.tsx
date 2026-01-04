@@ -1,14 +1,9 @@
+import { Header } from "../../components/Header";
+
 export const LoginPage = () => {
   return (
     <div className=" min-h-screen flex flex-col  items-center justify-center">
-      <header className="flex gap-2 items-center pt-8 pb-20 w-full ">
-        <img
-          src="/src/assets/images/logo.png"
-          alt="로고"
-          className="w-35 h-12"
-        />
-        <p className="title-sb-24">통합 로그인</p>
-      </header>
+      <Header />
 
       <section className=" w-full flex flex-col items-center  flex-1">
         <div className="flex gap-2 large-title-32 mb-8  items-center ">
