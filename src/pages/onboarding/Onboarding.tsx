@@ -7,7 +7,7 @@ export const Onboarding = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-col  items-center ">
-      <Header className="pb-3" />
+      <Header className="pb-2" />
       <section className="flex flex-col  items-center ">
         <div className="flex gap-4 mb-8 justify-center">
           <div className="flex gap-4 items-center ">
@@ -33,31 +33,31 @@ export const Onboarding = () => {
           <h1 className="subtitle-sb-20 mb-4">회원 가입</h1>
           <div className="w-full">
             <p className="mb-2 body-sb-16">닉네임</p>
-            <div className="w-full  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] mb-6">
+            <div className="w-full  rounded-xl mb-6">
               <input
                 type="text"
-                className="w-full p-3 body-r-14"
+                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
                 placeholder="닉네임을 입력하세요"
               />
             </div>
           </div>
           <div className="w-full">
-            <p className="mb-2 body-sb-16">이메일</p>
-            <div className="w-full  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] mb-6">
+            <p className="mb-2 body-sb-16">닉네임</p>
+            <div className="w-full  rounded-xl mb-6">
               <input
                 type="text"
-                className="w-full p-3 body-r-14"
+                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
                 placeholder="닉네임을 입력하세요"
               />
             </div>
           </div>
           <div className="w-full">
-            <p className="mb-2 body-sb-16">한 줄 소개</p>
-            <div className="w-full  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] mb-6">
+            <p className="mb-2 body-sb-16">닉네임</p>
+            <div className="w-full  rounded-xl mb-6">
               <input
                 type="text"
-                className="w-full p-3 body-r-14"
-                placeholder="당신을 한 줄로 소개해보세요"
+                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
+                placeholder="닉네임을 입력하세요"
               />
             </div>
           </div>
@@ -69,7 +69,10 @@ export const Onboarding = () => {
               <p className="text-blue-500">개인정보취급방침에</p>동의합니다
             </p>
           </div>
-          <button className="w-full rounded-lg text-white bg-blue-500 p-3">
+          <button
+            className="w-full rounded-lg text-white bg-blue-500 p-3 cursor-pointer"
+            onClick={() => navigate("/onboarding/tag")}
+          >
             다음
           </button>
         </section>
