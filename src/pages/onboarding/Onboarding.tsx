@@ -5,6 +5,7 @@ import CheckOn from "@assets/icons/Check_on.svg";
 import CheckOff from "@assets/icons/Check_off.svg";
 import { useState } from "react";
 import { Button } from "../../components/button/Button";
+import { OnboardingHeader } from "../../components/onboarding/OnboardingHeader";
 
 export const Onboarding = () => {
   const navigate = useNavigate();
@@ -13,26 +14,7 @@ export const Onboarding = () => {
     <div className="flex flex-col  items-center ">
       <Header className="pb-2" />
       <section className="flex flex-col  items-center ">
-        <div className="flex gap-4 mb-8 justify-center">
-          <div className="flex gap-4 items-center ">
-            <span className="size-8 rounded-full bg-blue-500 relative">
-              <p className="absolute left-3 top-1 text-white">1</p>
-            </span>
-
-            <p className="body-r-16 text-blue-500">기본 정보</p>
-          </div>
-
-          <span className="w-19 h-px bg-sub-800 mt-5"></span>
-
-          <div className="flex gap-4 items-center ">
-            <span className="size-8 rounded-full bg-assistive relative">
-              <p className="absolute left-3 top-1 text-white">1</p>
-            </span>
-
-            <p className="body-r-16 text-assistive">관심 분야</p>
-          </div>
-        </div>
-
+        <OnboardingHeader />
         <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 ">
           <h1 className="subtitle-sb-20 mb-4">회원 가입</h1>
           <div className="w-full">
@@ -79,7 +61,9 @@ export const Onboarding = () => {
             </p>
           </div>
 
-          <Button onClick={() => navigate("/onboarding/tag")}>다음</Button>
+          <Button onClick={() => navigate("/onboarding/tag")} className="p-2.5">
+            다음
+          </Button>
         </section>
       </section>
     </div>

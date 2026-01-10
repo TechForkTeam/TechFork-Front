@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MultiSelectedTag } from "../../components/MultiSelectedTag";
 import { Button } from "../../components/button/Button";
+import { OnboardingHeader } from "../../components/onboarding/OnboardingHeader";
 
 export const OnboardingTag = () => {
   const navigate = useNavigate();
@@ -44,27 +45,7 @@ export const OnboardingTag = () => {
     <div className="flex flex-col  items-center ">
       <Header className="pb-2" />
       <section className="flex flex-col  items-center ">
-        {/* 기본정보,관심분야 */}
-        <div className="flex gap-4 mb-8 justify-center">
-          <div className="flex gap-4 items-center ">
-            <span className="size-8 rounded-full bg-assistive  relative">
-              <p className="absolute left-3 top-1 text-white">1</p>
-            </span>
-
-            <p className=" body-r-16 text-assistive">기본 정보</p>
-          </div>
-
-          <span className="w-19 h-px bg-sub-800 mt-5"></span>
-
-          <div className="flex gap-4 items-center ">
-            <span className="size-8 rounded-full bg-blue-500 relative">
-              <p className="absolute left-3 top-1 text-white">1</p>
-            </span>
-
-            <p className="body-r-16 text-blue-500">관심 분야</p>
-          </div>
-        </div>
-
+        <OnboardingHeader basic={false} />
         <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 ">
           <h1 className="subtitle-sb-20 mb-2">관심 분야를 선택해 주세요</h1>
           <p className="body-r-14 text-alternative mb-2">
@@ -76,7 +57,7 @@ export const OnboardingTag = () => {
           </div>
           {/* 토글 */}
 
-          <article className="w-full max-h-70 overflow-scroll overflow-x-hidden scrollbar-hide">
+          <article className="w-full max-h-69 overflow-scroll overflow-x-hidden scrollbar-hide">
             {TAG.map((item, idx) => {
               const isOpen = openedCategories.has(idx);
               const itemTitle = item.replace(/[ /]/g, "_");
