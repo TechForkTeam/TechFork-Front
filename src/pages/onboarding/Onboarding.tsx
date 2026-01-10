@@ -4,6 +4,10 @@ import { Header } from "../../components/Header";
 import CheckOn from "@assets/icons/Check_on.svg";
 import CheckOff from "@assets/icons/Check_off.svg";
 import { useState } from "react";
+import { Button } from "../../components/button/Button";
+import { OnboardingHeader } from "../../components/onboarding/OnboardingHeader";
+import { InputField } from "../../components/InputField";
+import { onboardingFields } from "../../constants/onboarding";
 
 export const Onboarding = () => {
   const navigate = useNavigate();
@@ -12,58 +16,19 @@ export const Onboarding = () => {
     <div className="flex flex-col  items-center ">
       <Header className="pb-2" />
       <section className="flex flex-col  items-center ">
-        <div className="flex gap-4 mb-8 justify-center">
-          <div className="flex gap-4 items-center ">
-            <span className="size-8 rounded-full bg-blue-500 relative">
-              <p className="absolute left-3 top-1 text-white">1</p>
-            </span>
-
-            <p className="body-r-16 text-blue-500">기본 정보</p>
-          </div>
-
-          <span className="w-19 h-px bg-sub-800 mt-5"></span>
-
-          <div className="flex gap-4 items-center ">
-            <span className="size-8 rounded-full bg-assistive relative">
-              <p className="absolute left-3 top-1 text-white">1</p>
-            </span>
-
-            <p className="body-r-16 text-assistive">관심 분야</p>
-          </div>
-        </div>
-
+        <OnboardingHeader />
         <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 ">
           <h1 className="subtitle-sb-20 mb-4">회원 가입</h1>
-          <div className="w-full">
-            <p className="mb-3 body-sb-16">닉네임</p>
-            <div className="w-full  rounded-xl mb-5">
-              <input
-                type="text"
-                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
-                placeholder="닉네임을 입력하세요"
+
+          {onboardingFields.map(item => {
+            return (
+              <InputField
+                key={item.name}
+                label={item.label}
+                placeholder={item.placeholder}
               />
-            </div>
-          </div>
-          <div className="w-full">
-            <p className="mb-3 body-sb-16">이메일</p>
-            <div className="w-full  rounded-xl mb-5">
-              <input
-                type="text"
-                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
-                placeholder="이메일을 입력하세요"
-              />
-            </div>
-          </div>
-          <div className="w-full">
-            <p className="mb-3 body-sb-16">한 줄 소개</p>
-            <div className="w-full  rounded-xl mb-5">
-              <input
-                type="text"
-                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
-                placeholder="당신을 한 줄로 소개해보세요"
-              />
-            </div>
-          </div>
+            );
+          })}
 
           <div className="flex items-center mr-auto mb-8">
             <img
@@ -77,12 +42,10 @@ export const Onboarding = () => {
               <p className="text-blue-500">개인정보취급방침에</p>동의합니다.
             </p>
           </div>
-          <button
-            className="w-full rounded-lg text-white bg-blue-500 p-3 cursor-pointer"
-            onClick={() => navigate("/onboarding/tag")}
-          >
+
+          <Button onClick={() => navigate("/onboarding/tag")} className="p-2.5">
             다음
-          </button>
+          </Button>
         </section>
       </section>
     </div>
