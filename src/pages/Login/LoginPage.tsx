@@ -1,9 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
-
   return (
     <div className=" min-h-screen flex flex-col  items-center justify-center">
       <Header />
@@ -35,15 +32,6 @@ export const LoginPage = () => {
             />
             Apple 로그인
           </button>
-        </div>
-        <div className="flex gap-2 items-center justify-center">
-          <p className="body-sb-14 mt-0.5">계정이 없으신가요?</p>
-          <p
-            className="body-sb-16 text-blue-500 cursor-pointer"
-            onClick={() => navigate("/onboarding")}
-          >
-            회원가입
-          </p>
         </div>
       </section>
     </div>

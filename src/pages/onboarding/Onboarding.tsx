@@ -29,11 +29,11 @@ export const Onboarding = () => {
           </div>
         </div>
 
-        <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-116 ">
+        <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 ">
           <h1 className="subtitle-sb-20 mb-4">회원 가입</h1>
           <div className="w-full">
-            <p className="mb-2 body-sb-16">닉네임</p>
-            <div className="w-full  rounded-xl mb-6">
+            <p className="mb-3 body-sb-16">닉네임</p>
+            <div className="w-full  rounded-xl mb-5">
               <input
                 type="text"
                 className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
@@ -42,8 +42,8 @@ export const Onboarding = () => {
             </div>
           </div>
           <div className="w-full">
-            <p className="mb-2 body-sb-16">닉네임</p>
-            <div className="w-full  rounded-xl mb-6">
+            <p className="mb-3 body-sb-16">닉네임</p>
+            <div className="w-full  rounded-xl mb-5">
               <input
                 type="text"
                 className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
@@ -52,8 +52,8 @@ export const Onboarding = () => {
             </div>
           </div>
           <div className="w-full">
-            <p className="mb-2 body-sb-16">닉네임</p>
-            <div className="w-full  rounded-xl mb-6">
+            <p className="mb-3 body-sb-16">닉네임</p>
+            <div className="w-full  rounded-xl mb-5">
               <input
                 type="text"
                 className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
@@ -62,7 +62,7 @@ export const Onboarding = () => {
             </div>
           </div>
 
-          <div className="flex items-center mr-auto mb-4">
+          <div className="flex items-center mr-auto mb-8">
             <img src={CheckOn} alt="check" className="pr-2 size-7" />
             <p className="body-r-14 flex gap-1">
               <p className="text-blue-500">이용약관</p> 및
@@ -76,15 +76,6 @@ export const Onboarding = () => {
             다음
           </button>
         </section>
-        <div className="flex gap-2 my-3 items-center">
-          <p className="body-sb-14 mt-0.5">계정이 있으신가요?</p>
-          <p
-            className="body-sb-16 text-blue-500 cursor-pointer"
-            onClick={() => navigate("/login")}
-          >
-            로그인
-          </p>
-        </div>
       </section>
     </div>
   );
