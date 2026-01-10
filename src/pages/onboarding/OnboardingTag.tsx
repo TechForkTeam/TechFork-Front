@@ -7,6 +7,7 @@ import { TAG, TAG_MAP } from "../../constants/tag";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MultiSelectedTag } from "../../components/MultiSelectedTag";
+import { Button } from "../../components/button/Button";
 
 export const OnboardingTag = () => {
   const navigate = useNavigate();
@@ -124,15 +125,17 @@ export const OnboardingTag = () => {
           </article>
           {/* 버튼 */}
           <div className="flex gap-4 w-full pt-4">
-            <button
-              className="w-full rounded-lg  body-r-14 bg-sub-500 p-2.5 cursor-pointer"
+            <Button
+              color="grey1"
+              textColor="black"
+              className="body-r-14 p-2.5"
               onClick={() => navigate(-1)}
             >
               이전
-            </button>
-            <button className="w-full rounded-lg body-r-14 text-white bg-blue-500 p-2.5 cursor-pointer">
+            </Button>
+            <Button className="body-r-14 p-2.5" onClick={() => navigate("/")}>
               회원가입 완료
-            </button>
+            </Button>
           </div>
         </section>
       </section>

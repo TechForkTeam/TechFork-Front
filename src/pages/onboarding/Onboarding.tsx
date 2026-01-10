@@ -4,6 +4,7 @@ import { Header } from "../../components/Header";
 import CheckOn from "@assets/icons/Check_on.svg";
 import CheckOff from "@assets/icons/Check_off.svg";
 import { useState } from "react";
+import { Button } from "../../components/button/Button";
 
 export const Onboarding = () => {
   const navigate = useNavigate();
@@ -77,12 +78,8 @@ export const Onboarding = () => {
               <p className="text-blue-500">개인정보취급방침에</p>동의합니다.
             </p>
           </div>
-          <button
-            className="w-full rounded-lg text-white bg-blue-500 p-3 cursor-pointer"
-            onClick={() => navigate("/onboarding/tag")}
-          >
-            다음
-          </button>
+
+          <Button onClick={() => navigate("/onboarding/tag")}>다음</Button>
         </section>
       </section>
     </div>
