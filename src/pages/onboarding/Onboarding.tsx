@@ -6,6 +6,8 @@ import CheckOff from "@assets/icons/Check_off.svg";
 import { useState } from "react";
 import { Button } from "../../components/button/Button";
 import { OnboardingHeader } from "../../components/onboarding/OnboardingHeader";
+import { InputField } from "../../components/InputField";
+import { onboardingFields } from "../../constants/onboarding";
 
 export const Onboarding = () => {
   const navigate = useNavigate();
@@ -17,36 +19,16 @@ export const Onboarding = () => {
         <OnboardingHeader />
         <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 ">
           <h1 className="subtitle-sb-20 mb-4">회원 가입</h1>
-          <div className="w-full">
-            <p className="mb-3 body-sb-16">닉네임</p>
-            <div className="w-full  rounded-xl mb-5">
-              <input
-                type="text"
-                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
-                placeholder="닉네임을 입력하세요"
+
+          {onboardingFields.map(item => {
+            return (
+              <InputField
+                key={item.name}
+                label={item.label}
+                placeholder={item.placeholder}
               />
-            </div>
-          </div>
-          <div className="w-full">
-            <p className="mb-3 body-sb-16">이메일</p>
-            <div className="w-full  rounded-xl mb-5">
-              <input
-                type="text"
-                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
-                placeholder="이메일을 입력하세요"
-              />
-            </div>
-          </div>
-          <div className="w-full">
-            <p className="mb-3 body-sb-16">한 줄 소개</p>
-            <div className="w-full  rounded-xl mb-5">
-              <input
-                type="text"
-                className="w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 "
-                placeholder="당신을 한 줄로 소개해보세요"
-              />
-            </div>
-          </div>
+            );
+          })}
 
           <div className="flex items-center mr-auto mb-8">
             <img
