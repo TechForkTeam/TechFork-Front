@@ -19,6 +19,10 @@ import type { CompanyType } from "../../types/company";
 import { useInfiniteCompaniesPosts } from "../../hooks/useGetInfiniteCompaniesList";
 import { useGetMyInterest } from "../../lib/my";
 import { TagCodeToLabel } from "../../utils/tagCodeToLabel";
+import {
+  useGetRecommendPostList,
+  usePostRecommendPostList,
+} from "../../lib/recommendation";
 
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0); // 0 = 기업별 게시글
@@ -45,17 +49,18 @@ export const HomePage = () => {
         ? recentQuery
         : popularQuery;
 
+  const { data: recommedData } = useGetRecommendPostList();
+  console.log(recommedData);
+
   //회사 불러오기
   const { data: companyData } = useGetCompany();
-  // console.log(companyData);
 
   const infiniteRef = useRef<HTMLDivElement | null>(null);
-  const { tag } = useTagStore();
 
   //최근 생성된 게시글 + 인기순 게시글 + 기업별 게시글
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = activeQuery;
   const { data: myInterest } = useGetMyInterest();
-  console.log(myInterest);
+  // console.log(myInterest);
 
   useEffect(() => {
     if (!infiniteRef.current || !hasNextPage) return;
@@ -75,6 +80,8 @@ export const HomePage = () => {
   ); //게시글
   // console.log(selectedTab);
   const maxCompany = companyData.companies.slice(0, 8);
+
+  const { mutate: postRecommendList } = usePostRecommendPostList();
 
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
@@ -158,7 +165,10 @@ export const HomePage = () => {
             )}
           </div>
 
-          <button className="cursor-pointer flex items-center ml-auto my-5 py-2 px-4 body-r-14 gap-3 border border-bgNormal rounded-xl bg-white">
+          <button
+            className="cursor-pointer flex items-center ml-auto my-5 py-2 px-4 body-r-14 gap-3 border border-bgNormal rounded-xl bg-white"
+            onClick={() => postRecommendList()}
+          >
             새로고침
             <img src={Restart} alt="restart" />
           </button>
