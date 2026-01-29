@@ -27,5 +27,5 @@ export const KakaoLogin = () => {
   }, []);
 
   console.log(searchParams);
-  return <div>카카오로그인</div>;
+  return <div></div>;
 };
