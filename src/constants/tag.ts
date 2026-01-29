@@ -1,3 +1,26 @@
+export const TAG_CATEGORY_MAP = {
+  IOS: "iOS",
+  ANDROID: "Android",
+  FRONTEND: "Frontend",
+  BACKEND: "Backend",
+  DATA_ENGINEERING: "Data_Engineering",
+  DATA_SCIENCE: "Data_Science",
+  DATABASE: "Database",
+  AI_ML: "AI_ML",
+  DEVOPS: "DevOps",
+  CLOUD: "Cloud",
+  SYSTEMS_OS: "Systems_OS",
+  NETWORKING: "Networking",
+  SECURITY: "Security",
+  GAME_DEV: "Game_Dev",
+  AR_VR_XR: "AR_VR_XR",
+  EMBEDDED_IOT: "Embedded_IoT",
+  BLOCKCHAIN_WEB3: "Blockchain_Web3",
+  QA_TEST: "QA_Test",
+  PRODUCT_UX: "Product_UX",
+  ARCHITECTURE: "Architecture",
+} as const;
+
 export const TAG = [
   "iOS",
   "Android",
