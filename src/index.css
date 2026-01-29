@@ -185,15 +185,6 @@
   }
 }
 
-html {
-  -ms-overflow-style: none; /* IE, Edge */
-  scrollbar-width: none; /* Firefox */
-  overscroll-behavior: none;
-}
-html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
-
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

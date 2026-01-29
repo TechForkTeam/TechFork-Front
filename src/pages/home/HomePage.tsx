@@ -5,7 +5,7 @@ import Restart from "@/assets/icons/restart.svg";
 
 import { CardItem } from "../../shared/CardItem";
 import { CompanyItem } from "./components/CompanyItem";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CompaniesModal } from "./components/CompaniesModal";
 import { HomeCompanySelectBtn } from "./components/HomeCompanySelectBtn";
 import { useCompanyStore } from "../../store/uesCompanyStore";
@@ -13,6 +13,12 @@ import { MockData } from "../../Mock/company";
 import { useTagStore } from "../../store/useTagStore";
 import { SelectionBtn } from "../../shared/select-button/SelectionBtn";
 import { TAB_MAP } from "../../constants/tab";
+import {
+  useSuspenseInfiniteQuery,
+  type QueryFunctionContext,
+} from "@tanstack/react-query";
+import api from "../../lib/api";
+import type { CardItemProps, PostResponseDto } from "../../types/post";
 
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0); // 0 = 기업별 게시글
@@ -20,10 +26,69 @@ export const HomePage = () => {
   const { companies, toggleCompany } = useCompanyStore();
   // console.log(companies);
 
+  const infiniteRef = useRef<HTMLDivElement | null>(null);
   const { tag } = useTagStore();
-  console.log(tag);
+  // console.log(tag);
+  type PageParamType = {
+    lastPublishedAt?: string;
+    lastPostId?: number;
+  };
+  const getData = async ({
+    pageParam,
+  }: QueryFunctionContext<["posts", "recent", "latest"], PageParamType>) => {
+    const res = await api.get("/api/v2/posts/recent", {
+      params: {
+        sortBy: "LATEST",
+        size: 20,
+        ...pageParam,
+      },
+    });
+    return res.data;
+  };
 
-  const maxCompany = MockData.data.slice(0, 8); //최대 8개까지
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useSuspenseInfiniteQuery<
+      PostResponseDto, // queryFn
+      Error,
+      PostResponseDto[], // select ㅌ타입
+      ["posts", "recent", "latest"],
+      PageParamType
+    >({
+      queryKey: ["posts", "recent", "latest"],
+      queryFn: getData,
+      initialPageParam: {},
+      getNextPageParam: lastPage => {
+        if (!lastPage.data || !lastPage.data.hasNext) return undefined;
+        return {
+          lastPublishedAt: lastPage.data.lastPublishedAt,
+          lastPostId: lastPage.data.lastPostId,
+        };
+      },
+      select: res => res.pages,
+    });
+
+  useEffect(() => {
+    if (!infiniteRef.current || !hasNextPage) return;
+
+    const observer = new IntersectionObserver(entries => {
+      console.log(entries[0].isIntersecting);
+      if (entries[0].isIntersecting && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    });
+
+    observer.observe(infiniteRef.current);
+
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
+  console.log(data);
+  const posts: CardItemProps[] = data.flatMap(
+    (page: PostResponseDto) => page.data.posts,
+  ); //게시글
+  console.log(data);
+
+  const maxCompany = MockData.data.slice(0, 8);
 
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
@@ -113,18 +178,22 @@ export const HomePage = () => {
       )}
 
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-4">
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
-        <CardItem />
+        {posts.map(item => {
+          // const isLast = index === posts.length - 1;
+          return (
+            <CardItem
+              company={item.company}
+              key={item.id}
+              logoUrl={item.logoUrl}
+              viewCount={item.viewCount}
+              title={item.title}
+              thumbnailUrl={item.thumbnailUrl}
+              url={item.url}
+            />
+          );
+        })}
       </ul>
+      <div ref={infiniteRef} className="h-10 w-full" />
     </div>
   );
 };
