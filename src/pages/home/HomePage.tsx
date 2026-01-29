@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 import { CompaniesModal } from "./components/CompaniesModal";
 import { HomeCompanySelectBtn } from "./components/HomeCompanySelectBtn";
 import { useCompanyStore } from "../../store/uesCompanyStore";
-import { useTagStore } from "../../store/useTagStore";
 import { SelectionBtn } from "../../shared/select-button/SelectionBtn";
 import { TAB_MAP } from "../../constants/tab";
 
@@ -42,15 +41,21 @@ export const HomePage = () => {
     sortBy: "POPULAR",
   });
 
-  const activeQuery =
-    selectedTab === 0
-      ? companyQuery
-      : selectedTab === 2
-        ? recentQuery
-        : popularQuery;
+  const activeQuery = (() => {
+    switch (selectedTab) {
+      case 0:
+        return companyQuery;
+      case 1:
+        return null; // 추천은 무한스크롤 ㄴ
+      case 2:
+        return recentQuery;
+      case 3:
+        return popularQuery;
+    }
+  })();
 
-  const { data: recommedData } = useGetRecommendPostList();
-  console.log(recommedData);
+  const { data: recommendData } = useGetRecommendPostList();
+  // console.log(recommendData);
 
   //회사 불러오기
   const { data: companyData } = useGetCompany();
@@ -58,14 +63,23 @@ export const HomePage = () => {
   const infiniteRef = useRef<HTMLDivElement | null>(null);
 
   //최근 생성된 게시글 + 인기순 게시글 + 기업별 게시글
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = activeQuery;
+  // const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = activeQuery;
+
+  const isInfiniteTab = selectedTab !== 1;
+
+  const infiniteQuery = isInfiniteTab ? activeQuery : null;
+
+  const data = infiniteQuery?.data;
+  const fetchNextPage = infiniteQuery?.fetchNextPage;
+  const hasNextPage = infiniteQuery?.hasNextPage;
+  const isFetchingNextPage = infiniteQuery?.isFetchingNextPage;
+
   const { data: myInterest } = useGetMyInterest();
   // console.log(myInterest);
 
   useEffect(() => {
     if (!infiniteRef.current || !hasNextPage) return;
     const observer = new IntersectionObserver(entries => {
-      console.log(entries[0].isIntersecting);
       if (entries[0].isIntersecting && !isFetchingNextPage) {
         fetchNextPage();
       }
@@ -75,10 +89,15 @@ export const HomePage = () => {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   //데이터
-  const posts: CardItemProps[] = data.flatMap(
-    (page: PostResponseDto) => page.data.posts,
-  ); //게시글
-  // console.log(selectedTab);
+  const posts: CardItemProps[] = (() => {
+    if (selectedTab === 1) {
+      return recommendData?.recommendations ?? [];
+    }
+
+    return data?.flatMap((page: PostResponseDto) => page.data.posts) ?? [];
+  })();
+
+  //게시글
   const maxCompany = companyData.companies.slice(0, 8);
 
   const { mutate: postRecommendList } = usePostRecommendPostList();

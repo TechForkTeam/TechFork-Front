@@ -1,4 +1,8 @@
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import api from "./api";
 
 //추천 게시글 조회
@@ -22,9 +26,15 @@ export const postRecommendList = async () => {
 };
 
 export const usePostRecommendPostList = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postRecommendList,
-    onSuccess: () => console.log("새로고침성공"),
+    onSuccess: async () => {
+      console.log("성공");
+      await queryClient.refetchQueries({
+        queryKey: ["my", "recommend"],
+      });
+    },
     onError: err => {
       console.log(err);
     },
