@@ -1,14 +1,14 @@
-import User from "@/assets/images/user.png";
 import { cn } from "../../../utils/cn";
 interface CompanyModalItemProps {
   company?: string;
-  img?: string;
+  logoUrl?: string;
   selected: boolean;
   onClick: () => void;
 }
 export const CompanyModalItem = ({
   company = "company",
   selected = false,
+  logoUrl,
   onClick,
 }: CompanyModalItemProps) => {
   return (
@@ -20,7 +20,7 @@ export const CompanyModalItem = ({
       onClick={onClick}
     >
       <div className="p-3 rounded-2xl border border-bgNormal aspect-square   bg-white  ">
-        <img src={User} alt="company" className="object-corver size-8" />
+        <img src={logoUrl} alt="company" className="object-corver size-8" />
       </div>
       <p
         className="body-r-14 text-center h-10 line-clamp-2  wrap-break-word

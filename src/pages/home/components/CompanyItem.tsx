@@ -1,9 +1,8 @@
-import User from "@/assets/images/user.png";
 import Dot from "@/assets/icons/dot.svg";
 import { cn } from "../../../utils/cn";
 interface CompanyItemProps {
   company?: string;
-  img?: string;
+  logoUrl?: string;
   newDot?: boolean;
   selected: boolean;
   onClick?: () => void;
@@ -12,6 +11,7 @@ export const CompanyItem = ({
   company = "company",
   newDot = false,
   selected = true,
+  logoUrl,
   onClick,
 }: CompanyItemProps) => {
   return (
@@ -26,7 +26,7 @@ export const CompanyItem = ({
         )}
         onClick={onClick}
       >
-        <img src={User} alt="company" className="size-8" />
+        <img src={logoUrl} alt="company" className="size-8" />
       </div>
       <p className="body-r-14">{company}</p>
     </div>

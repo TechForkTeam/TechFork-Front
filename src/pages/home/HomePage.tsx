@@ -2,93 +2,55 @@ import { TabSelectList } from "./components/TabSelectList";
 import PopOn from "@/assets/icons/pop-on.svg";
 import PopOff from "@/assets/icons/pop-off.svg";
 import Restart from "@/assets/icons/restart.svg";
-
 import { CardItem } from "../../shared/CardItem";
 import { CompanyItem } from "./components/CompanyItem";
 import { useEffect, useRef, useState } from "react";
 import { CompaniesModal } from "./components/CompaniesModal";
 import { HomeCompanySelectBtn } from "./components/HomeCompanySelectBtn";
 import { useCompanyStore } from "../../store/uesCompanyStore";
-import { MockData } from "../../Mock/company";
 import { useTagStore } from "../../store/useTagStore";
 import { SelectionBtn } from "../../shared/select-button/SelectionBtn";
 import { TAB_MAP } from "../../constants/tab";
-import {
-  useSuspenseInfiniteQuery,
-  type QueryFunctionContext,
-} from "@tanstack/react-query";
-import api from "../../lib/api";
+
 import type { CardItemProps, PostResponseDto } from "../../types/post";
+import { useInfinitePosts } from "../../hooks/useGetInfinitePostList";
+import { useGetCompany } from "../../lib/company";
+import type { CompanyType } from "../../types/company";
 
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0); // 0 = 기업별 게시글
   const [modal, setModal] = useState(false);
   const { companies, toggleCompany } = useCompanyStore();
-  // console.log(companies);
+
+  //회사 불러오기
+  const { data: companyData } = useGetCompany();
+  console.log(companyData);
 
   const infiniteRef = useRef<HTMLDivElement | null>(null);
   const { tag } = useTagStore();
-  // console.log(tag);
-  type PageParamType = {
-    lastPublishedAt?: string;
-    lastPostId?: number;
-  };
-  const getData = async ({
-    pageParam,
-  }: QueryFunctionContext<["posts", "recent", "latest"], PageParamType>) => {
-    const res = await api.get("/api/v2/posts/recent", {
-      params: {
-        sortBy: "LATEST",
-        size: 20,
-        ...pageParam,
-      },
-    });
-    return res.data;
-  };
-
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useSuspenseInfiniteQuery<
-      PostResponseDto, // queryFn
-      Error,
-      PostResponseDto[], // select ㅌ타입
-      ["posts", "recent", "latest"],
-      PageParamType
-    >({
-      queryKey: ["posts", "recent", "latest"],
-      queryFn: getData,
-      initialPageParam: {},
-      getNextPageParam: lastPage => {
-        if (!lastPage.data || !lastPage.data.hasNext) return undefined;
-        return {
-          lastPublishedAt: lastPage.data.lastPublishedAt,
-          lastPostId: lastPage.data.lastPostId,
-        };
-      },
-      select: res => res.pages,
+    useInfinitePosts({
+      sortBy: selectedTab === 2 ? "LATEST" : "POPULAR",
+      size: 20,
     });
 
   useEffect(() => {
     if (!infiniteRef.current || !hasNextPage) return;
-
     const observer = new IntersectionObserver(entries => {
       console.log(entries[0].isIntersecting);
       if (entries[0].isIntersecting && !isFetchingNextPage) {
         fetchNextPage();
       }
     });
-
     observer.observe(infiniteRef.current);
-
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-  console.log(data);
   const posts: CardItemProps[] = data.flatMap(
     (page: PostResponseDto) => page.data.posts,
   ); //게시글
-  console.log(data);
-
-  const maxCompany = MockData.data.slice(0, 8);
+  console.log(selectedTab);
+  const maxCompany = companyData.companies.slice(0, 8);
 
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
@@ -103,26 +65,36 @@ export const HomePage = () => {
       {selectedTab === 0 && (
         <>
           <div className=" flex items-center gap-4 flex-wrap pb-6">
-            {companies.length !== 0 && (
+            {companyData.companies.length !== 0 && (
               <>
                 <div className=" body-sb-14">선택된 기업:</div>
-                {companies.map(company => (
-                  <HomeCompanySelectBtn
-                    company={company}
-                    onClick={e => e.stopPropagation()}
-                  />
-                ))}
+                {companies.map(company => {
+                  const matchedCompany = companyData.companies.find(
+                    item => item.company === company,
+                  );
+
+                  return (
+                    <HomeCompanySelectBtn
+                      key={company}
+                      company={company}
+                      logoUrl={matchedCompany.logoUrl}
+                      onClick={e => e.stopPropagation()}
+                    />
+                  );
+                })}
               </>
             )}
           </div>
           {/* 게시글일때 회사 네모item */}
           <section className="mb-12 flex items-center justify-center gap-12 relative flex-wrap">
-            {maxCompany.map(item => {
+            {maxCompany.map((item: CompanyType) => {
               return (
                 <CompanyItem
-                  company={item.companies}
-                  selected={companies.includes(item.companies)}
-                  onClick={() => toggleCompany(item.companies)}
+                  company={item.company}
+                  logoUrl={item.logoUrl}
+                  newDot={item.hasNewPost}
+                  selected={companies.includes(item.company)}
+                  onClick={() => toggleCompany(item.company)}
                 />
               );
             })}
@@ -141,7 +113,7 @@ export const HomePage = () => {
                 onClick={e => e.stopPropagation()}
                 className="absolute  top-25 right-40"
               >
-                <CompaniesModal />
+                <CompaniesModal companyData={companyData} />
               </div>
             )}
           </section>
