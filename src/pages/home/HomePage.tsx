@@ -16,23 +16,46 @@ import type { CardItemProps, PostResponseDto } from "../../types/post";
 import { useInfinitePosts } from "../../hooks/useGetInfinitePostList";
 import { useGetCompany } from "../../lib/company";
 import type { CompanyType } from "../../types/company";
+import { useInfiniteCompaniesPosts } from "../../hooks/useGetInfiniteCompaniesList";
+import { useGetMyInterest } from "../../lib/my";
+import { TagCodeToLabel } from "../../utils/tagCodeToLabel";
 
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0); // 0 = 기업별 게시글
   const [modal, setModal] = useState(false);
   const { companies, toggleCompany } = useCompanyStore();
+  // console.log(companies);
+
+  const companyQuery = useInfiniteCompaniesPosts({
+    companies,
+  });
+
+  const recentQuery = useInfinitePosts({
+    sortBy: "LATEST",
+  });
+
+  const popularQuery = useInfinitePosts({
+    sortBy: "POPULAR",
+  });
+
+  const activeQuery =
+    selectedTab === 0
+      ? companyQuery
+      : selectedTab === 2
+        ? recentQuery
+        : popularQuery;
 
   //회사 불러오기
   const { data: companyData } = useGetCompany();
-  console.log(companyData);
+  // console.log(companyData);
 
   const infiniteRef = useRef<HTMLDivElement | null>(null);
   const { tag } = useTagStore();
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfinitePosts({
-      sortBy: selectedTab === 2 ? "LATEST" : "POPULAR",
-      size: 20,
-    });
+
+  //최근 생성된 게시글 + 인기순 게시글 + 기업별 게시글
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = activeQuery;
+  const { data: myInterest } = useGetMyInterest();
+  console.log(myInterest);
 
   useEffect(() => {
     if (!infiniteRef.current || !hasNextPage) return;
@@ -46,10 +69,11 @@ export const HomePage = () => {
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
+  //데이터
   const posts: CardItemProps[] = data.flatMap(
     (page: PostResponseDto) => page.data.posts,
   ); //게시글
-  console.log(selectedTab);
+  // console.log(selectedTab);
   const maxCompany = companyData.companies.slice(0, 8);
 
   return (
@@ -125,21 +149,13 @@ export const HomePage = () => {
         <>
           <div className=" flex gap-2 flex-wrap py-4">
             <p className="body-r-14 mr-2">나의 관심 분야:</p>
-
-            <SelectionBtn>전체</SelectionBtn>
-            <SelectionBtn>React</SelectionBtn>
-            <SelectionBtn>TypeScript</SelectionBtn>
-            <SelectionBtn>전체</SelectionBtn>
-            <SelectionBtn>전체</SelectionBtn>
-            <SelectionBtn>React</SelectionBtn>
-            <SelectionBtn>TypeScript</SelectionBtn>
-            <SelectionBtn>전체</SelectionBtn>
-            <SelectionBtn>전체</SelectionBtn>
-            <SelectionBtn>React</SelectionBtn>
-
-            {tag.map(item => {
-              return <SelectionBtn>{item}</SelectionBtn>;
-            })}
+            {myInterest.map(item =>
+              TagCodeToLabel(item.category, item.keywords).map(label => (
+                <SelectionBtn key={`${item.category}-${label}`}>
+                  {label}
+                </SelectionBtn>
+              )),
+            )}
           </div>
 
           <button className="cursor-pointer flex items-center ml-auto my-5 py-2 px-4 body-r-14 gap-3 border border-bgNormal rounded-xl bg-white">
@@ -151,7 +167,6 @@ export const HomePage = () => {
 
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-4">
         {posts.map(item => {
-          // const isLast = index === posts.length - 1;
           return (
             <CardItem
               company={item.company}

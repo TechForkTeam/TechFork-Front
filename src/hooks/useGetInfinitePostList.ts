@@ -3,13 +3,8 @@ import {
   useSuspenseInfiniteQuery,
   type QueryFunctionContext,
 } from "@tanstack/react-query";
-import type { PostResponseDto } from "../types/post";
+import type { PageParamType, PostResponseDto } from "../types/post";
 import { getPostList } from "../lib/post";
-
-export type PageParamType = {
-  lastPublishedAt?: string;
-  lastPostId?: number;
-};
 
 interface UseInfinitePostsParams {
   sortBy: "LATEST" | "POPULAR";

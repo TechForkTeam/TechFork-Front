@@ -18,3 +18,21 @@ export const getPostList = async (
 
   return res.data;
 };
+
+//기업별 게시글 조회
+
+export interface GetCompaniesPostListParams {
+  companies?: string[];
+  size?: number;
+  lastPublishedAt?: string;
+  lastPostId?: number;
+}
+export const getCompaniesPostList = async (
+  params: GetCompaniesPostListParams,
+): Promise<PostResponseDto> => {
+  const res = await api.get("/api/v2/posts/by-company", {
+    params,
+  });
+
+  return res.data;
+};
