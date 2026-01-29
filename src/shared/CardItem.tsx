@@ -54,8 +54,10 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
         </div>
         <a
           href={url}
-          className="  absolute inset-0 z-10 cursor-pointer"
-          aria-label={`${title} 게시글로 이동`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute inset-0 z-10 cursor-pointer"
+          aria-label={`${title} 보기`}
         />
       </li>
     );
