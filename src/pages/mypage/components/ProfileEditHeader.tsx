@@ -4,30 +4,36 @@ import { Button } from "../../../shared/button/Button";
 interface ProfileEditHEaderProps {
   onSubmit: () => void;
   onCancel: () => void;
+  nickName: string;
+  email: string;
+  description: string;
 }
 
 export const ProfileEditHeader = ({
   onSubmit,
   onCancel,
+  nickName,
+  email,
+  description,
 }: ProfileEditHEaderProps) => {
   return (
     <div>
       <InputField
         key={"ss"}
         label={"닉네임"}
-        placeholder={"한줄소개"}
+        placeholder={nickName}
         className="body-r-16"
       />
       <InputField
         key={"ss"}
         label={"이메일"}
-        placeholder={"한줄소개"}
+        placeholder={email}
         className="body-r-16"
       />
       <InputField
         key={"ss"}
         label={"한줄 소개"}
-        placeholder={"자기 소개"}
+        placeholder={description}
         className="body-r-16"
       />
       <div className="flex gap-4">

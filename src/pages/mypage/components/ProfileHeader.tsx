@@ -1,22 +1,33 @@
-import User from "@assets/images/user.png";
 import { Button } from "../../../shared/button/Button";
 
 interface ProfileHeaderProps {
   onEdit: () => void;
+  profileImage: string;
+  nickName: string;
+  email: string;
+  description: string;
 }
 
-export const ProfileHeader = ({ onEdit }: ProfileHeaderProps) => {
+export const ProfileHeader = ({
+  onEdit,
+  profileImage,
+  nickName,
+  email,
+  description,
+}: ProfileHeaderProps) => {
   return (
     <div>
       <h2 className="mb-8 subtitle-sb-20">프로필</h2>
       <div className="flex gap-7 mb-7">
-        <img src={User} alt="profile image" className="rounded-full size-17" />
+        <img
+          src={profileImage}
+          alt="profile image"
+          className="rounded-full size-17"
+        />
         <div className="flex flex-col gap-1">
-          <p className="body-r-16">닉네임</p>
-          <p className="body-r-14 text-alternative">user@example.com</p>
-          <p className="body-r-14 text-alternative">
-            한줄소개가 입력되어있어요
-          </p>
+          <p className="body-r-16">{nickName}</p>
+          <p className="body-r-14 text-alternative">{email}</p>
+          <p className="body-r-14 text-alternative">{description}</p>
         </div>
       </div>
       <Button

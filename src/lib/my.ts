@@ -16,3 +16,17 @@ export const useGetMyInterest = () => {
     select: res => res.data.interests,
   });
 };
+
+// 내 프로필 조회
+export const getMyProfile = async () => {
+  const { data } = await api.get("/api/v1/users/me/profile");
+  return data;
+};
+
+export const useGetMyProfile = () => {
+  return useSuspenseQuery({
+    queryKey: ["my", "profile"],
+    queryFn: getMyProfile,
+    select: res => res.data,
+  });
+};

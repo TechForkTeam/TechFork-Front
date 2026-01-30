@@ -8,6 +8,7 @@ import { ProfileHeader } from "./components/ProfileHeader";
 import { LeaveModal } from "./components/LeaveModal";
 import { ProfileEditHeader } from "./components/ProfileEditHeader";
 import { SettingList } from "./components/SettingList";
+import { useGetMyProfile } from "../../lib/my";
 interface SettingItem {
   icon: LucideIcon;
   label: string;
@@ -53,14 +54,24 @@ export const SettingPage = () => {
       onClick: () => navigate("/ask"),
     },
   ];
-
+  const { data: user } = useGetMyProfile();
+  console.log(user);
   return (
     <div className="px-20 pb-8">
       <section className="mt-16 mb-8  bg-white p-8 rounded-xl border border-bgNormal">
         {!isEdit ? (
-          <ProfileHeader onEdit={() => setIsEdit(true)} />
+          <ProfileHeader
+            onEdit={() => setIsEdit(true)}
+            nickName={user.nickName}
+            description={user.description ?? ""}
+            profileImage={user.profileImage}
+            email={user.email}
+          />
         ) : (
           <ProfileEditHeader
+            nickName={user.nickName}
+            description={user.description ?? ""}
+            email={user.email}
             onCancel={() => setIsEdit(false)}
             onSubmit={() => {
               setIsEdit(false);
