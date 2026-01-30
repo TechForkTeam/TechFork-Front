@@ -21,13 +21,12 @@ import {
   useGetRecommendPostList,
   usePostRecommendPostList,
 } from "../../lib/recommendation";
+import type { InterestTypeDto } from "../../types/my";
 
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0); // 0 = 기업별 게시글
   const [modal, setModal] = useState(false);
   const { companies, toggleCompany } = useCompanyStore();
-  // console.log(companies);
-
   const companyQuery = useInfiniteCompaniesPosts({
     companies,
   });
@@ -57,6 +56,7 @@ export const HomePage = () => {
 
   //회사 불러오기
   const { data: companyData } = useGetCompany();
+  console.log(companyData);
 
   const infiniteRef = useRef<HTMLDivElement | null>(null);
 
@@ -70,9 +70,10 @@ export const HomePage = () => {
   const isFetchingNextPage = infiniteQuery?.isFetchingNextPage;
 
   const { data: myInterest } = useGetMyInterest();
+  console.log(myInterest);
 
   useEffect(() => {
-    if (!infiniteRef.current || !hasNextPage) return;
+    if (!infiniteRef.current || !hasNextPage || !fetchNextPage) return;
     const observer = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && !isFetchingNextPage) {
         fetchNextPage();
@@ -91,7 +92,7 @@ export const HomePage = () => {
     return data?.flatMap((page: PostResponseDto) => page.data.posts) ?? [];
   })();
 
-  console.log(posts);
+  // console.log(posts);
 
   //게시글
   const maxCompany = companyData.companies.slice(0, 8);
@@ -116,7 +117,7 @@ export const HomePage = () => {
                 <div className=" body-sb-14">선택된 기업:</div>
                 {companies.map(company => {
                   const matchedCompany = companyData.companies.find(
-                    item => item.company === company,
+                    (item: CompanyType) => item.company === company,
                   );
 
                   return (
@@ -171,7 +172,7 @@ export const HomePage = () => {
         <>
           <div className=" flex gap-2 flex-wrap py-4">
             <p className="body-r-14 mr-2">나의 관심 분야:</p>
-            {myInterest.map(item =>
+            {myInterest.map((item: InterestTypeDto) =>
               TagCodeToLabel(item.category, item.keywords).map(label => (
                 <SelectionBtn key={`${item.category}-${label}`}>
                   {label}
@@ -192,6 +193,7 @@ export const HomePage = () => {
 
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-4">
         {posts.map(item => {
+          const isSelected = selectedTab === 1;
           return (
             <CardItem
               company={item.company}
@@ -201,7 +203,7 @@ export const HomePage = () => {
               title={item.title}
               thumbnailUrl={item.thumbnailUrl}
               url={item.url}
-              id={item.id}
+              id={isSelected ? item.postId : item.id}
               isBookmarked={item.isBookmarked}
             />
           );

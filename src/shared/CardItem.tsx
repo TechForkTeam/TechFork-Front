@@ -25,13 +25,14 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
     //북마크 추가
     const handleSubmitPostBookmark = usePostBookmark();
     const handleSubmitDeleteBookmark = useDeleteBookmark();
-    const handleClick = e => {
+    const handleClick = (e: React.MouseEvent) => {
       e.stopPropagation();
       e.preventDefault();
+      if (!id) return;
       if (isBookmarked) {
-        handleSubmitDeleteBookmark.mutate(id ?? 0);
+        handleSubmitDeleteBookmark.mutate(id);
       } else {
-        handleSubmitPostBookmark.mutate(id ?? 0);
+        handleSubmitPostBookmark.mutate(id);
       }
     };
 

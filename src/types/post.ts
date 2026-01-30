@@ -33,8 +33,10 @@ export type CardItemProps = {
   logoUrl: string;
   thumbnailUrl: string;
   publishedAt?: string;
+  isBookmarked: boolean;
   viewCount: number;
   keywords?: string[];
+  postId?: number;
 };
 
 export type PageParamType = {
