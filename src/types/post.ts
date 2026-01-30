@@ -41,3 +41,27 @@ export type PageParamType = {
   lastPublishedAt?: string;
   lastPostId?: number;
 };
+
+// 북마크
+export type UseInfiniteBookmarkPostsParams = {
+  lastBookmarkId?: number;
+  size: number;
+};
+
+export type PostListBookmarkResponse = {
+  bookmarkId: number;
+  postId: number;
+  title: string;
+  url: string;
+  companyName: string;
+  logoUrl: string;
+  publishedAt: string;
+};
+
+//북마크 단위
+export type PostBookmarkResponseDto = {
+  data: PostListBookmarkResponse;
+  code: string;
+  isSuccess: boolean;
+  message: string;
+};
