@@ -1,6 +1,8 @@
 import BookOn from "@/assets/icons/book-on.svg";
+import BookOff from "@/assets/icons/book-off.svg";
 import Eye from "@/assets/icons/eye.svg";
 import { forwardRef } from "react";
+import { useDeleteBookmark, usePostBookmark } from "../lib/activity";
 
 interface CardItemProps {
   id?: number;
@@ -10,17 +12,39 @@ interface CardItemProps {
   logoUrl: string;
   thumbnailUrl: string;
   publishedAt?: string;
+  isBookmarked: boolean;
   viewCount: number;
   keywords?: string[];
 }
 
 export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
-  ({ viewCount, logoUrl, title, thumbnailUrl, company, url }, ref) => {
+  (
+    { viewCount, logoUrl, title, thumbnailUrl, company, url, id, isBookmarked },
+    ref,
+  ) => {
+    //북마크 추가
+    const handleSubmitPostBookmark = usePostBookmark();
+    const handleSubmitDeleteBookmark = useDeleteBookmark();
+    const handleClick = e => {
+      e.stopPropagation();
+      e.preventDefault();
+      if (isBookmarked) {
+        handleSubmitDeleteBookmark.mutate(id ?? 0);
+      } else {
+        handleSubmitPostBookmark.mutate(id ?? 0);
+      }
+    };
+
     return (
       <li className=" h-90 rounded-lg bg-white p-4 relative " ref={ref}>
         <div className="flex justify-between mb-3">
           <img src={logoUrl} alt={company} className="size-10" />
-          <img src={BookOn} alt="북마크" />
+          <img
+            src={isBookmarked ? BookOn : BookOff}
+            alt="북마크"
+            className=" z-50 cursor-pointer"
+            onClick={e => handleClick(e)}
+          />
         </div>
         <div className="flex flex-col gap-4 pb-3 border-b border-bgNormal mb-2">
           <h3 className="body-sb-18 min-h-12  line-clamp-2 overflow-hidden text-clip">

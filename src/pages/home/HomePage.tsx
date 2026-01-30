@@ -10,7 +10,6 @@ import { HomeCompanySelectBtn } from "./components/HomeCompanySelectBtn";
 import { useCompanyStore } from "../../store/uesCompanyStore";
 import { SelectionBtn } from "../../shared/select-button/SelectionBtn";
 import { TAB_MAP } from "../../constants/tab";
-
 import type { CardItemProps, PostResponseDto } from "../../types/post";
 import { useInfinitePosts } from "../../hooks/useGetInfinitePostList";
 import { useGetCompany } from "../../lib/company";
@@ -55,15 +54,11 @@ export const HomePage = () => {
   })();
 
   const { data: recommendData } = useGetRecommendPostList();
-  // console.log(recommendData);
 
   //회사 불러오기
   const { data: companyData } = useGetCompany();
 
   const infiniteRef = useRef<HTMLDivElement | null>(null);
-
-  //최근 생성된 게시글 + 인기순 게시글 + 기업별 게시글
-  // const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = activeQuery;
 
   const isInfiniteTab = selectedTab !== 1;
 
@@ -75,7 +70,6 @@ export const HomePage = () => {
   const isFetchingNextPage = infiniteQuery?.isFetchingNextPage;
 
   const { data: myInterest } = useGetMyInterest();
-  // console.log(myInterest);
 
   useEffect(() => {
     if (!infiniteRef.current || !hasNextPage) return;
@@ -96,6 +90,8 @@ export const HomePage = () => {
 
     return data?.flatMap((page: PostResponseDto) => page.data.posts) ?? [];
   })();
+
+  console.log(posts);
 
   //게시글
   const maxCompany = companyData.companies.slice(0, 8);
@@ -205,6 +201,8 @@ export const HomePage = () => {
               title={item.title}
               thumbnailUrl={item.thumbnailUrl}
               url={item.url}
+              id={item.id}
+              isBookmarked={item.isBookmarked}
             />
           );
         })}
