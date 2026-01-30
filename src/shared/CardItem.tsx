@@ -42,7 +42,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
           <img
             src={isBookmarked ? BookOn : BookOff}
             alt="북마크"
-            className=" z-50 cursor-pointer"
+            className=" z-15 cursor-pointer"
             onClick={e => handleClick(e)}
           />
         </div>
