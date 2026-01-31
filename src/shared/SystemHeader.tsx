@@ -6,12 +6,17 @@ import { Button } from "./button/Button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { MYPAGE_NAV } from "../constants/mypage";
+import useUserStore from "../store/useUserStore";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
   //나중에 store로 header  login Btn 뺄  에정
   const [userModal, setUserModal] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
+
+  const { user } = useUserStore();
+  const isLogin = !!user?.accessToken;
+  // console.log(user?.accessToken);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -45,13 +50,15 @@ export const SystemHeader = () => {
           />
         </div>
         <div className="flex gap-4">
-          <Button
-            size={"sm"}
-            className="body-r-14 w-30 py-2"
-            onClick={() => navigate("/login")}
-          >
-            회원가입/로그인
-          </Button>
+          {!isLogin && (
+            <Button
+              size={"sm"}
+              className="body-r-14 w-30 py-2"
+              onClick={() => navigate("/login")}
+            >
+              회원가입/로그인
+            </Button>
+          )}
           <img
             src={User}
             alt="mypage"
