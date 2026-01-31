@@ -1,71 +1,88 @@
 export const INTERESTS_MOCK = {
   interests: [
     {
-      category: "iOS",
+      code: "IOS",
+      label: "iOS",
       keywords: ["Swift", "SwiftUI", "UIKit", "Xcode"],
     },
     {
-      category: "Android",
+      code: "ANDROID",
+      label: "Android",
       keywords: ["Kotlin", "Java", "Jetpack Compose", "Android Studio"],
     },
     {
-      category: "Frontend",
+      code: "FRONTEND",
+      label: "Frontend",
       keywords: ["React", "Vue.js", "Angular", "JavaScript", "TypeScript"],
     },
     {
-      category: "Backend",
+      code: "BACKEND",
+      label: "Backend",
       keywords: ["Java", "Spring", "Node.js", "Python", "Django"],
     },
     {
-      category: "Data Engineering",
+      code: "DATA_ENGINEERING",
+      label: "Data Engineering",
       keywords: ["Apache Spark", "Apache Kafka", "Airflow", "ETL"],
     },
     {
-      category: "Data Science",
+      code: "DATA_SCIENCE",
+      label: "Data Science",
       keywords: ["Python", "Pandas", "NumPy", "Jupyter", "SQL"],
     },
     {
-      category: "Database",
+      code: "DATABASE",
+      label: "Database",
       keywords: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Oracle"],
     },
     {
-      category: "AI/ML",
+      code: "AI_ML",
+      label: "AI/ML",
       keywords: ["TensorFlow", "PyTorch", "Machine Learning", "Deep Learning"],
     },
     {
-      category: "DevOps",
+      code: "DEVOPS",
+      label: "DevOps",
       keywords: ["Docker", "Kubernetes", "AWS", "CI/CD", "Jenkins"],
     },
     {
-      category: "Cloud",
+      code: "CLOUD",
+      label: "Cloud",
       keywords: ["AWS", "Azure", "GCP", "Firebase"],
     },
     {
-      category: "Systems/OS",
+      code: "SYSTEMS_OS",
+      label: "Systems/OS",
       keywords: ["Linux", "Unix", "Windows Server", "시스템 프로그래밍"],
     },
     {
-      category: "Networking",
+      code: "NETWORKING",
+      label: "Networking",
       keywords: ["TCP/IP", "HTTP/HTTPS", "RESTful API", "WebSocket"],
     },
     {
-      category: "Security",
+      code: "SECURITY",
+      label: "Security",
       keywords: ["네트워크 보안", "웹 보안", "암호화", "인증"],
     },
     {
-      category: "Game Dev",
+      code: "GAME_DEV",
+      label: "Game Dev",
       keywords: ["Unity", "Unreal Engine", "C#", "C++"],
     },
     {
-      category: "AR/VR/XR",
+      code: "AR_VR_XR",
+      label: "AR/VR/XR",
       keywords: ["ARKit", "RealityKit", "Unity AR", "VR Development"],
     },
     {
-      category: "Embedded/IoT",
+      code: "EMBEDDED_IOT",
+      label: "Embedded/IoT",
       keywords: ["C", "C++", "Arduino", "Raspberry Pi", "RTOS"],
     },
     {
-      category: "Blockchain/Web3",
+      code: "BLOCKCHAIN_WEB3",
+      label: "Blockchain/Web3",
       keywords: [
         "이더리움",
         "스마트 컨트랙트",
@@ -78,15 +95,18 @@ export const INTERESTS_MOCK = {
       ],
     },
     {
-      category: "QA/Test",
+      code: "QA_TEST",
+      label: "QA/Test",
       keywords: ["JUnit", "Selenium", "Test Automation", "TDD"],
     },
     {
-      category: "Product/UX",
+      code: "PRODUCT_UX",
+      label: "Product/UX",
       keywords: ["Figma", "Sketch", "Adobe XD", "프로토타이핑"],
     },
     {
-      category: "Architecture",
+      code: "ARCHITECTURE",
+      label: "Architecture",
       keywords: [
         "Microservices",
         "DDD",

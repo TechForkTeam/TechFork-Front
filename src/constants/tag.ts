@@ -46,7 +46,7 @@ export const TAG = [
 
 export const TAG_MAP = {
   iOS: [
-    { code: "IOS_SWIFT", label: "Swift" },
+    { code: "SWIFT", label: "Swift" },
     { code: "SWIFTUI", label: "SwiftUI" },
     { code: "UIKIT", label: "UIKit" },
     { code: "XCODE", label: "Xcode" },

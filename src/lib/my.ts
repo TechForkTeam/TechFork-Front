@@ -6,7 +6,11 @@ import {
   useSuspenseQuery,
 } from "@tanstack/react-query";
 import api from "./api";
-import type { MyProfileType } from "../types/my";
+import type {
+  InterestResponseDto,
+  InterestTypeDto,
+  MyProfileType,
+} from "../types/my";
 
 //내 관심사 조회
 export const getMyInterest = async () => {
@@ -15,7 +19,7 @@ export const getMyInterest = async () => {
 };
 
 export const useGetMyInterest = () => {
-  return useSuspenseQuery({
+  return useSuspenseQuery<InterestResponseDto, Error, InterestTypeDto[]>({
     queryKey: ["my", "interest"],
     queryFn: getMyInterest,
     select: res => res.data.interests,
@@ -53,6 +57,26 @@ export const usePatchMyProfile = (onSuccess?: () => void) => {
         queryKey: ["my", "profile"],
       });
       onSuccess?.();
+    },
+    onError: err => console.log(err),
+  });
+};
+
+// 내 관심사 수정
+export const putMyInterst = async (body: InterestTypeDto) => {
+  const { data } = await api.put("/api/v1/users/me/interests", body);
+  return data;
+};
+
+export const usePutMyInterst = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (body: InterestTypeDto) => putMyInterst(body),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["my", "interest"],
+      });
     },
     onError: err => console.log(err),
   });

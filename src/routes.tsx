@@ -5,11 +5,11 @@ import { Onboarding } from "./pages/onboarding/Onboarding";
 import { OnboardingTag } from "./pages/onboarding/OnboardingTag";
 import { SystemLayout } from "./layout/SystemLayout";
 import { HomePage } from "./pages/home/HomePage";
-import { EditInterestPage } from "./pages/mypage/EditInterestPage";
 import { MyIntersListPage } from "./pages/mypage/MyInterstListPage";
 import { SettingPage } from "./pages/mypage/SettingPage";
 import { AskPage } from "./pages/mypage/AskPage";
 import { KakaoLogin } from "./pages/Login/KakaoLogin";
+import { EditInterestPage } from "./pages/mypage/EditInterestPage";
 const router = createBrowserRouter([
   {
     path: "/",
