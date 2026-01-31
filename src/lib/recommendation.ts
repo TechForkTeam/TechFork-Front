@@ -13,7 +13,7 @@ export const getRecommendPostList = async () => {
 
 export const useGetRecommendPostList = () => {
   return useSuspenseQuery({
-    queryKey: ["my", "recommend"],
+    queryKey: ["posts", "my", "recommend"],
     queryFn: getRecommendPostList,
     select: res => res.data,
   });
@@ -32,7 +32,7 @@ export const usePostRecommendPostList = () => {
     onSuccess: async () => {
       console.log("성공");
       await queryClient.refetchQueries({
-        queryKey: ["my", "recommend"],
+        queryKey: ["posts", "my", "recommend"],
       });
     },
     onError: err => {

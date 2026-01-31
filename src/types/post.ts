@@ -67,3 +67,10 @@ export type PostBookmarkResponseDto = {
   isSuccess: boolean;
   message: string;
 };
+
+//읽은 게시글 저장
+export type ReadPostType = {
+  postId: number;
+  readAt: string;
+  readDurationSeconds: number;
+};

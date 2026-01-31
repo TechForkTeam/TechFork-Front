@@ -2,7 +2,11 @@ import BookOn from "@/assets/icons/book-on.svg";
 import BookOff from "@/assets/icons/book-off.svg";
 import Eye from "@/assets/icons/eye.svg";
 import { forwardRef } from "react";
-import { useDeleteBookmark, usePostBookmark } from "../lib/activity";
+import {
+  useDeleteBookmark,
+  usePostBookmark,
+  usePostReadPost,
+} from "../lib/activity";
 
 interface CardItemProps {
   id?: number;
@@ -46,6 +50,26 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
       }
     };
 
+    const readPostMutation = usePostReadPost();
+
+    const handleReadAndMove = async (
+      e: React.MouseEvent<HTMLAnchorElement>,
+    ) => {
+      e.preventDefault(); // 기본 이동 방지
+      if (!id || !url) return;
+
+      try {
+        await readPostMutation.mutateAsync({
+          postId: id,
+          readAt: new Date().toISOString(),
+          readDurationSeconds: 0,
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+    };
     return (
       <li className=" h-90 rounded-lg bg-white p-4 relative " ref={ref}>
         <div className="flex justify-between mb-3">
@@ -94,6 +118,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
           rel="noopener noreferrer"
           className="absolute inset-0 z-10 cursor-pointer"
           aria-label={`${title} 보기`}
+          onClick={handleReadAndMove}
         />
       </li>
     );
