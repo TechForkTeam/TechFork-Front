@@ -6,6 +6,7 @@ import type {
   ReadPostType,
   UseInfiniteBookmarkPostsParams,
 } from "../types/post";
+import { updateBookmarkState } from "../utils/queryUpdata";
 
 //1. 북마크 추가
 export const postBookmark = async (postId: number) => {
@@ -18,16 +19,18 @@ export const usePostBookmark = () => {
 
   return useMutation({
     mutationFn: (postId: number) => postBookmark(postId),
-    onSuccess: async () => {
-      console.log("북마크성공");
-      await queryClient.invalidateQueries({
-        queryKey: ["posts"],
-      });
+    onMutate: async postId => {
+      await queryClient.cancelQueries({ queryKey: ["posts"] });
+
+      // ["posts"]로 시작하는 모든 쿼리(무한스크롤, 추천 등)를 업데이트
+      queryClient.setQueriesData({ queryKey: ["posts"] }, old =>
+        updateBookmarkState(old, postId, true),
+      );
     },
-    onError: err => console.log(err),
+    onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
-
 //1. 북마크 제거
 export const deleteBookmark = async (postId: number) => {
   const { data } = await api.delete("/api/v1/activities/bookmarks", {
@@ -38,18 +41,19 @@ export const deleteBookmark = async (postId: number) => {
 
 export const useDeleteBookmark = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (postId: number) => deleteBookmark(postId),
-    onSuccess: () => {
-      console.log("북마크 삭제");
-      queryClient.invalidateQueries({
-        queryKey: ["posts"],
-      });
+    onMutate: async postId => {
+      await queryClient.cancelQueries({ queryKey: ["posts"] });
+      queryClient.setQueriesData({ queryKey: ["posts"] }, old =>
+        updateBookmarkState(old, postId, false),
+      );
     },
-    onError: err => console.log(err),
+    onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+    onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
-
 //북마크 목록 조회
 export const getBookmarkList = async (
   params: UseInfiniteBookmarkPostsParams,
