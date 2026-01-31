@@ -4,3 +4,8 @@ export type InterestTypeDto = {
   category: string;
   keywords: string[];
 };
+
+export type MyProfileType = {
+  nickName: string;
+  description: string;
+};

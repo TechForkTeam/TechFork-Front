@@ -1,7 +1,12 @@
 //사용자와 관련된 정보를 가져옵니다.
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import api from "./api";
+import type { MyProfileType } from "../types/my";
 
 //내 관심사 조회
 export const getMyInterest = async () => {
@@ -28,5 +33,27 @@ export const useGetMyProfile = () => {
     queryKey: ["my", "profile"],
     queryFn: getMyProfile,
     select: res => res.data,
+  });
+};
+
+//내프로필 수정
+
+export const patchMyProfile = async (body: MyProfileType) => {
+  const { data } = await api.patch("/api/v1/users/me/profile", body);
+  return data;
+};
+
+export const usePatchMyProfile = (onSuccess?: () => void) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: patchMyProfile,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["my", "profile"],
+      });
+      onSuccess?.();
+    },
+    onError: err => console.log(err),
   });
 };
