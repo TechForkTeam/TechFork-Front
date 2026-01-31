@@ -48,6 +48,8 @@ export const InputField = ({
         h-30 resize-none
         "
             placeholder={placeholder}
+            value={value}
+            onChange={onChange}
           />
         )}
       </div>
