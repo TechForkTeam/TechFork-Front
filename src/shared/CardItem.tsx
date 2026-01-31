@@ -19,7 +19,17 @@ interface CardItemProps {
 
 export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
   (
-    { viewCount, logoUrl, title, thumbnailUrl, company, url, id, isBookmarked },
+    {
+      viewCount,
+      logoUrl,
+      title,
+      thumbnailUrl,
+      company,
+      url,
+      id,
+      publishedAt,
+      isBookmarked,
+    },
     ref,
   ) => {
     //북마크 추가
@@ -74,8 +84,9 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
           )}
         </div>
         <div className="flex items-center gap-2">
-          <img src={Eye} alt="" className="mt-1" />
-          <p className="text-xs text-assistive">{viewCount}</p>
+          <img src={Eye} alt="" className="" />
+          <p className="text-xs ">{viewCount}</p>
+          <p className="text-xs text-assistive">{publishedAt?.split("T")[0]}</p>
         </div>
         <a
           href={url}
