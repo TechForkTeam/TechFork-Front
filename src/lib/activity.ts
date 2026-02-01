@@ -22,10 +22,15 @@ export const usePostBookmark = () => {
     onMutate: async postId => {
       await queryClient.cancelQueries({ queryKey: ["posts"] });
 
-      // ["posts"]로 시작하는 모든 쿼리(무한스크롤, 추천 등)를 업데이트
-      queryClient.setQueriesData({ queryKey: ["posts"] }, old =>
-        updateBookmarkState(old, postId, true),
+      const previousQueries = queryClient.getQueriesData({
+        queryKey: ["posts"],
+      });
+      queryClient.setQueriesData(
+        { queryKey: ["posts"], exact: false },
+        (old: any) => updateBookmarkState(old, postId, true),
       );
+
+      return { previousQueries };
     },
     onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
     onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
@@ -46,9 +51,16 @@ export const useDeleteBookmark = () => {
     mutationFn: (postId: number) => deleteBookmark(postId),
     onMutate: async postId => {
       await queryClient.cancelQueries({ queryKey: ["posts"] });
-      queryClient.setQueriesData({ queryKey: ["posts"] }, old =>
-        updateBookmarkState(old, postId, false),
+
+      const previousQueries = queryClient.getQueriesData({
+        queryKey: ["posts"],
+      });
+      queryClient.setQueriesData(
+        { queryKey: ["posts"], exact: false },
+        (old: any) => updateBookmarkState(old, postId, false),
       );
+
+      return { previousQueries };
     },
     onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
     onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),

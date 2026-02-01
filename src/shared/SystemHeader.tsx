@@ -16,7 +16,6 @@ export const SystemHeader = () => {
 
   const { user } = useUserStore();
   const isLogin = !!user?.accessToken;
-  // console.log(user?.accessToken);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -26,6 +25,16 @@ export const SystemHeader = () => {
 
     document.addEventListener("click", handleClick); //영역 아니면 닫게
   }, []);
+  //검색어
+  const [input, setInput] = useState<string>("");
+
+  useEffect(() => {
+    if (input) {
+      navigate(`/?search=${input}`);
+    } else {
+      navigate("/");
+    }
+  }, [input, navigate]);
 
   return (
     <header
@@ -47,6 +56,8 @@ export const SystemHeader = () => {
             type="text"
             placeholder="검색어 또는 태그명 입력"
             className="w-full px-3 py-2    focus:outline-none outline-none"
+            value={input}
+            onChange={e => setInput(e.target.value)}
           />
         </div>
         <div className="flex gap-4">

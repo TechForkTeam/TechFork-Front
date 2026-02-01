@@ -20,12 +20,10 @@ export const PostCardList = ({ selectedTab }: PostCardListProps) => {
   const popularQuery = useInfinitePosts({ sortBy: "POPULAR" });
   const { data: recommendData } = useGetRecommendPostList();
 
-  // 2. 현재 활성화된 쿼리 선택
   const activeQuery = [companyQuery, null, recentQuery, popularQuery][
     selectedTab
   ];
 
-  // 3. 무한 스크롤 로직
   useEffect(() => {
     if (
       !infiniteRef.current ||
@@ -40,7 +38,6 @@ export const PostCardList = ({ selectedTab }: PostCardListProps) => {
     return () => observer.disconnect();
   }, [activeQuery]);
 
-  // 4. 데이터 정제
   const posts =
     selectedTab === 1
       ? (recommendData?.recommendations ?? [])

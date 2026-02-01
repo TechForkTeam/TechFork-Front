@@ -4,9 +4,27 @@ export const updateBookmarkState = (
   postId: number,
   isBookmarked: boolean,
 ) => {
+  console.log("업뎃데이터", old);
   if (!old) return old;
 
-  // 1. 무한 스크롤 구조 (pages > data > posts)
+  //데이터 구조에 따른 분기
+  if (Array.isArray(old)) {
+    return old.map((post: any) =>
+      post.id === postId || post.postId === postId
+        ? { ...post, isBookmarked }
+        : post,
+    );
+  }
+  if (old.data && Array.isArray(old.data)) {
+    return {
+      ...old,
+      data: old.data.map((post: any) =>
+        post.id === postId || post.postId === postId
+          ? { ...post, isBookmarked }
+          : post,
+      ),
+    };
+  }
   if (old.pages) {
     return {
       ...old,
@@ -23,8 +41,6 @@ export const updateBookmarkState = (
       })),
     };
   }
-
-  // 2. 일반 리스트 구조 (recommendations가 최상위)
   if (old.recommendations) {
     return {
       ...old,
@@ -36,7 +52,6 @@ export const updateBookmarkState = (
     };
   }
 
-  // 3. Suspense/Data 래핑 구조 (data > recommendations)
   if (old.data && old.data.recommendations) {
     return {
       ...old,

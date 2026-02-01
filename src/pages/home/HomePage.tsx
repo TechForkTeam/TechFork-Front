@@ -10,6 +10,10 @@ import { useGetMyInterest } from "../../lib/my";
 import { usePostRecommendPostList } from "../../lib/recommendation";
 import { TAB_MAP } from "../../constants/tab";
 import { Loading } from "../../shared/Loading";
+import { useSearchParams } from "react-router-dom";
+import { CardItem } from "../../shared/CardItem";
+import { useDebounce } from "../../hooks/useDebouce";
+import { useGetSearchPost } from "../../lib/search";
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
@@ -22,26 +26,58 @@ export const HomePage = () => {
 
   const maxCompany = companyData?.companies.slice(0, 8) ?? [];
 
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search");
+  console.log(searchQuery);
+  const debouncedInput = useDebounce(searchQuery, 200);
+  const { data: searchData } = useGetSearchPost(debouncedInput);
+  console.log(searchData);
+  //검색화면일때
+
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
-      <TabSelectList
-        className={[2, 3].includes(selectedTab) ? "mb-20" : "mb-8"}
-        onChange={setSelectedTab}
-        selected={selectedTab}
-        tagList={TAB_MAP}
-      />
-      {/* 기업별 게시글 */}
-      {selectedTab === 0 && (
+      {searchQuery ? (
+        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+          {searchData?.map(post => {
+            return (
+              <CardItem
+                // key={post.postId}
+                id={post.postId}
+                title={post.title}
+                company={post.companyName}
+                thumbnailUrl={post.thumbnailUrl}
+                logoUrl={post.logoUrl}
+                publishedAt={post.publishedAt}
+                viewCount={post.viewCount}
+                shortSummary={post.summary}
+                url={post.url}
+                isBookmarked={post.isBookmarked}
+              />
+            );
+          })}
+        </ul>
+      ) : (
         <>
-          <CompanyFilterList
-            companies={companies}
-            companyData={companyData}
-            maxCompany={maxCompany}
-            modal={modal}
-            setModal={setModal}
-            toggleCompany={toggleCompany}
+          <TabSelectList
+            className={[2, 3].includes(selectedTab) ? "mb-20" : "mb-8"}
+            onChange={setSelectedTab}
+            selected={selectedTab}
+            tagList={TAB_MAP}
           />
-          <PostCardList selectedTab={0} />
+
+          {selectedTab === 0 && (
+            <>
+              <CompanyFilterList
+                companies={companies}
+                companyData={companyData}
+                maxCompany={maxCompany}
+                modal={modal}
+                setModal={setModal}
+                toggleCompany={toggleCompany}
+              />
+              <PostCardList selectedTab={0} />
+            </>
+          )}
         </>
       )}
       {/* 나와맞는 게시글 */}
@@ -51,7 +87,6 @@ export const HomePage = () => {
             myInterest={myInterest}
             onRefresh={postRecommendList}
           />
-          {/* 2. 새로고침 중이면 즉시 로딩바를 보여주고, 아니면 Suspense 구조를 유지합니다. */}
           {isRefreshing ? (
             <Loading />
           ) : (
@@ -61,7 +96,6 @@ export const HomePage = () => {
           )}
         </>
       )}
-      {/* {/* ... 나머지 탭 생략 */}
       {(selectedTab === 2 || selectedTab === 3) && (
         <PostCardList selectedTab={selectedTab} />
       )}
