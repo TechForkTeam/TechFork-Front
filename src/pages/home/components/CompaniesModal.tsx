@@ -1,6 +1,6 @@
 import { CompanyModalItem } from "./CompanyModalItem";
 import { useCompanyStore } from "../../../store/uesCompanyStore";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import type { CompanyResponseDto } from "../../../types/company";
 
 interface CompaniesModalProps {
@@ -9,19 +9,23 @@ interface CompaniesModalProps {
 
 export const CompaniesModal = ({ companyData }: CompaniesModalProps) => {
   const { toggleCompany, companies } = useCompanyStore();
-  const headerRef = useRef<HTMLDivElement>(null);
-  const scrollToTop = () => {
-    headerRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "center",
-    });
-  };
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({
+        behavior: "auto",
+        block: "center",
+      });
+    }
+  }, [companies]);
+
   console.log(companies);
   return (
     <section
       className="relative h-130 w-125  shadow-ds100 rounded-2xl overflow-hidden bg-white z-250"
-      onClick={scrollToTop}
-      ref={headerRef}
+      onClick={e => e.stopPropagation()}
+      ref={scrollRef}
     >
       <div className="h-full overflow-y-auto ">
         {/* header */}
@@ -41,7 +45,10 @@ export const CompaniesModal = ({ companyData }: CompaniesModalProps) => {
                 company={item.company}
                 logoUrl={item.logoUrl}
                 selected={companies.includes(item.company)}
-                onClick={() => toggleCompany(item.company)}
+                onClick={e => {
+                  e.stopPropagation();
+                  toggleCompany(item.company);
+                }}
               />
             ))}
           </div>

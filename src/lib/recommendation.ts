@@ -29,14 +29,20 @@ export const usePostRecommendPostList = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postRecommendList,
-    onSuccess: async () => {
-      console.log("성공");
-      await queryClient.refetchQueries({
+
+    onMutate: async () => {
+      await queryClient.cancelQueries({
         queryKey: ["posts", "my", "recommend"],
       });
+      const prev = queryClient.getQueryData(["posts", "my", "recommend"]);
+      queryClient.removeQueries({
+        queryKey: ["posts", "my", "recommend"],
+        exact: true,
+      });
+      return { prev };
     },
-    onError: err => {
-      console.log(err);
+    onError: (_err, _var, ctx) => {
+      queryClient.setQueryData(["posts", "my", "recommend"], ctx?.prev);
     },
   });
 };

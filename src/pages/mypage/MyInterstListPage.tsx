@@ -48,6 +48,7 @@ export const MyIntersListPage = () => {
               url={item.url}
               id={item.postId}
               isBookmarked={true}
+              publishedAt={item.publishedAt}
             />
           );
         })}

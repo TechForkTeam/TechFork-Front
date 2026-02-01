@@ -13,7 +13,6 @@ export const EditInterestPage = () => {
   const { selectedTags, setFromServer, toggleTag, originalTags } =
     useEditTagStore();
   const { data } = useGetMyInterest();
-  console.log(selectedTags);
 
   // 카테고리 라벨 맞추기
   const myInterestMap = data.reduce<Record<string, string[]>>(
