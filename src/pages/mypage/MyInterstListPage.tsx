@@ -47,8 +47,9 @@ export const MyIntersListPage = () => {
               thumbnailUrl={item.thumbnailUrl}
               url={item.url}
               id={item.postId}
-              isBookmarked={true}
+              isBookmarked={item.isBookmarked}
               publishedAt={item.publishedAt}
+              shortSummary={item.shortSummary}
             />
           );
         })}
