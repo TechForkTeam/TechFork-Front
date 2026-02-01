@@ -55,6 +55,8 @@ export const OnboardingTag = () => {
     });
   };
 
+  console.log(tag);
+
   return (
     <div className="flex flex-col items-center">
       <section className="flex flex-col items-center">
@@ -90,7 +92,7 @@ export const OnboardingTag = () => {
                     onClick={() => toggleCategory(idx)}
                   >
                     <div className="flex items-center gap-2">
-                      <img src={Tag} alt="ios" />
+                      <img src={Tag} alt="tag" />
                       <p>{item}</p>
                     </div>
                     <img
