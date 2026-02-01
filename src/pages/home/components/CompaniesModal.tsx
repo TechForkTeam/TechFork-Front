@@ -45,7 +45,7 @@ export const CompaniesModal = ({ companyData }: CompaniesModalProps) => {
                 company={item.company}
                 logoUrl={item.logoUrl}
                 selected={companies.includes(item.company)}
-                onClick={e => {
+                onClick={(e: React.MouseEvent) => {
                   e.stopPropagation();
                   toggleCompany(item.company);
                 }}

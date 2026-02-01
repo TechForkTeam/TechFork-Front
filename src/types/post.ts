@@ -37,6 +37,7 @@ export type CardItemProps = {
   viewCount: number;
   keywords?: string[];
   postId?: number;
+  shortSummary: string;
 };
 
 export type PageParamType = {

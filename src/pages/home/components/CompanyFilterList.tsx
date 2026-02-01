@@ -1,13 +1,13 @@
 import PopOn from "@/assets/icons/pop-on.svg";
 import PopOff from "@/assets/icons/pop-off.svg";
-import type { CompanyType } from "../../../types/company";
+import type { CompanyResponseDto, CompanyType } from "../../../types/company";
 import { HomeCompanySelectBtn } from "./HomeCompanySelectBtn";
 import { CompanyItem } from "./CompanyItem";
 import { CompaniesModal } from "./CompaniesModal";
 
 interface CompanyFilterListProps {
   companies: string[];
-  companyData: { companies: CompanyType[] };
+  companyData: CompanyResponseDto;
   maxCompany: CompanyType[];
   modal: boolean;
   setModal: (val: boolean | ((pre: boolean) => boolean)) => void;

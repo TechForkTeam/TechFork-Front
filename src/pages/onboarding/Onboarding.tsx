@@ -9,9 +9,11 @@ import { cn } from "../../utils/cn";
 
 export const Onboarding = () => {
   const navigate = useNavigate();
-  const { nickname, aboutMe, setTemp, check, email } = useOnboardingStore(); //store저장
+  const { nickname, aboutMe, setTemp, check, email } = useOnboardingStore();
 
-  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNicknameChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const value = e.target.value;
     const filteredValue = value.replace(/[^ㄱ-ㅎ가-힣a-zA-Z0-9]/g, "");
 

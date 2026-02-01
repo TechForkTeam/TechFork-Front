@@ -3,7 +3,7 @@ import { useCompanyStore } from "../../../store/uesCompanyStore";
 import { useInfiniteCompaniesPosts } from "../../../hooks/useGetInfiniteCompaniesList";
 import { useInfinitePosts } from "../../../hooks/useGetInfinitePostList";
 import { useGetRecommendPostList } from "../../../lib/recommendation";
-import type { PostResponseDto } from "../../../types/post";
+import type { CardItemProps, PostResponseDto } from "../../../types/post";
 import { CardItem } from "../../../shared/CardItem";
 import { Loading } from "../../../shared/Loading";
 
@@ -45,12 +45,12 @@ export const PostCardList = ({ selectedTab }: PostCardListProps) => {
           (page: PostResponseDto) => page.data.posts,
         ) ?? []);
 
-  // console.log(posts);
+  console.log(posts);
 
   return (
     <>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {posts.map(item => (
+        {posts.map((item: CardItemProps) => (
           <CardItem
             key={item.id || item.postId}
             {...item}

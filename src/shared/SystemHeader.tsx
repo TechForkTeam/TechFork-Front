@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { MYPAGE_NAV } from "../constants/mypage";
 import useUserStore from "../store/useUserStore";
 import { postLogout } from "../lib/auth";
+import { useGetMyProfile } from "../lib/my";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ export const SystemHeader = () => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const { user, logout } = useUserStore();
+  const { data } = useGetMyProfile();
+  console.log(data);
 
   const handleLogout = async () => {
     try {
@@ -30,10 +33,10 @@ export const SystemHeader = () => {
 
   const isLogin = !!user?.accessToken;
 
-  const handleNavClick = (item: { name: string; nav: string }) => {
+  const handleNavClick = (item: { name: string; nav?: string }) => {
     if (item.name === "로그아웃") {
       handleLogout();
-    } else {
+    } else if (item.nav) {
       setUserModal(false);
       navigate(item.nav);
     }
@@ -95,9 +98,9 @@ export const SystemHeader = () => {
             </Button>
           )}
           <img
-            src={User}
+            src={isLogin ? data.profileImage : User}
             alt="mypage"
-            className="size-10 cursor-pointer"
+            className="size-10 cursor-pointer rounded-full"
             onClick={() => {
               if (!isLogin) return navigate("/login");
               setUserModal(prev => !prev);

@@ -3,7 +3,7 @@ interface CompanyModalItemProps {
   company?: string;
   logoUrl?: string;
   selected: boolean;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 export const CompanyModalItem = ({
   company = "company",

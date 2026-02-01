@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query";
 import api from "./api";
 import type {
+  InterestDataDto,
   InterestResponseDto,
   InterestTypeDto,
   MyProfileType,
@@ -64,7 +65,7 @@ export const useGetMyInterest = () => {
 };
 
 // 내 관심사 수정
-export const putMyInterst = async (body: InterestTypeDto) => {
+export const putMyInterst = async (body: InterestDataDto) => {
   const { data } = await api.put("/api/v1/users/me/interests", body);
   return data;
 };
@@ -74,18 +75,21 @@ export const usePutMyInterst = () => {
   const queryKey = ["my", "interest"];
 
   return useMutation({
-    mutationFn: (body: InterestTypeDto) => putMyInterst(body),
-    onMutate: async (payload: { interests: InterestTypeDto[] }) => {
+    mutationFn: (body: InterestDataDto) => putMyInterst(body),
+
+    onMutate: async (payload: InterestDataDto) => {
       await queryClient.cancelQueries({ queryKey });
+
       const previous = queryClient.getQueryData<InterestTypeDto[]>(queryKey);
       queryClient.setQueryData<InterestTypeDto[]>(queryKey, payload.interests);
+
       const { selectedTags } = useEditTagStore.getState();
       useEditTagStore.setState({
         originalTags: [...selectedTags],
       });
+
       return { previous };
     },
-
     onError: (_err, _payload, context) => {
       if (context?.previous) {
         queryClient.setQueryData(queryKey, context.previous);
