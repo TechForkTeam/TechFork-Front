@@ -10,24 +10,24 @@ import { SettingPage } from "./pages/mypage/SettingPage";
 import { AskPage } from "./pages/mypage/AskPage";
 import { KakaoLogin } from "./pages/Login/KakaoLogin";
 import { EditInterestPage } from "./pages/mypage/EditInterestPage";
+import { PrivateRoute } from "./layout/PrivateRoiute";
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <SystemLayout />,
     children: [
+      { index: true, element: <HomePage /> },
       {
-        index: true,
-        element: <HomePage />,
+        element: <PrivateRoute />,
+        children: [
+          { path: "/edit", element: <EditInterestPage /> },
+          { path: "/interested", element: <MyIntersListPage /> },
+          { path: "/setting", element: <SettingPage /> },
+          { path: "/ask", element: <AskPage /> },
+        ],
       },
-      {
-        path: "/edit",
-        element: <EditInterestPage />,
-      },
-      { path: "/interested", element: <MyIntersListPage /> },
-      { path: "/setting", element: <SettingPage /> },
-      { path: "/ask", element: <AskPage /> },
     ],
   },
+
   {
     element: <OnboardingLayout />,
     children: [

@@ -13,7 +13,6 @@ export const MYPAGE_NAV = [
   },
   {
     name: "로그아웃",
-    nav: "/",
   },
 ];
 

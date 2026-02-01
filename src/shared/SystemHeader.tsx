@@ -7,15 +7,37 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { MYPAGE_NAV } from "../constants/mypage";
 import useUserStore from "../store/useUserStore";
+import { postLogout } from "../lib/auth";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
-  //나중에 store로 header  login Btn 뺄  에정
   const [userModal, setUserModal] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
-  const { user } = useUserStore();
+  const { user, logout } = useUserStore();
+
+  const handleLogout = async () => {
+    try {
+      await postLogout();
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+    } finally {
+      logout();
+      setUserModal(false);
+      navigate("/");
+    }
+  };
+
   const isLogin = !!user?.accessToken;
+
+  const handleNavClick = (item: { name: string; nav: string }) => {
+    if (item.name === "로그아웃") {
+      handleLogout();
+    } else {
+      setUserModal(false);
+      navigate(item.nav);
+    }
+  };
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -23,9 +45,8 @@ export const SystemHeader = () => {
         return setUserModal(false);
     };
 
-    document.addEventListener("click", handleClick); //영역 아니면 닫게
+    document.addEventListener("click", handleClick);
   }, []);
-  //검색어
   const [input, setInput] = useState<string>("");
 
   useEffect(() => {
@@ -77,20 +98,17 @@ export const SystemHeader = () => {
             src={User}
             alt="mypage"
             className="size-10 cursor-pointer"
-            onClick={() => setUserModal(prev => !prev)}
+            onClick={() => {
+              if (!isLogin) return navigate("/login");
+              setUserModal(prev => !prev);
+            }}
           />
         </div>
         {userModal && (
           <div className=" z-50 absolute top-15 shadow-ds100s right-0 w-43 rounded-2xl bg-white border border-bgNormal cursor-pointer">
             {MYPAGE_NAV.map(item => {
               return (
-                <div
-                  className="p-4"
-                  onClick={() => {
-                    setUserModal(false);
-                    navigate(item.nav);
-                  }}
-                >
+                <div className="p-4" onClick={() => handleNavClick(item)}>
                   {item.name}
                 </div>
               );

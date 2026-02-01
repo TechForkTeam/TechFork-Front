@@ -7,6 +7,8 @@ import {
   usePostBookmark,
   usePostReadPost,
 } from "../lib/activity";
+import useUserStore from "../store/useUserStore";
+import { useNavigate } from "react-router-dom";
 
 interface CardItemProps {
   id?: number;
@@ -41,10 +43,21 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
     //북마크 추가
     const handleSubmitPostBookmark = usePostBookmark();
     const handleSubmitDeleteBookmark = useDeleteBookmark();
+
+    const { user } = useUserStore();
+    const isLogin = !!user?.accessToken;
+    const navigate = useNavigate();
+
     const handleClick = (e: React.MouseEvent) => {
       e.stopPropagation();
       e.preventDefault();
       if (!id) return;
+
+      if (!isLogin) {
+        navigate("/login");
+        return;
+      }
+
       if (isBookmarked) {
         handleSubmitDeleteBookmark.mutate(id);
       } else {

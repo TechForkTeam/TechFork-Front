@@ -9,9 +9,10 @@ import { useGetMyInterest } from "../../lib/my";
 import { usePostRecommendPostList } from "../../lib/recommendation";
 import { TAB_MAP } from "../../constants/tab";
 import { Loading } from "../../shared/Loading";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebouce";
 import { SearchPostList } from "./components/SearchPostList";
+import useUserStore from "../../store/useUserStore";
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
@@ -28,6 +29,16 @@ export const HomePage = () => {
   const searchQuery = searchParams.get("search");
   console.log(searchQuery);
   const debouncedInput = useDebounce(searchQuery, 200);
+  const { user } = useUserStore();
+  const isLogin = !!user?.accessToken;
+  const navigate = useNavigate();
+  const handleTabChange = (tab: number) => {
+    if (tab === 1 && !isLogin) {
+      navigate("/login");
+      return;
+    }
+    setSelectedTab(tab);
+  };
 
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
@@ -39,7 +50,7 @@ export const HomePage = () => {
         <>
           <TabSelectList
             className={[2, 3].includes(selectedTab) ? "mb-20" : "mb-8"}
-            onChange={setSelectedTab}
+            onChange={handleTabChange}
             selected={selectedTab}
             tagList={TAB_MAP}
           />
