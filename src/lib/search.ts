@@ -1,7 +1,8 @@
 //통합 검색
 
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "./api";
+import type { SearchType } from "../types/search";
 
 export const getSearchPost = async (query: string) => {
   const { data } = await api.get("/api/v1/search", { params: { query } });
@@ -14,5 +15,25 @@ export const useGetSearchPost = (query: string) => {
     queryFn: () => getSearchPost(query),
     select: res => res.data,
     enabled: !!query,
+  });
+};
+
+//검색 히스토리 저장
+export const searchHistory = async (body: SearchType) => {
+  const { data } = await api.post("/api/v1/activities/searches", body);
+  return data;
+};
+
+export const useSearchHistory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (body: SearchType) => searchHistory(body),
+    onSuccess: () => {
+      console.log("검색 히스토리 저장");
+      queryClient.invalidateQueries({
+        queryKey: ["posts", "search"],
+      });
+    },
+    onError: err => console.log(err),
   });
 };

@@ -20,6 +20,7 @@ interface CardItemProps {
   viewCount: number;
   keywords?: string[];
   shortSummary: string;
+  onSearch?: () => void;
 }
 
 export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
@@ -35,6 +36,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
       publishedAt,
       isBookmarked,
       shortSummary,
+      onSearch,
     },
     ref,
   ) => {
@@ -61,6 +63,10 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
       if (!id || !url) return;
 
       try {
+        if (onSearch) {
+          onSearch();
+        }
+
         await readPostMutation.mutateAsync({
           postId: id,
           readAt: new Date().toISOString(),

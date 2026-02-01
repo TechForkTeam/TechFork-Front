@@ -14,7 +14,6 @@ export const PostCardList = ({ selectedTab }: PostCardListProps) => {
   const { companies } = useCompanyStore();
   const infiniteRef = useRef<HTMLDivElement | null>(null);
 
-  // 1. 각 탭에 맞는 쿼리 호출 (useSuspense... 시리즈 사용)
   const companyQuery = useInfiniteCompaniesPosts({ companies });
   const recentQuery = useInfinitePosts({ sortBy: "LATEST" });
   const popularQuery = useInfinitePosts({ sortBy: "POPULAR" });

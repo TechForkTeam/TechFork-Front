@@ -48,7 +48,10 @@ export const SystemHeader = () => {
           src={Logo}
           alt="로고"
           className="w-35 h-12 cursor-pointer"
-          onClick={() => navigate("/")}
+          onClick={() => {
+            navigate("/");
+            setInput("");
+          }}
         />
         <div className="w-160 flex  bg-bgPrimary rounded-lg border border-bgNormal px-3">
           <img src={Search} alt="" className="search" />

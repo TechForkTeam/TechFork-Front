@@ -13,7 +13,7 @@ import { Loading } from "../../shared/Loading";
 import { useSearchParams } from "react-router-dom";
 import { CardItem } from "../../shared/CardItem";
 import { useDebounce } from "../../hooks/useDebouce";
-import { useGetSearchPost } from "../../lib/search";
+import { useGetSearchPost, useSearchHistory } from "../../lib/search";
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
@@ -30,10 +30,9 @@ export const HomePage = () => {
   const searchQuery = searchParams.get("search");
   console.log(searchQuery);
   const debouncedInput = useDebounce(searchQuery, 200);
-  const { data: searchData } = useGetSearchPost(debouncedInput);
-  console.log(searchData);
-  //검색화면일때
+  const { data: searchData } = useGetSearchPost(debouncedInput ?? "");
 
+  const history = useSearchHistory();
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
       {searchQuery ? (
@@ -42,6 +41,14 @@ export const HomePage = () => {
             return (
               <CardItem
                 // key={post.postId}
+                onSearch={() => {
+                  if (debouncedInput) {
+                    history.mutate({
+                      searchWord: debouncedInput,
+                      searchedAt: new Date().toISOString(),
+                    });
+                  }
+                }}
                 id={post.postId}
                 title={post.title}
                 company={post.companyName}

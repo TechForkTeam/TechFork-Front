@@ -4,7 +4,7 @@ export const updateBookmarkState = (
   postId: number,
   isBookmarked: boolean,
 ) => {
-  console.log("업뎃데이터", old);
+  // console.log("업뎃데이터", old);
   if (!old) return old;
 
   //데이터 구조에 따른 분기
