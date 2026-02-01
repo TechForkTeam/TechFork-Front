@@ -11,20 +11,7 @@ import type {
   InterestTypeDto,
   MyProfileType,
 } from "../types/my";
-
-//내 관심사 조회
-export const getMyInterest = async () => {
-  const { data } = await api.get("/api/v1/users/me/interests");
-  return data;
-};
-
-export const useGetMyInterest = () => {
-  return useSuspenseQuery<InterestResponseDto, Error, InterestTypeDto[]>({
-    queryKey: ["my", "interest"],
-    queryFn: getMyInterest,
-    select: res => res.data.interests,
-  });
-};
+import { useEditTagStore } from "../store/useEditTagStore";
 
 // 내 프로필 조회
 export const getMyProfile = async () => {
@@ -62,6 +49,20 @@ export const usePatchMyProfile = (onSuccess?: () => void) => {
   });
 };
 
+//내 관심사 조회
+export const getMyInterest = async () => {
+  const { data } = await api.get("/api/v1/users/me/interests");
+  return data;
+};
+
+export const useGetMyInterest = () => {
+  return useSuspenseQuery<InterestResponseDto, Error, InterestTypeDto[]>({
+    queryKey: ["my", "interest"],
+    queryFn: getMyInterest,
+    select: res => res.data.interests,
+  });
+};
+
 // 내 관심사 수정
 export const putMyInterst = async (body: InterestTypeDto) => {
   const { data } = await api.put("/api/v1/users/me/interests", body);
@@ -70,14 +71,29 @@ export const putMyInterst = async (body: InterestTypeDto) => {
 
 export const usePutMyInterst = () => {
   const queryClient = useQueryClient();
+  const queryKey = ["my", "interest"];
 
   return useMutation({
     mutationFn: (body: InterestTypeDto) => putMyInterst(body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["my", "interest"],
+    onMutate: async (payload: { interests: InterestTypeDto[] }) => {
+      await queryClient.cancelQueries({ queryKey });
+      const previous = queryClient.getQueryData<InterestTypeDto[]>(queryKey);
+      queryClient.setQueryData<InterestTypeDto[]>(queryKey, payload.interests);
+      const { selectedTags } = useEditTagStore.getState();
+      useEditTagStore.setState({
+        originalTags: [...selectedTags],
       });
+      return { previous };
     },
-    onError: err => console.log(err),
+
+    onError: (_err, _payload, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(queryKey, context.previous);
+      }
+    },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+    },
   });
 };

@@ -6,7 +6,6 @@ import { TechSelection } from "./components/TechSelection";
 import { cn } from "../../utils/cn";
 import { InterstBtn } from "./components/IntersetBtn";
 import { useGetMyInterest, usePutMyInterst } from "../../lib/my";
-import type { InterestTypeDto } from "../../types/my";
 import { TagCodeToLabel, TagLabelToCode } from "../../utils/tagCodeToLabel";
 
 export const EditInterestPage = () => {
@@ -15,25 +14,31 @@ export const EditInterestPage = () => {
   const { data } = useGetMyInterest();
 
   // 카테고리 라벨 맞추기
-  const myInterestMap = data.reduce<Record<string, string[]>>(
-    (acc, cur: InterestTypeDto) => {
-      acc[cur.category] = TagCodeToLabel(cur.category, cur.keywords);
+  const myInterestMap = selectedTags.reduce<Record<string, number>>(
+    (acc, label) => {
+      const categoryData = INTERESTS_MOCK.interests.find(item =>
+        item.keywords.includes(label),
+      );
+
+      if (!categoryData) return acc;
+
+      acc[categoryData.code] = (acc[categoryData.code] ?? 0) + 1;
       return acc;
     },
     {},
   );
-
   const [selectedCategory, setSelectedCategory] = useState<string>(
     INTERESTS_MOCK.interests[0].code,
   );
 
   useEffect(() => {
-    const serverTags = data.flatMap(item =>
-      TagCodeToLabel(item.category, item.keywords),
-    );
-
-    setFromServer(serverTags);
-  }, [data, setFromServer]);
+    if (originalTags.length === 0) {
+      const serverTags = data.flatMap(item =>
+        TagCodeToLabel(item.category, item.keywords),
+      );
+      setFromServer(serverTags);
+    }
+  }, [data, originalTags.length, setFromServer]);
 
   // 선택된 카테고리
   const selectedCategoryData = INTERESTS_MOCK.interests.find(
@@ -118,7 +123,7 @@ export const EditInterestPage = () => {
 
             <ul className="w-65 flex flex-col h-150 overflow-scroll overflow-x-hidden">
               {INTERESTS_MOCK.interests.map(item => {
-                const count = myInterestMap[item.code]?.length ?? 0;
+                const count = myInterestMap[item.code] ?? 0;
 
                 return (
                   <TagItem
