@@ -5,6 +5,7 @@ import { useInfinitePosts } from "../../../hooks/useGetInfinitePostList";
 import { useGetRecommendPostList } from "../../../lib/recommendation";
 import type { PostResponseDto } from "../../../types/post";
 import { CardItem } from "../../../shared/CardItem";
+import { Loading } from "../../../shared/Loading";
 
 interface PostCardListProps {
   selectedTab: number;
@@ -56,6 +57,7 @@ export const PostCardList = ({ selectedTab }: PostCardListProps) => {
           />
         ))}
       </ul>
+      {activeQuery?.isFetchingNextPage && <Loading />}
       {selectedTab !== 1 && <div ref={infiniteRef} className="h-10 w-full" />}
     </>
   );
