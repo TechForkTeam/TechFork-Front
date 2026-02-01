@@ -1,30 +1,37 @@
-import { create, type StateCreator } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface UserData {
-  // memberId: number;
-  // nickname: string;
   accessToken: string | null;
-  // refreshToken: string | null;
   isNewMember: string | null;
 }
 
 interface UserStoreType {
   user: UserData | null;
+
   setUser: (user: UserData) => void;
-  resetUser: () => void;
+  setAccessToken: (token: string | null) => void;
+  logout: () => void;
 }
 
-const UserStore: StateCreator<UserStoreType> = set => ({
-  user: null,
-  setUser: user => set({ user }),
-  resetUser: () => set({ user: null }),
-});
 const useUserStore = create<UserStoreType>()(
-  persist(UserStore, {
-    name: "user",
-    storage: createJSONStorage(() => localStorage),
-  }),
+  persist(
+    set => ({
+      user: null,
+      setUser: user => set({ user }),
+      setAccessToken: accessToken =>
+        set(state => ({
+          user: state.user
+            ? { ...state.user, accessToken }
+            : { accessToken, isNewMember: null },
+        })),
+      logout: () => set({ user: null }),
+    }),
+    {
+      name: "user",
+      storage: createJSONStorage(() => localStorage),
+    },
+  ),
 );
 
 export default useUserStore;
