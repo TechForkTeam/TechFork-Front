@@ -20,7 +20,6 @@ interface CardItemProps {
   viewCount: number;
   keywords?: string[];
   shortSummary: string;
-  onSearch?: () => void;
 }
 
 export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
@@ -36,7 +35,6 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
       publishedAt,
       isBookmarked,
       shortSummary,
-      onSearch,
     },
     ref,
   ) => {
@@ -59,14 +57,10 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
     const handleReadAndMove = async (
       e: React.MouseEvent<HTMLAnchorElement>,
     ) => {
-      e.preventDefault(); // 기본 이동 방지
+      e.preventDefault();
       if (!id || !url) return;
 
       try {
-        if (onSearch) {
-          onSearch();
-        }
-
         await readPostMutation.mutateAsync({
           postId: id,
           readAt: new Date().toISOString(),
