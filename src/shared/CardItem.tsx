@@ -91,7 +91,10 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
       }
     };
     return (
-      <li className=" h-90 rounded-lg bg-white p-4 relative " ref={ref}>
+      <li
+        className=" h-90 rounded-lg bg-white p-4 relative hover:scale-103  transition-transform duration-200"
+        ref={ref}
+      >
         <div className="flex justify-between mb-3">
           <img src={logoUrl} alt={company} className="size-10" />
           <img

@@ -15,7 +15,7 @@ export const TabSelectList = ({
   tagList,
 }: TabSelectList) => {
   return (
-    <div className={clsx("flex justify-start", className)}>
+    <div className={clsx("flex justify-start gap-2", className)}>
       {tagList.map((item, idx) => {
         return (
           <TabBtn
