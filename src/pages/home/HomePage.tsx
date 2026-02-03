@@ -15,6 +15,7 @@ import { SearchPostList } from "./components/SearchPostList";
 import useUserStore from "../../store/useUserStore";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
+import { SkeletonCard } from "../../shared/SkeletonCard";
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
@@ -47,6 +48,7 @@ export const HomePage = () => {
 
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
+      {/* <SkeletonCard /> */}
       {debouncedInput && debouncedInput.trim() !== "" ? (
         <Suspense fallback={<Loading />}>
           <SearchPostList query={debouncedInput ?? ""} />
@@ -81,9 +83,21 @@ export const HomePage = () => {
                 onRefresh={postRecommendList}
               />
               {isRefreshing ? (
-                <Loading />
+                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                  {Array.from({ length: 16 }).map((_, i) => (
+                    <SkeletonCard key={i} />
+                  ))}
+                </ul>
               ) : (
-                <Suspense fallback={<Loading />}>
+                <Suspense
+                  fallback={
+                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                      {Array.from({ length: 16 }).map((_, i) => (
+                        <SkeletonCard key={i} />
+                      ))}
+                    </ul>
+                  }
+                >
                   <PostCardList selectedTab={1} />
                 </Suspense>
               )}
