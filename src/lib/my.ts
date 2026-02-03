@@ -21,7 +21,7 @@ export const getMyProfile = async () => {
   return data;
 };
 
-export const useGetMyProfile = (enabled: boolean) => {
+export const useGetMyProfile = (enabled?: boolean) => {
   return useQuery({
     queryKey: ["my", "profile"],
     queryFn: getMyProfile,
