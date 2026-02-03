@@ -2,6 +2,7 @@
 
 import {
   useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -20,11 +21,12 @@ export const getMyProfile = async () => {
   return data;
 };
 
-export const useGetMyProfile = () => {
-  return useSuspenseQuery({
+export const useGetMyProfile = (enabled: boolean) => {
+  return useQuery({
     queryKey: ["my", "profile"],
     queryFn: getMyProfile,
     select: res => res.data,
+    enabled,
   });
 };
 

@@ -18,8 +18,9 @@ export const SystemHeader = () => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const { user, logout } = useUserStore();
-  const { data } = useGetMyProfile();
-  // console.log(data);
+  const isLogin = !!user?.accessToken;
+
+  const { data } = useGetMyProfile(isLogin);
 
   const handleLogout = async () => {
     try {
@@ -32,8 +33,6 @@ export const SystemHeader = () => {
       navigate("/");
     }
   };
-
-  const isLogin = !!user?.accessToken;
 
   const handleNavClick = (item: { name: string; nav?: string }) => {
     if (item.name === "로그아웃") {
@@ -98,7 +97,7 @@ export const SystemHeader = () => {
             </Button>
           )}
           <img
-            src={isLogin ? data.profileImage : User}
+            src={isLogin ? data?.profileImage : User}
             alt="mypage"
             className="size-10 cursor-pointer rounded-full"
             onClick={() => {

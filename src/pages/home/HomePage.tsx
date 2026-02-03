@@ -1,11 +1,9 @@
 import { TabSelectList } from "./components/TabSelectList";
 import { CompanyFilterList } from "./components/CompanyFilterList";
-import { InterestFilterList } from "./components/InterestFilterList";
 import { PostCardList } from "./components/PostCardList";
 import { Suspense, useState } from "react";
 import { useCompanyStore } from "../../store/uesCompanyStore";
 import { useGetCompany } from "../../lib/company";
-import { useGetMyInterest } from "../../lib/my";
 import { usePostRecommendPostList } from "../../lib/recommendation";
 import { TAB_MAP } from "../../constants/tab";
 import { Loading } from "../../shared/Loading";
@@ -15,14 +13,14 @@ import { SearchPostList } from "./components/SearchPostList";
 import useUserStore from "../../store/useUserStore";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
-import { SkeletonCard } from "../../shared/SkeletonCard";
+import { SkeletonList } from "../../shared/SkeletonList";
+import { InterestPage } from "./components/InterestPage";
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
   const { companies, toggleCompany } = useCompanyStore();
 
   const { data: companyData } = useGetCompany();
-  const { data: myInterest } = useGetMyInterest();
   const { mutate: postRecommendList, isPending: isRefreshing } =
     usePostRecommendPostList();
 
@@ -76,33 +74,15 @@ export const HomePage = () => {
             </>
           )}
           {/* 나와맞는 게시글 */}
-          {selectedTab === 1 && (
-            <>
-              <InterestFilterList
-                myInterest={myInterest}
+          {selectedTab === 1 && isLogin && (
+            <Suspense fallback={<SkeletonList />}>
+              <InterestPage
                 onRefresh={postRecommendList}
+                isRefreshing={isRefreshing}
               />
-              {isRefreshing ? (
-                <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {Array.from({ length: 16 }).map((_, i) => (
-                    <SkeletonCard key={i} />
-                  ))}
-                </ul>
-              ) : (
-                <Suspense
-                  fallback={
-                    <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                      {Array.from({ length: 16 }).map((_, i) => (
-                        <SkeletonCard key={i} />
-                      ))}
-                    </ul>
-                  }
-                >
-                  <PostCardList selectedTab={1} />
-                </Suspense>
-              )}
-            </>
+            </Suspense>
           )}
+
           {(selectedTab === 2 || selectedTab === 3) && (
             <PostCardList selectedTab={selectedTab} />
           )}

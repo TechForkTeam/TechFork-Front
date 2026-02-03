@@ -1,8 +1,4 @@
-import {
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "./api";
 
 //추천 게시글 조회
@@ -11,11 +7,12 @@ export const getRecommendPostList = async () => {
   return data;
 };
 
-export const useGetRecommendPostList = () => {
-  return useSuspenseQuery({
+export const useGetRecommendPostList = (isLogin: boolean) => {
+  return useQuery({
     queryKey: ["posts", "my", "recommend"],
     queryFn: getRecommendPostList,
     select: res => res.data,
+    enabled: isLogin,
   });
 };
 

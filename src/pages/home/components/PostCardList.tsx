@@ -6,6 +6,7 @@ import { useGetRecommendPostList } from "../../../lib/recommendation";
 import type { CardItemProps, PostResponseDto } from "../../../types/post";
 import { CardItem } from "../../../shared/CardItem";
 import { Loading } from "../../../shared/Loading";
+import useUserStore from "../../../store/useUserStore";
 
 interface PostCardListProps {
   selectedTab: number;
@@ -18,7 +19,9 @@ export const PostCardList = ({ selectedTab }: PostCardListProps) => {
   const companyQuery = useInfiniteCompaniesPosts({ companies });
   const recentQuery = useInfinitePosts({ sortBy: "LATEST" });
   const popularQuery = useInfinitePosts({ sortBy: "POPULAR" });
-  const { data: recommendData } = useGetRecommendPostList();
+  const { user } = useUserStore();
+  const isLogin = !!user?.accessToken;
+  const { data: recommendData } = useGetRecommendPostList(isLogin);
 
   const activeQuery = [companyQuery, null, recentQuery, popularQuery][
     selectedTab
