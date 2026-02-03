@@ -102,11 +102,13 @@ export const SystemHeader = () => {
             alt="mypage"
             className="size-10 cursor-pointer rounded-full"
             onClick={() => {
-              if (!isLogin)
-                return toast.info(`로그인이 필요한 서비스입니다.`, {
+              if (!isLogin) {
+                toast.info(`로그인이 sss필요한 서비스입니다.`, {
                   icon: <img src={Alert} alt="login으로 이동" />,
                 });
-              navigate("/login");
+                navigate("/login");
+              }
+
               setUserModal(prev => !prev);
             }}
           />
