@@ -9,6 +9,8 @@ import { MYPAGE_NAV } from "../constants/mypage";
 import useUserStore from "../store/useUserStore";
 import { postLogout } from "../lib/auth";
 import { useGetMyProfile } from "../lib/my";
+import { toast } from "react-toastify";
+import Alert from "@/assets/icons/alert2.svg";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
@@ -100,7 +102,11 @@ export const SystemHeader = () => {
             alt="mypage"
             className="size-10 cursor-pointer rounded-full"
             onClick={() => {
-              if (!isLogin) return navigate("/login");
+              if (!isLogin)
+                return toast.info(`로그인이 필요한 서비스입니다.`, {
+                  icon: <img src={Alert} alt="login으로 이동" />,
+                });
+              navigate("/login");
               setUserModal(prev => !prev);
             }}
           />

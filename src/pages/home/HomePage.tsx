@@ -13,6 +13,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebouce";
 import { SearchPostList } from "./components/SearchPostList";
 import useUserStore from "../../store/useUserStore";
+import { toast } from "react-toastify";
+import Alert from "@/assets/icons/alert2.svg";
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
@@ -34,6 +36,9 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const handleTabChange = (tab: number) => {
     if (tab === 1 && !isLogin) {
+      toast.info("로그인이 필요한 서비스입니다.", {
+        icon: <img src={Alert} alt="login으로 이동" />,
+      });
       navigate("/login");
       return;
     }

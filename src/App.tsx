@@ -5,7 +5,7 @@ import { Slide, ToastContainer } from "react-toastify";
 function App() {
   return (
     <div className="w-full min-h-dvh mx-auto overflow-y-auto bg-bgPrimary">
-      <main>
+      <main className="">
         <RouterProvider router={router} />
       </main>
       <ToastContainer
