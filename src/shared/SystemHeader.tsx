@@ -61,9 +61,7 @@ export const SystemHeader = () => {
   }, [input, navigate]);
 
   return (
-    <header
-      className={cn("flex gap-2 items-center pb-5 pt-7 bg-white -mx-14 px-14 ")}
-    >
+    <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14 ")}>
       <div
         className="flex items-center justify-between w-full relative"
         ref={modalRef}

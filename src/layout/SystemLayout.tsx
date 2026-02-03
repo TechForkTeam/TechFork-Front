@@ -3,9 +3,11 @@ import { SystemHeader } from "../shared/SystemHeader";
 
 export const SystemLayout = () => {
   return (
-    <div className=" min-h-screen  flex flex-col  ">
+    <div className="w-full bg-white">
       <SystemHeader />
-      <Outlet />
+      <div className="max-w-480 mx-auto px-14 min-h-screen   items-center">
+        <Outlet />
+      </div>
     </div>
   );
 };
