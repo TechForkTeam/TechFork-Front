@@ -20,7 +20,7 @@ export const CompaniesModal = ({ companyData }: CompaniesModalProps) => {
     }
   }, [companies]);
 
-  console.log(companies);
+  // console.log(companies);
   return (
     <section
       className="relative h-130 w-125  shadow-ds100 rounded-2xl overflow-hidden bg-white z-250"

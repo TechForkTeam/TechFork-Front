@@ -55,7 +55,7 @@ export const OnboardingTag = () => {
     });
   };
 
-  console.log(tag);
+  // console.log(tag);
 
   return (
     <div className="flex flex-col items-center">

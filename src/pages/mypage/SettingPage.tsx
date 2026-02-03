@@ -55,7 +55,7 @@ export const SettingPage = () => {
     },
   ];
   const { data: user } = useGetMyProfile();
-  console.log(user);
+  // console.log(user);
   return (
     <div className="px-20 pb-8">
       <section className="mt-16 mb-8  bg-white p-8 rounded-xl border border-bgNormal">

@@ -22,7 +22,7 @@ export const ProfileEditHeader = ({
 
   const [name, setName] = useState(nickName);
   const [introduce, setIntroduce] = useState(description);
-  console.log(name, introduce);
+  // console.log(name, introduce);
 
   return (
     <div>

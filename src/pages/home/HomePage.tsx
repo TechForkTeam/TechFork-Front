@@ -30,7 +30,7 @@ export const HomePage = () => {
 
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
-  console.log(searchQuery);
+  // console.log(searchQuery);
   const debouncedInput = useDebounce(searchQuery, 200);
   const { user } = useUserStore();
   const isLogin = !!user?.accessToken;

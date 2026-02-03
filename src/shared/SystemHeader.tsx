@@ -19,7 +19,7 @@ export const SystemHeader = () => {
 
   const { user, logout } = useUserStore();
   const { data } = useGetMyProfile();
-  console.log(data);
+  // console.log(data);
 
   const handleLogout = async () => {
     try {

@@ -24,7 +24,7 @@ export const SearchPostList = ({ query }: SearchPostListProps) => {
     return <div className="py-20 text-center">검색 결과가 없습니다.</div>;
   }
 
-  console.log(searchData);
+  // console.log(searchData);
   return (
     <div>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-10">

@@ -21,8 +21,6 @@ export const Onboarding = () => {
   };
   const isNicknameValid = nickname.length >= 2;
   const BtnAble = !isNicknameValid || !check;
-  console.log(BtnAble, "버튼");
-  console.log(email);
 
   return (
     <div className=" ">

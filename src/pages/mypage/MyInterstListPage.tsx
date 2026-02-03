@@ -25,7 +25,7 @@ export const MyIntersListPage = () => {
 
   const posts = data?.flatMap(page => page.data.bookmarks) ?? [];
 
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <div className="py-12">
