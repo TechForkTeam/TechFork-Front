@@ -11,6 +11,7 @@ import { postLogout } from "../lib/auth";
 import { useGetMyProfile } from "../lib/my";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
+import Logout from "@/assets/icons/confirm.svg";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
@@ -25,6 +26,9 @@ export const SystemHeader = () => {
   const handleLogout = async () => {
     try {
       await postLogout();
+      toast.info(`로그아웃 되었습니다.`, {
+        icon: <img src={Logout} alt="logout" />,
+      });
     } catch (error) {
       console.error("로그아웃 실패:", error);
     } finally {
@@ -102,7 +106,7 @@ export const SystemHeader = () => {
             className="size-10 cursor-pointer rounded-full"
             onClick={() => {
               if (!isLogin) {
-                toast.info(`로그인이 sss필요한 서비스입니다.`, {
+                toast.info(`로그인이 필요한 서비스입니다.`, {
                   icon: <img src={Alert} alt="login으로 이동" />,
                 });
                 navigate("/login");

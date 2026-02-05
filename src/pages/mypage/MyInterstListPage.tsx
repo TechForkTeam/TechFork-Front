@@ -3,6 +3,7 @@ import { MYPAGE_TAP } from "../../constants/tab";
 import { TabSelectList } from "../home/components/TabSelectList";
 import { CardItem } from "../../shared/CardItem";
 import { useInfiniteBookmarkPosts } from "../../hooks/useGetInfiniteBookmarkList";
+import { Loading } from "../../shared/Loading";
 
 // mypage 관심사 list
 export const MyIntersListPage = () => {
@@ -54,6 +55,7 @@ export const MyIntersListPage = () => {
           );
         })}
       </ul>
+      {isFetchingNextPage && <Loading />}
       <div ref={infiniteRef} className="h-10 w-full" />
     </div>
   );
