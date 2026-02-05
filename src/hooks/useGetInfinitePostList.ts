@@ -50,5 +50,7 @@ export const useInfinitePosts = ({
     },
 
     select: res => res.pages,
+    staleTime: 1000 * 60 * 5,
+    gcTime: 1000 * 60 * 10,
   });
 };

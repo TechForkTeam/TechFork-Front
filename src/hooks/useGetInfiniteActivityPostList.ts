@@ -4,6 +4,7 @@ import { getActivityPostList, type ActivityPostType } from "../lib/activity";
 export const useInfiniteActivityPosts = (type: ActivityPostType, size = 20) => {
   return useSuspenseInfiniteQuery({
     queryKey: ["posts", "activity", type],
+
     queryFn: ({ pageParam }) =>
       getActivityPostList(type, {
         pageParam,
@@ -21,6 +22,6 @@ export const useInfiniteActivityPosts = (type: ActivityPostType, size = 20) => {
     },
 
     select: res => res.pages,
-    staleTime: 0,
+    gcTime: 1000 * 60 * 5,
   });
 };

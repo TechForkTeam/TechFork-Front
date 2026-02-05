@@ -36,7 +36,7 @@ export const usePostBookmark = () => {
       return { previousQueries };
     },
     onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+    // onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
 
@@ -67,7 +67,7 @@ export const useDeleteBookmark = () => {
       return { previousQueries };
     },
     onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+    // onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
 
