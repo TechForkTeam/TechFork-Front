@@ -79,6 +79,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
       if (!id || !url) return;
 
       try {
+        if (!isLogin) return;
         await readPostMutation.mutateAsync({
           postId: id,
           readAt: new Date().toISOString(),
