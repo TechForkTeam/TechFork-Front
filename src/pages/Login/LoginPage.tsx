@@ -1,3 +1,6 @@
+import Apple from "@/assets/images/apple.png";
+import Kakao from "@/assets/images/kakao.png";
+
 export const LoginPage = () => {
   const handleKakaoLogin = () => {
     window.location.href =
@@ -21,19 +24,11 @@ export const LoginPage = () => {
             className="w-80 bg-kakao h-13 text-black rounded-xl body-r-16 flex gap-2 items-center justify-center cursor-pointer"
             onClick={handleKakaoLogin}
           >
-            <img
-              src="/src/assets/images/kakao.png"
-              alt="kakao login"
-              className="size-7"
-            />
+            <img src={Kakao} alt="kakao login" className="size-7" />
             카카오 로그인
           </button>
           <button className="w-80 bg-black h-13 text-white rounded-xl body-r-16 flex gap-2 items-center justify-center cursor-pointer">
-            <img
-              src="/src/assets/images/apple.png"
-              alt="apple login"
-              className="size-7 "
-            />
+            <img src={Apple} alt="apple login" className="size-7 " />
             Apple 로그인
           </button>
         </div>
