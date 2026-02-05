@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 interface TabSelectList {
   className?: string;
-  selected?: number;
+  selected?: number | null;
   onChange: (idx: number) => void;
   tagList: string[];
 }

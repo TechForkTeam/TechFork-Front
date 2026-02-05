@@ -105,7 +105,7 @@ export const EditInterestPage = () => {
             </div>
             <button
               className={cn(
-                "ml-auto rounded-xl px-3 py-2 body-sb-14 text-white items-start shrink-0 cursor-pointer",
+                "ml-auto rounded-xl px-3 py-2 body-r-14 text-white items-start shrink-0 cursor-pointer",
                 isEqual ? "bg-sub-900" : "bg-blue-500",
               )}
               onClick={handleSave}

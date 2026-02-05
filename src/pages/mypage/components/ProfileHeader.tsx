@@ -33,7 +33,7 @@ export const ProfileHeader = ({
       <Button
         color={"grey1"}
         textColor={"black"}
-        className=" font-bold"
+        className=" "
         onClick={onEdit}
       >
         프로필 편집

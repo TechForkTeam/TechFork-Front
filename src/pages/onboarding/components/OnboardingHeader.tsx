@@ -36,7 +36,7 @@ export const OnboardingHeader = ({ basic = true }: OnboardingHeaderProps) => {
             basic ? "bg-assistive" : "bg-blue-500",
           )}
         >
-          <p className="absolute left-3 top-1 text-white">1</p>
+          <p className="absolute left-3 top-1 text-white">2</p>
         </span>
 
         <p

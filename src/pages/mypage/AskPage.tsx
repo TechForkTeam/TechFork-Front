@@ -71,7 +71,7 @@ export const AskPage = () => {
                   {ASK_MAP.map(askItem => {
                     return (
                       <p
-                        className="body-r-14 cursor-pointer p-4"
+                        className="body-r-14 cursor-pointer p-4 hover:bg-[#579AEB] rounded-xl"
                         onClick={e => handleAsk(e, askItem)}
                       >
                         {askItem}
