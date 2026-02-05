@@ -3,7 +3,7 @@ import Search from "@/assets/icons/search.svg";
 import User from "@/assets/images/user.png";
 import Logo from "@/assets/images/logo.png";
 import { Button } from "./button/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { MYPAGE_NAV } from "../constants/mypage";
 import useUserStore from "../store/useUserStore";
@@ -22,6 +22,8 @@ export const SystemHeader = () => {
   const isLogin = !!user?.accessToken;
 
   const { data } = useGetMyProfile(isLogin);
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("search") ?? "";
 
   const handleLogout = async () => {
     try {
@@ -92,7 +94,7 @@ export const SystemHeader = () => {
             type="text"
             placeholder="검색어 또는 태그명 입력"
             className="w-full px-3 py-2    focus:outline-none outline-none"
-            value={input}
+            value={searchQuery}
             onChange={e => setInput(e.target.value)}
           />
         </div>
