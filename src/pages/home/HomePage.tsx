@@ -6,7 +6,6 @@ import { useCompanyStore } from "../../store/uesCompanyStore";
 import { useGetCompany } from "../../lib/company";
 import { usePostRecommendPostList } from "../../lib/recommendation";
 import { TAB_MAP } from "../../constants/tab";
-import { Loading } from "../../shared/Loading";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebouce";
 import { SearchPostList } from "./components/SearchPostList";
@@ -26,13 +25,14 @@ export const HomePage = () => {
 
   const maxCompany = companyData?.companies.slice(0, 8) ?? [];
 
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
-  // console.log(searchQuery);
   const debouncedInput = useDebounce(searchQuery, 200);
+  const isSearching = debouncedInput && debouncedInput.trim() !== "";
   const { user } = useUserStore();
   const isLogin = !!user?.accessToken;
   const navigate = useNavigate();
+
   const handleTabChange = (tab: number) => {
     if (tab === 1 && !isLogin) {
       toast.info("로그인이 필요한 서비스입니다.", {
@@ -41,25 +41,28 @@ export const HomePage = () => {
       navigate("/login");
       return;
     }
+    if (isSearching) {
+      setSearchParams({}); //검색 종료
+    }
     setSelectedTab(tab);
   };
 
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
-      {/* <SkeletonCard /> */}
+      <TabSelectList
+        className={[2, 3].includes(selectedTab) ? "mb-20" : "mb-8"}
+        onChange={handleTabChange}
+        selected={isSearching ? null : selectedTab}
+        tagList={TAB_MAP}
+      />
       {debouncedInput && debouncedInput.trim() !== "" ? (
-        <Suspense fallback={<Loading />}>
-          <SearchPostList query={debouncedInput ?? ""} />
-        </Suspense>
+        <>
+          <Suspense fallback={<SkeletonList />}>
+            <SearchPostList query={debouncedInput ?? ""} />
+          </Suspense>
+        </>
       ) : (
         <>
-          <TabSelectList
-            className={[2, 3].includes(selectedTab) ? "mb-20" : "mb-8"}
-            onChange={handleTabChange}
-            selected={selectedTab}
-            tagList={TAB_MAP}
-          />
-
           {selectedTab === 0 && (
             <>
               <CompanyFilterList

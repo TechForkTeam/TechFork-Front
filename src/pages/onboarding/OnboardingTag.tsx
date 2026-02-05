@@ -10,6 +10,7 @@ import { OnboardingHeader } from "./components/OnboardingHeader";
 import { useTagStore } from "../../store/useTagStore";
 import { useOnboardingStore } from "../../store/useOnboardingStore";
 import { useSubmitOnboarding } from "../../lib/onboarding";
+import { ClipLoader } from "react-spinners";
 
 export const OnboardingTag = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ export const OnboardingTag = () => {
   const { tag, toggleTag, getApiPayload } = useTagStore();
   const { nickname, aboutMe, email } = useOnboardingStore();
   const handleForm = useSubmitOnboarding();
+  const isSubmitting = handleForm.isPending;
 
   const initialOpenedIndices = useMemo(() => {
     return TAG.map((name, index) => {
@@ -68,7 +70,6 @@ export const OnboardingTag = () => {
           </p>
           <div className="flex gap-2 mb-6">
             <p className="body-r-14">선택한 기술: </p>
-            {/* store의 상태로 선택 개수 표시 */}
             <p className="text-point1 body-sb-16">{tag.length}</p>
           </div>
 
@@ -129,7 +130,11 @@ export const OnboardingTag = () => {
               이전
             </Button>
             <Button className="body-r-14 p-2.5" onClick={submitOnboardingForm}>
-              회원가입 완료
+              {isSubmitting ? (
+                <ClipLoader size={20} color="#FFFFFF" />
+              ) : (
+                "회원가입 완료"
+              )}
             </Button>
           </div>
         </section>
