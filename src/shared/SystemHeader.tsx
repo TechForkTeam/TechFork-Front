@@ -54,23 +54,29 @@ export const SystemHeader = () => {
     };
 
     document.addEventListener("click", handleClick);
+    return () => {
+      //cleanup
+      document.removeEventListener("click", handleClick);
+    };
   }, []);
   const [input, setInput] = useState<string>("");
 
   useEffect(() => {
+    if (!input) return;
     if (input) {
       navigate(`/?search=${input}`);
-    } else {
-      navigate("/");
     }
   }, [input, navigate]);
 
+  useEffect(() => {
+    if (userModal) {
+      setInput("");
+    }
+  }, [userModal]);
+
   return (
     <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14   ")}>
-      <div
-        className="flex items-center justify-between w-full relative"
-        ref={modalRef}
-      >
+      <div className="flex items-center justify-between w-full relative">
         <img
           src={Logo}
           alt="로고"
@@ -104,7 +110,8 @@ export const SystemHeader = () => {
             src={isLogin ? data?.profileImage : User}
             alt="mypage"
             className="size-10 cursor-pointer rounded-full"
-            onClick={() => {
+            onClick={e => {
+              e.stopPropagation();
               if (!isLogin) {
                 toast.info(`로그인이 필요한 서비스입니다.`, {
                   icon: <img src={Alert} alt="login으로 이동" />,
@@ -117,7 +124,11 @@ export const SystemHeader = () => {
           />
         </div>
         {userModal && (
-          <div className=" z-50 absolute top-15 shadow-ds100s right-0 w-43 rounded-2xl bg-white border border-bgNormal cursor-pointer">
+          <div
+            ref={modalRef}
+            onClick={e => e.stopPropagation()}
+            className=" z-50 absolute top-15 shadow-ds100s right-0 w-43 rounded-2xl bg-white border border-bgNormal cursor-pointer"
+          >
             {MYPAGE_NAV.map(item => {
               return (
                 <div className="p-4" onClick={() => handleNavClick(item)}>
