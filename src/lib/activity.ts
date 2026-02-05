@@ -2,13 +2,13 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "./api";
-import type {
-  ReadPostType,
-  UseInfiniteBookmarkPostsParams,
-} from "../types/post";
+import type { ReadPostType } from "../types/post";
 import { updateBookmarkState } from "../utils/queryUpdata";
 
-//1. 북마크 추가
+//무한스크롤
+export type ActivityPostType = "bookmark" | "read";
+
+// 북마크 추가
 export const postBookmark = async (postId: number) => {
   const { data } = await api.post("/api/v1/activities/bookmarks", { postId });
   return data;
@@ -20,11 +20,14 @@ export const usePostBookmark = () => {
   return useMutation({
     mutationFn: (postId: number) => postBookmark(postId),
     onMutate: async postId => {
+      //post로 시작하는 query모두 취소
       await queryClient.cancelQueries({ queryKey: ["posts"] });
 
+      //복구위한 데이터 백업
       const previousQueries = queryClient.getQueriesData({
         queryKey: ["posts"],
       });
+
       queryClient.setQueriesData(
         { queryKey: ["posts"], exact: false },
         (old: any) => updateBookmarkState(old, postId, true),
@@ -36,7 +39,8 @@ export const usePostBookmark = () => {
     onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
-//1. 북마크 제거
+
+//북마크 제거
 export const deleteBookmark = async (postId: number) => {
   const { data } = await api.delete("/api/v1/activities/bookmarks", {
     data: { postId },
@@ -66,11 +70,30 @@ export const useDeleteBookmark = () => {
     onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
-//북마크 목록 조회
-export const getBookmarkList = async (
-  params: UseInfiniteBookmarkPostsParams,
+
+export type UseInfiniteActivityPostsParams = {
+  lastBookmarkId?: number;
+  lastReadPostId?: number;
+  size: number;
+};
+
+//읽은게시글 + 북마크 목록 통합
+export const getActivityPostList = async (
+  type: ActivityPostType,
+  { pageParam, size }: { pageParam?: number; size: number },
 ) => {
-  const { data } = await api.get("/api/v1/activities/bookmarks", { params });
+  const url =
+    type === "bookmark"
+      ? "/api/v1/activities/bookmarks"
+      : "/api/v1/activities/read-posts";
+
+  const params = {
+    size,
+    ...(pageParam !== undefined && {
+      [type === "bookmark" ? "lastBookmarkId" : "lastReadPostId"]: pageParam,
+    }),
+  };
+  const { data } = await api.get(url, { params });
   return data;
 };
 
@@ -88,7 +111,7 @@ export const usePostReadPost = () => {
     onSuccess: () => {
       console.log("읽은 게시글 저장");
       queryClient.invalidateQueries({
-        queryKey: ["posts"],
+        queryKey: ["posts", "read"],
       });
     },
     onError: err => console.log(err),

@@ -45,11 +45,7 @@ export type PageParamType = {
   lastPostId?: number;
 };
 
-// 북마크
-export type UseInfiniteBookmarkPostsParams = {
-  lastBookmarkId?: number;
-  size: number;
-};
+// 북마크+읽은게시글
 
 export type PostListBookmarkResponse = {
   bookmarkId: number;
@@ -75,3 +71,19 @@ export type ReadPostType = {
   readAt: string;
   readDurationSeconds: number;
 };
+
+export interface ActivityPostResponseDTO {
+  readPost: number; // bookmark,read
+  postId: number;
+  title: string;
+  shortSummary: string;
+  url: string;
+  companyName: string;
+  logoUrl: string;
+  thumbnailUrl: string;
+  publishedAt: string;
+  viewCount: number;
+  keywords?: string[];
+  isBookmarked: boolean;
+  readAt?: string; // read 전용
+}

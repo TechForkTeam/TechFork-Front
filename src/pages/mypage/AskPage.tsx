@@ -23,7 +23,7 @@ export const AskPage = () => {
   const [confirmModal, setIsConfirmModal] = useState(false);
 
   const activeBtn =
-    title.length > 2 && content.length > 2 && askContent.length > 0; //모두 true여야함, + 다 true면 마지막꺼
+    title.length > 2 && content.length > 2 && askContent.length > 0;
 
   const handleAsk = (e: React.MouseEvent, value: string) => {
     e.stopPropagation();

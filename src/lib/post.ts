@@ -8,6 +8,7 @@ export interface GetPostListParams {
   size?: number;
   lastPublishedAt?: string;
   lastPostId?: number;
+  lastViewCount?: number;
 }
 export const getPostList = async (
   params: GetPostListParams,
