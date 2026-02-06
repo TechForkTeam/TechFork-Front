@@ -23,7 +23,7 @@ export const SystemHeader = () => {
 
   const { data } = useGetMyProfile(isLogin);
   const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get("search") ?? "";
+  const [input, setInput] = useState<string>("");
 
   const handleLogout = async () => {
     try {
@@ -50,6 +50,25 @@ export const SystemHeader = () => {
   };
 
   useEffect(() => {
+    const searchQuery = searchParams.get("search") || "";
+    if (input !== searchQuery) {
+      setInput(searchQuery);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (input === "") {
+      if (searchParams.get("search")) {
+        navigate("/", { replace: true });
+      }
+      return;
+    }
+    if (input !== searchParams.get("search")) {
+      navigate(`/?search=${input}`, { replace: true });
+    }
+  }, [input, navigate]);
+
+  useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (!modalRef.current?.contains(e.target as Node))
         return setUserModal(false);
@@ -61,14 +80,6 @@ export const SystemHeader = () => {
       document.removeEventListener("click", handleClick);
     };
   }, []);
-  const [input, setInput] = useState<string>("");
-
-  useEffect(() => {
-    if (!input) return;
-    if (input) {
-      navigate(`/?search=${input}`);
-    }
-  }, [input, navigate]);
 
   useEffect(() => {
     if (userModal) {
@@ -94,7 +105,7 @@ export const SystemHeader = () => {
             type="text"
             placeholder="검색어 또는 태그명 입력"
             className="w-full px-3 py-2    focus:outline-none outline-none"
-            value={searchQuery}
+            value={input}
             onChange={e => setInput(e.target.value)}
           />
         </div>

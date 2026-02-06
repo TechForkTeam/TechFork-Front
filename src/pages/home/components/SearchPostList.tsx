@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useGetSearchPost, useSearchHistory } from "../../../lib/search";
 import { CardItem } from "../../../shared/CardItem";
 import type { CardItemProps } from "../../../types/post";
+import useUserStore from "../../../store/useUserStore";
 
 interface SearchPostListProps {
   query: string;
@@ -10,10 +11,11 @@ interface SearchPostListProps {
 export const SearchPostList = ({ query }: SearchPostListProps) => {
   const { data: searchData } = useGetSearchPost(query);
   const history = useSearchHistory();
+  const { user } = useUserStore();
+  const isLogin = !!user?.accessToken;
 
   useEffect(() => {
-    if (!query) return;
-
+    if (!query || !isLogin) return;
     history.mutate({
       searchWord: query,
       searchedAt: new Date().toISOString(),
