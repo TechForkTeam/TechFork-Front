@@ -12,6 +12,7 @@ import { useGetMyProfile } from "../lib/my";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
 import Logout from "@/assets/icons/confirm.svg";
+import { useCompanyStore } from "../store/uesCompanyStore";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ export const SystemHeader = () => {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   const { user, logout } = useUserStore();
+  const { resetCompanies, companies } = useCompanyStore();
+  console.log(companies);
   const isLogin = !!user?.accessToken;
 
   const { data } = useGetMyProfile(isLogin);
@@ -28,6 +31,7 @@ export const SystemHeader = () => {
   const handleLogout = async () => {
     try {
       await postLogout();
+
       toast.info(`로그아웃 되었습니다.`, {
         icon: <img src={Logout} alt="logout" />,
       });
@@ -35,6 +39,7 @@ export const SystemHeader = () => {
       console.error("로그아웃 실패:", error);
     } finally {
       logout();
+      resetCompanies();
       setUserModal(false);
       navigate("/");
     }
