@@ -18,3 +18,17 @@ export const useSubmitOnboarding = () => {
     onError: err => console.log(err),
   });
 };
+
+//회원탈퇴
+export const deleteAccount = async () => {
+  const { data } = await api.patch("/api/v1/users/me/withdrawal");
+  return data;
+};
+
+export const useDeleteAccount = (onSuccess: () => void) => {
+  return useMutation({
+    mutationFn: deleteAccount,
+    onSuccess: () => onSuccess?.(),
+    onError: err => console.error(err),
+  });
+};

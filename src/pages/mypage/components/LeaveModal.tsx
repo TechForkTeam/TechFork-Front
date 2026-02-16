@@ -4,17 +4,25 @@ import Warning from "@/assets/icons/warning.svg";
 import CheckOn from "@/assets/icons/check_on.svg";
 import CheckOff from "@/assets/icons/check_off.svg";
 import { useState } from "react";
+import { useDeleteAccount } from "../../../lib/onboarding";
+import useUserStore from "../../../store/useUserStore";
 interface LeaveModalProps {
   onClose?: () => void;
 }
 
 export const LeaveModal = ({ onClose }: LeaveModalProps) => {
   const [check, setCheck] = useState<boolean>(false);
+  const { logout } = useUserStore();
+  const handleWithdrawal = () => {
+    logout();
+    onClose?.();
+  };
+  const { mutate } = useDeleteAccount(handleWithdrawal);
 
   return (
     <>
       <div
-        className="fixed inset-0 bg-[rgba(20,24,31,0.7)] z-40 cursor-pointer"
+        className="fixed inset-0 bg-[rgba(27,33,42,0.7)] z-40 cursor-pointer"
         onClick={onClose}
       ></div>
       <div className="bg-white p-8 rounded-xl w-104  z-500">
@@ -49,10 +57,17 @@ export const LeaveModal = ({ onClose }: LeaveModalProps) => {
             </p>
           </div>
           <div className="gap-2 flex">
-            <Button color={"grey1"} textColor={"black"}>
+            <Button
+              color={"grey1"}
+              textColor={"black"}
+              onClick={mutate}
+              disabled={!check}
+            >
               회원탈퇴
             </Button>
-            <Button onClick={onClose}>취소</Button>
+            <Button onClick={onClose} disabled={!check}>
+              취소
+            </Button>
           </div>
         </section>
       </div>

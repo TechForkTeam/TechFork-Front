@@ -1,10 +1,8 @@
 import { Moon, Info, FileText, LockKeyhole, MessageSquare } from "lucide-react";
-
 import type { LucideIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ProfileHeader } from "./components/ProfileHeader";
-
 import { LeaveModal } from "./components/LeaveModal";
 import { ProfileEditHeader } from "./components/ProfileEditHeader";
 import { SettingList } from "./components/SettingList";
@@ -55,7 +53,7 @@ export const SettingPage = () => {
     },
   ];
   const { data: user } = useGetMyProfile();
-  // console.log(user);
+
   return (
     <div className="px-20 pb-8">
       <section className="mt-16 mb-8  bg-white p-8 rounded-xl border border-bgNormal">

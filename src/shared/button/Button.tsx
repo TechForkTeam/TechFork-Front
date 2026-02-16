@@ -21,7 +21,11 @@ export const Button = ({
   return (
     <button
       disabled={disabled}
-      className={cn(ButtonVariants({ color, textColor, size }), className)}
+      className={cn(
+        ButtonVariants({ color, textColor, size }),
+        disabled && "cursor-not-allowed",
+        className,
+      )}
       onClick={onClick}
     >
       {children}
