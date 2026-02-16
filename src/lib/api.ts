@@ -10,7 +10,7 @@ interface CustomInternalAxiosRequestConfig extends InternalAxiosRequestConfig {
 let refreshPromise: Promise<string> | null = null;
 
 const api = axios.create({
-  baseURL: "https://techfork.shop",
+  baseURL: import.meta.env.VITE_SERVER_API_URL,
   withCredentials: true,
 });
 

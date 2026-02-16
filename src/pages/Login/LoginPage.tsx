@@ -1,12 +1,11 @@
 import Apple from "@/assets/images/apple.png";
 import Kakao from "@/assets/images/kakao.png";
+import { getOAuthUrl, type OAuthProvider } from "../../constants/login";
 
 export const LoginPage = () => {
-  const handleKakaoLogin = () => {
-    window.location.href =
-      "https://api.techfork.shop/oauth2/authorization/kakao";
+  const handleLogin = (provider: OAuthProvider) => {
+    window.location.assign(getOAuthUrl(provider));
   };
-
   return (
     <div className=" flex flex-col  items-center justify-center">
       <section className=" w-full flex flex-col items-center  flex-1">
@@ -22,12 +21,15 @@ export const LoginPage = () => {
         <div className="flex flex-col gap-4 mb-16">
           <button
             className="w-80 bg-kakao h-13 text-black rounded-xl body-r-16 flex gap-2 items-center justify-center cursor-pointer"
-            onClick={handleKakaoLogin}
+            onClick={() => handleLogin("KAKAO")}
           >
             <img src={Kakao} alt="kakao login" className="size-7" />
             카카오 로그인
           </button>
-          <button className="w-80 bg-black h-13 text-white rounded-xl body-r-16 flex gap-2 items-center justify-center cursor-pointer">
+          <button
+            className="w-80 bg-black h-13 text-white rounded-xl body-r-16 flex gap-2 items-center justify-center cursor-pointer"
+            onClick={() => handleLogin("APPLE")}
+          >
             <img src={Apple} alt="apple login" className="size-7 " />
             Apple 로그인
           </button>
