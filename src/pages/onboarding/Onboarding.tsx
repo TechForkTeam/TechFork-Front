@@ -21,7 +21,7 @@ export const Onboarding = () => {
   };
   const isNicknameValid = nickname.length >= 2;
   const BtnAble = !isNicknameValid || !check;
-
+  console.log("test");
   return (
     <div className=" ">
       <section className="flex flex-col  items-center ">
