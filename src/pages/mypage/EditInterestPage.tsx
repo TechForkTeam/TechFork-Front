@@ -6,7 +6,8 @@ import { TechSelection } from "./components/TechSelection";
 import { cn } from "../../utils/cn";
 import { InterstBtn } from "./components/IntersetBtn";
 import { useGetMyInterest, usePutMyInterst } from "../../lib/my";
-import { TagCodeToLabel, TagLabelToCode } from "../../utils/tagCodeToLabel";
+import { TagCodeToLabel } from "../../utils/tagCodeToLabel";
+import { TAG_MAP } from "../../constants/tag";
 
 export const EditInterestPage = () => {
   const { selectedTags, setFromServer, toggleTag, originalTags } =
@@ -15,18 +16,15 @@ export const EditInterestPage = () => {
 
   // 카테고리 라벨 맞추기
   const myInterestMap = selectedTags.reduce<Record<string, number>>(
-    (acc, label) => {
-      const categoryData = INTERESTS_MOCK.interests.find(item =>
-        item.keywords.includes(label),
-      );
-
-      if (!categoryData) return acc;
-
-      acc[categoryData.code] = (acc[categoryData.code] ?? 0) + 1;
+    (acc, code) => {
+      const [categoryCode] = code.split(":");
+      if (!categoryCode) return acc;
+      acc[categoryCode] = (acc[categoryCode] ?? 0) + 1;
       return acc;
     },
     {},
   );
+  //선택한 동적 카테고리
   const [selectedCategory, setSelectedCategory] = useState<string>(
     INTERESTS_MOCK.interests[0].code,
   );
@@ -34,7 +32,7 @@ export const EditInterestPage = () => {
   useEffect(() => {
     if (originalTags.length === 0) {
       const serverTags = data.flatMap(item =>
-        TagCodeToLabel(item.category, item.keywords),
+        item.keywords.map(keywordCode => `${item.category}:${keywordCode}`),
       );
       setFromServer(serverTags);
     }
@@ -59,20 +57,12 @@ export const EditInterestPage = () => {
   const handleSave = () => {
     const categoryMap: Record<string, string[]> = {};
 
-    selectedTags.forEach(label => {
-      const categoryData = INTERESTS_MOCK.interests.find(item =>
-        item.keywords.includes(label),
-      );
-
-      if (categoryData) {
-        const categoryCode = categoryData.code;
-        const keywordCode = TagLabelToCode(label);
-
-        if (!categoryMap[categoryCode]) {
-          categoryMap[categoryCode] = [];
-        }
-        categoryMap[categoryCode].push(keywordCode);
+    selectedTags.forEach(code => {
+      const [categoryCode, keywordCode] = code.split(":");
+      if (!categoryMap[categoryCode]) {
+        categoryMap[categoryCode] = [];
       }
+      categoryMap[categoryCode].push(keywordCode);
     });
 
     const payload = {
@@ -99,9 +89,12 @@ export const EditInterestPage = () => {
 
           <div className="flex items-start">
             <div className="flex gap-2 flex-wrap">
-              {selectedTags.map(tag => (
-                <InterstBtn key={tag} label={tag} />
-              ))}
+              {selectedTags.map(tag => {
+                const [categoryCode, keywordCode] = tag.split(":");
+                const label =
+                  TagCodeToLabel(categoryCode, [keywordCode])[0] ?? keywordCode;
+                return <InterstBtn key={tag} label={label} value={tag} />;
+              })}
             </div>
             <button
               className={cn(
@@ -148,14 +141,27 @@ export const EditInterestPage = () => {
             </p>
 
             <div className="grid grid-cols-5 gap-4">
-              {selectedCategoryData?.keywords.map(keyword => (
-                <TechSelection
-                  key={keyword}
-                  label={keyword}
-                  selected={selectedTags.includes(keyword)}
-                  onClick={() => toggleTag(keyword)}
-                />
-              ))}
+              {selectedCategoryData?.keywords.map(keyword => {
+                const categoryLabel = selectedCategoryData.label;
+                const keywordCode = TAG_MAP[
+                  categoryLabel as keyof typeof TAG_MAP
+                ]?.find(item => item.label === keyword)?.code;
+
+                if (!keywordCode) return null;
+
+                const value = `${selectedCategoryData.code}:${keywordCode}`;
+
+                return (
+                  <TechSelection
+                    key={value}
+                    label={keyword}
+                    selected={selectedTags.includes(value)}
+                    onClick={() =>
+                      toggleTag(selectedCategoryData.code, keywordCode)
+                    }
+                  />
+                );
+              })}
             </div>
           </div>
         </section>
