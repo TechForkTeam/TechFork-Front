@@ -55,6 +55,7 @@ export const HomePage = () => {
       resetCompanies();
     };
   }, []);
+  console.log("test2");
 
   return (
     <div className="bg-bgPrimary py-12 " onClick={() => setModal(false)}>
