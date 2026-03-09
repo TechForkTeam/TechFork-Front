@@ -15,7 +15,6 @@ export const KakaoLogin = () => {
     const token = searchParams.get("token");
     const isMember = searchParams.get("registered");
     const email = searchParams.get("email") ?? undefined;
-    // console.log(email);
     setTemp({ email });
     setUser({ accessToken: token, isNewMember: isMember });
     if (!token) {

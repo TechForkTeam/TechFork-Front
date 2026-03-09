@@ -1,6 +1,6 @@
 export const SkeletonCard = () => {
   return (
-    <li className="h-90 rounded-lg bg-white p-4 relative animate-pulse">
+    <li className="h-90 rounded-lg bg-sub-500 p-4 relative animate-pulse">
       <div className="flex justify-between mb-3">
         <div className="size-10 rounded bg-gray-300" />
         <div className="size-6 rounded bg-gray-300" />

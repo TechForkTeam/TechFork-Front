@@ -1,11 +1,16 @@
 import Apple from "@/assets/images/apple.png";
+import DarkApple from "@/assets/images/apple_dark.png";
 import Kakao from "@/assets/images/kakao.png";
 import { getOAuthUrl, type OAuthProvider } from "../../constants/login";
+import { useThemeToggle } from "../../hooks/useThemToggle";
+import clsx from "clsx";
 
 export const LoginPage = () => {
   const handleLogin = (provider: OAuthProvider) => {
     window.location.assign(getOAuthUrl(provider));
   };
+
+  const { isDark } = useThemeToggle();
   return (
     <div className=" flex flex-col  items-center justify-center">
       <section className=" w-full flex flex-col items-center  flex-1">
@@ -27,10 +32,17 @@ export const LoginPage = () => {
             카카오 로그인
           </button>
           <button
-            className="w-80 bg-black h-13 text-white rounded-xl body-r-16 flex gap-2 items-center justify-center cursor-pointer"
+            className={clsx(
+              "w-80 h-13  rounded-xl body-r-16 flex gap-2 items-center justify-center cursor-pointer",
+              isDark ? "bg-white text-black " : "bg-black text-white",
+            )}
             onClick={() => handleLogin("APPLE")}
           >
-            <img src={Apple} alt="apple login" className="size-7 " />
+            <img
+              src={isDark ? DarkApple : Apple}
+              alt="apple login"
+              className="size-7 "
+            />
             Apple 로그인
           </button>
         </div>
