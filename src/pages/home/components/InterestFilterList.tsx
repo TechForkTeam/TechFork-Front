@@ -15,7 +15,7 @@ export const InterestFilterList = ({
   return (
     <>
       <div className="flex gap-2 flex-wrap py-4">
-        <p className="body-r-14 mr-2 text-strong">나의 관심 분야:</p>
+        <p className="body-r-14 mr-2 font-strong">나의 관심 분야:</p>
         {myInterest?.map(item =>
           TagCodeToLabel(item.category, item.keywords).map(label => (
             <SelectionBtn key={`${item.category}-${label}`}>

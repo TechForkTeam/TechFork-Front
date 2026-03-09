@@ -93,7 +93,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
     };
     return (
       <li
-        className=" h-90 rounded-lg bg-primary text-strong p-4 relative hover:scale-103  transition-transform duration-200"
+        className=" h-90 rounded-lg bg-primary font-strong p-4 relative hover:scale-103  transition-transform duration-200"
         ref={ref}
       >
         <div className="flex justify-between mb-3">

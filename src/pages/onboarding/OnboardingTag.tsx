@@ -63,7 +63,7 @@ export const OnboardingTag = () => {
   // console.log(tag);
 
   return (
-    <div className="flex flex-col items-center text-strong">
+    <div className="flex flex-col items-center font-strong">
       <section className="flex flex-col items-center">
         <OnboardingHeader basic={false} />
         <section className="  rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 bg-primary">
@@ -95,7 +95,7 @@ export const OnboardingTag = () => {
                     className="justify-between flex items-center"
                     onClick={() => toggleCategory(idx)}
                   >
-                    <div className="flex items-center gap-2 text-strong">
+                    <div className="flex items-center gap-2 font-strong">
                       <img src={isDark ? DarkTag : Tag} alt="tag" />
                       <p>{item}</p>
                     </div>
@@ -127,7 +127,7 @@ export const OnboardingTag = () => {
             <Button
               color="grey1"
               textColor="black"
-              className="body-r-14 p-2.5 text-strong"
+              className="body-r-14 p-2.5 font-strong"
               onClick={() => navigate(-1)}
             >
               이전

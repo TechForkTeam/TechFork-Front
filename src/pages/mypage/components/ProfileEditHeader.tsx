@@ -45,7 +45,7 @@ export const ProfileEditHeader = ({
         onChange={e => setIntroduce(e.target.value)}
       />
       <div className="flex gap-4">
-        <Button color={"grey1"} className="text-black" onClick={onCancel}>
+        <Button color={"grey1"} className="font-strong" onClick={onCancel}>
           취소
         </Button>
         <Button

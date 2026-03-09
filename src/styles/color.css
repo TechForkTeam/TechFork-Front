@@ -29,12 +29,15 @@
   --color-light-caution: #fa9538;
   --color-light-positive: #3dc061;
 
+  --color-light-bg-strong: #fff; /*배경*/
+
   /* 텍스트 */
 
   --color-light-text-alternative: #4e5968;
   --color-light-text-assistive: #8b95a1;
   --color-light-text-normal: #14181f;
   --color-light-text-disabled: #d4d8dd;
+  --color-light-text-strong: #14181f;
 
   /* 라인 */
   --color-light-strong: #000000;
@@ -77,14 +80,16 @@
   --color-dark-caution: #fa9538;
   --color-dark-positive: #3dc061;
 
-  --color-dark-strong: #e0e4eb;
+  --color-dark-strong: #0d0d0d;
 
   --color-dark-bgNormal: #2a2f36;
   --color-dark-bgPrimary: #141414; /*배경*/
   --color-dark-primary: #181a1f; /*카드배경*/
 
-  /* 텍스트 */
+  --color-dark-bg-strong: #0d0d0d;
 
+  /* 텍스트 */
+  --color-dark-text-strong: #e0e4eb;
   --color-dark-text-alternative: #8b95a1;
   --color-dark-text-assistive: #8b95a1;
   --color-dark-text-normal: #e0e4eb;
@@ -126,6 +131,7 @@
   --color-alert: var(--color-light-alert);
   --color-caution: var(--color-light-caution);
   --color-positive: var(--color-light-positive);
+  --color-bg-strong: var(--color-light-bg-strong);
 
   /* border line */
   --color-strong: var(--color-light-strong);
@@ -135,6 +141,7 @@
   --color-disabled: var(--color-light-disabled);
 
   /*text */
+  --color-text-strong: var(--color-light-text-strong);
   --color-text-normal: var(--color-light-text-normal);
   --color-text-alternative: var(--color-light-text-alternative);
   --color-text-assistive: var(--color-light-text-assistive);

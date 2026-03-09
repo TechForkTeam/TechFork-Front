@@ -1,6 +1,7 @@
-import Arrow from "@assets/icons/arrow_right.svg";
+// import Arrow from "@assets/icons/arrow_right.svg";
 import ToggleOn from "@assets/images/toggle_on.png";
 import ToggleOff from "@assets/images/toggle_off.png";
+import { ChevronRight } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 interface SettingListProps {
   icon: LucideIcon;
@@ -34,9 +35,14 @@ export const SettingList = ({
 
       <div>
         <p>{label}</p>
-        <p className="detail-r-12 text-alternative">{version}</p>
+        <p className="detail-r-12 font-alternative">{version}</p>
       </div>
-      {isArrow && <img src={Arrow} alt={label} className="ml-auto " />}
+      {isArrow && (
+        <div className="ml-auto font-strong">
+          <ChevronRight />
+        </div>
+        // <img src={Arrow} alt={label} className="ml-auto " />
+      )}
       {isToggle && (
         <img
           src={dark ? ToggleOn : ToggleOff}

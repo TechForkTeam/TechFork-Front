@@ -207,7 +207,9 @@
     .border-blue-50 {
       border-color: var(--color-blue-50);
     }
-
+    .bg-sub-950 {
+      border-color: var(--color-sub-950);
+    }
     .bg-sub-900 {
       background-color: var(--color-sub-900);
     }
@@ -316,8 +318,8 @@
       border-color: var(--color-positive);
     }
 
-    .bg-strong {
-      background-color: var(--color-strong);
+    .bg-bgStrong {
+      background-color: var(--color-bg-strong);
     }
     .bg-normal {
       background-color: var(--color-normal);
@@ -333,8 +335,8 @@
     }
 
     /* 텍스트 */
-    .text-strong {
-      color: var(--color-strong);
+    .font-strong {
+      color: var(--color-text-strong);
     }
     .font-normal {
       color: var(--color-text-normal);
@@ -381,6 +383,9 @@
 
     .border-bgNormal {
       border-color: var(--color-bgNormal);
+    }
+    .border-normal {
+      border-color: var(--color-normal);
     }
     .border-bgPrimary {
       border-color: var(--color-bgPrimary);

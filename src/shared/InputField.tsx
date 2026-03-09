@@ -27,7 +27,7 @@ export const InputField = ({
   return (
     <div className="w-full">
       <div className="flex">
-        <p className={cn("mb-3 body-sb-16 text-strong", className)}>{label}</p>
+        <p className={cn("mb-3 body-sb-16 font-strong", className)}>{label}</p>
         {isDot && <p className="text-alert">*</p>}
       </div>
       <div className="w-full  rounded-xl mb-5">

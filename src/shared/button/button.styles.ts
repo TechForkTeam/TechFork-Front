@@ -23,7 +23,7 @@ export const ButtonVariants = cva(
       },
       textColor: {
         default: "text-white",
-        black: "text-black",
+        black: "font-strong",
         blue: "text-blue-500",
       },
     },

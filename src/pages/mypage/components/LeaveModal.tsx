@@ -22,10 +22,10 @@ export const LeaveModal = ({ onClose }: LeaveModalProps) => {
   return (
     <>
       <div
-        className="fixed inset-0 bg-[rgba(27,33,42,0.7)] z-40 cursor-pointer"
+        className="fixed inset-0 bg-[rgba(27,33,42,0.85)] z-40 cursor-pointer"
         onClick={onClose}
       ></div>
-      <div className="bg-white p-8 rounded-xl w-104  z-500">
+      <div className="bg-primary p-8 rounded-xl w-104  z-500 font-strong ">
         <section>
           <div className="flex mb-5">
             <h3 className="subtitle-sb-20">회원탈퇴</h3>
@@ -40,7 +40,7 @@ export const LeaveModal = ({ onClose }: LeaveModalProps) => {
             <img src={Warning} alt="주의" />
             <p>정말로 탈퇴하시겠습니까?</p>
           </div>
-          <ul className="list-disc  marker:text-xs marker:text-alternative pl-5 body-r-14 text-alternative mb-4">
+          <ul className="list-disc  marker:text-xs marker:text-alternative pl-5 body-r-14 font-alternative mb-4">
             <li>회원정보 및 이용기록은 즉시 삭제되며 복구할 수 없습니다.</li>
             <li>동일 이메일로 재가입이 가능합니다. </li>
           </ul>

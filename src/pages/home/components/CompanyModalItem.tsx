@@ -23,7 +23,7 @@ export const CompanyModalItem = ({
         <img src={logoUrl} alt="company" className="object-corver size-8" />
       </div>
       <p
-        className="body-r-14 text-center h-10 line-clamp-2 text-strong wrap-break-word
+        className="body-r-14 text-center h-10 line-clamp-2 font-strong wrap-break-word
     break-all"
       >
         {company}

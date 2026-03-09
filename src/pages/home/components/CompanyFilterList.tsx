@@ -24,7 +24,7 @@ export const CompanyFilterList = ({
 }: CompanyFilterListProps) => {
   return (
     <>
-      <div className="flex items-center gap-4 flex-wrap pb-6 text-strong">
+      <div className="flex items-center gap-4 flex-wrap pb-6 font-strong">
         {companyData.companies.length !== 0 && (
           <>
             <div className="body-sb-14">선택된 기업:</div>
@@ -75,7 +75,7 @@ export const CompanyFilterList = ({
             modal ? "border-blue-500" : "border-bgNormal",
           )}
         >
-          <Ellipsis className=" text-strong" />
+          <Ellipsis className=" font-strong" />
         </div>
         {modal && (
           <div

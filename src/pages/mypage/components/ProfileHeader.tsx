@@ -24,18 +24,13 @@ export const ProfileHeader = ({
           alt="profile image"
           className="rounded-full size-17"
         />
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 font-strong">
           <p className="body-r-16">{nickName}</p>
-          <p className="body-r-14 text-alternative">{email}</p>
-          <p className="body-r-14 text-alternative">{description}</p>
+          <p className="body-r-14 font-alternative">{email}</p>
+          <p className="body-r-14 font-alternative">{description}</p>
         </div>
       </div>
-      <Button
-        color={"grey1"}
-        textColor={"black"}
-        className=" "
-        onClick={onEdit}
-      >
+      <Button color={"grey1"} textColor={"black"} onClick={onEdit}>
         프로필 편집
       </Button>
     </div>

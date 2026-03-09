@@ -22,7 +22,7 @@ export const Header = ({ className }: HeaderProps) => {
         className="w-35 h-12 cursor-pointer"
         onClick={() => navigate("/")}
       />
-      <p className="subtitle-sb-20 text-strong">통합 로그인</p>
+      <p className="subtitle-sb-20 font-strong">통합 로그인</p>
     </header>
   );
 };

@@ -148,7 +148,7 @@ export const SystemHeader = () => {
           <div
             ref={modalRef}
             onClick={e => e.stopPropagation()}
-            className=" z-50 absolute top-15 shadow-ds100s right-0 w-43 rounded-2xl bg-primary border border-bgNormal cursor-pointer text-strong"
+            className=" z-50 absolute top-15 shadow-ds100s right-0 w-43 rounded-2xl bg-primary border border-bgNormal cursor-pointer font-strong"
           >
             {MYPAGE_NAV.map(item => {
               return (

@@ -16,7 +16,7 @@ export const HomeCompanySelectBtn = ({
 
   return (
     <div
-      className="flex gap-1.5 items-center py-2 px-3 border border-bgNormal bg-white w-fit rounded-[20px] text-strong"
+      className="flex gap-1.5 items-center py-2 px-3 border border-bgNormal bg-white w-fit rounded-[20px] font-strong"
       onClick={onClick}
     >
       <img src={logoUrl} alt="company" className="size-5" />

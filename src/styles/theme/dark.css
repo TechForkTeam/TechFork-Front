@@ -27,6 +27,8 @@
     --color-caution: var(--color-dark-caution);
     --color-positive: var(--color-dark-positive);
 
+    --color-bg-strong: var(--color-dark-bg-strong);
+
     /* 라인 */
     --color-strong: var(--color-dark-strong);
     --color-normal: var(--color-dark-normal);
@@ -35,7 +37,7 @@
     --color-disabled: var(--color-dark-disabled);
 
     /* text*/
-
+    --color-text-strong: var(--color-dark-text-strong);
     --color-text-normal: var(--color-dark-text-normal);
     --color-text-alternative: var(--color-dark-text-alternative);
     --color-text-assistive: var(--color-dark-text-assistive);
