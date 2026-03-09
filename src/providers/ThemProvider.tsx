@@ -1,28 +1,10 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type PropsWithChildren,
-} from "react";
-
-export enum THEME {
-  LIGHT = "light",
-  DARK = "dark",
-}
-
-interface ThemeContextType {
-  theme: THEME;
-  setTheme: (theme: THEME) => void;
-}
-
-const ThemeContext = createContext<ThemeContextType | null>(null);
-
-const THEME_STORAGE_KEY = "theme";
+import { useEffect, useState, type PropsWithChildren } from "react";
+import { THEME, THEME_STORAGE_KEY, type Theme } from "../types/theme";
+import { ThemeContext } from "./ThemeContext";
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
-  const [theme, setTheme] = useState<THEME>(() => {
-    const saved = localStorage.getItem(THEME_STORAGE_KEY) as THEME | null;
+  const [theme, setTheme] = useState<Theme>(() => {
+    const saved = localStorage.getItem(THEME_STORAGE_KEY);
 
     if (saved === THEME.LIGHT || saved === THEME.DARK) {
       return saved;
@@ -50,10 +32,4 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
       {children}
     </ThemeContext.Provider>
   );
-};
-
-export const useThemeContext = () => {
-  const context = useContext(ThemeContext);
-  if (!context) throw new Error("오류발생");
-  return context;
 };
