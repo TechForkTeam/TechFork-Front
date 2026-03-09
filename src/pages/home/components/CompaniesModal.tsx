@@ -27,7 +27,7 @@ export const CompaniesModal = ({ companyData }: CompaniesModalProps) => {
       onClick={e => e.stopPropagation()}
       ref={scrollRef}
     >
-      <div className="h-full overflow-y-auto ">
+      <div className="h-full overflow-y-auto  scrollbar-style">
         {/* header */}
         <div className="sticky top-0 z-10 bg-sub-500 px-4 pt-4">
           <div className="flex justify-between border-b border-bgNormal  pb-4 mb-4">
