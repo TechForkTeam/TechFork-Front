@@ -93,7 +93,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
     };
     return (
       <li
-        className=" h-90 rounded-lg bg-white p-4 relative hover:scale-103  transition-transform duration-200"
+        className=" h-90 rounded-lg bg-primary text-strong p-4 relative hover:scale-103  transition-transform duration-200"
         ref={ref}
       >
         <div className="flex justify-between mb-3">
@@ -124,7 +124,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
         <div className="flex items-center gap-2">
           <img src={Eye} alt="" className="" />
           <p className="text-xs ">{viewCount}</p>
-          <p className="text-xs text-assistive">{publishedAt?.split("T")[0]}</p>
+          <p className="text-xs font-assistive">{publishedAt?.split("T")[0]}</p>
         </div>
         <a
           href={url}

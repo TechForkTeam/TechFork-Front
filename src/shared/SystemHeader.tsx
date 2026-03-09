@@ -2,6 +2,7 @@ import { cn } from "../utils/cn";
 import Search from "@/assets/icons/search.svg";
 import User from "@/assets/images/user.png";
 import Logo from "@/assets/images/logo.png";
+import DarkLogo from "@/assets/images/logo_dark.png";
 import { Button } from "./button/Button";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
@@ -13,11 +14,13 @@ import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
 import Logout from "@/assets/icons/confirm.svg";
 import { useCompanyStore } from "../store/uesCompanyStore";
+import { useThemeToggle } from "../hooks/useThemToggle";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
   const [userModal, setUserModal] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const { isDark } = useThemeToggle();
 
   const { user, logout } = useUserStore();
   const { resetCompanies, companies } = useCompanyStore();
@@ -96,7 +99,7 @@ export const SystemHeader = () => {
     <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14   ")}>
       <div className="flex items-center justify-between w-full relative">
         <img
-          src={Logo}
+          src={isDark ? DarkLogo : Logo}
           alt="로고"
           className="w-35 h-12 cursor-pointer"
           onClick={() => {
@@ -109,7 +112,7 @@ export const SystemHeader = () => {
           <input
             type="text"
             placeholder="검색어 또는 태그명 입력"
-            className="w-full px-3 py-2    focus:outline-none outline-none"
+            className="w-full px-3 py-2    focus:outline-none outline-none font-alternative"
             value={input}
             onChange={e => setInput(e.target.value)}
           />
@@ -145,7 +148,7 @@ export const SystemHeader = () => {
           <div
             ref={modalRef}
             onClick={e => e.stopPropagation()}
-            className=" z-50 absolute top-15 shadow-ds100s right-0 w-43 rounded-2xl bg-white border border-bgNormal cursor-pointer"
+            className=" z-50 absolute top-15 shadow-ds100s right-0 w-43 rounded-2xl bg-primary border border-bgNormal cursor-pointer text-strong"
           >
             {MYPAGE_NAV.map(item => {
               return (

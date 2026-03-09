@@ -58,7 +58,7 @@ export const HomePage = () => {
   console.log("test2");
 
   return (
-    <div className="bg-bgPrimary py-12" onClick={() => setModal(false)}>
+    <div className="bg-bgPrimary  py-12" onClick={() => setModal(false)}>
       <TabSelectList
         className={
           isSearching || [2, 3].includes(selectedTab) ? "mb-20" : "mb-8"

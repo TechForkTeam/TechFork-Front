@@ -61,7 +61,7 @@
   --color-dark-blue-200: #688cff;
   --color-dark-blue-150: #b3c5ff;
   --color-dark-blue-100: #cdd9ff;
-  --color-dark-blue-50: #e6ecff;
+  --color-dark-blue-50: #181a1f;
 
   --color-dark-sub-900: #b2bdcc;
   --color-dark-sub-800: #333d4c; /*온보딩 관심분야*/
@@ -77,7 +77,7 @@
   --color-dark-caution: #fa9538;
   --color-dark-positive: #3dc061;
 
-  --color-dark-strong: #ffffff;
+  --color-dark-strong: #e0e4eb;
 
   --color-dark-bgNormal: #2a2f36;
   --color-dark-bgPrimary: #141414; /*배경*/
@@ -86,7 +86,7 @@
   /* 텍스트 */
 
   --color-dark-text-alternative: #8b95a1;
-  --color-dark-text-assistive: #4e5968;
+  --color-dark-text-assistive: #8b95a1;
   --color-dark-text-normal: #e0e4eb;
   --color-dark-text-disabled: #333;
 

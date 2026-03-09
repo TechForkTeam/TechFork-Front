@@ -1,9 +1,9 @@
-import PopOn from "@/assets/icons/pop-on.svg";
-import PopOff from "@/assets/icons/pop-off.svg";
 import type { CompanyResponseDto, CompanyType } from "../../../types/company";
 import { HomeCompanySelectBtn } from "./HomeCompanySelectBtn";
 import { CompanyItem } from "./CompanyItem";
 import { CompaniesModal } from "./CompaniesModal";
+import { Ellipsis } from "lucide-react";
+import clsx from "clsx";
 
 interface CompanyFilterListProps {
   companies: string[];
@@ -24,7 +24,7 @@ export const CompanyFilterList = ({
 }: CompanyFilterListProps) => {
   return (
     <>
-      <div className="flex items-center gap-4 flex-wrap pb-6">
+      <div className="flex items-center gap-4 flex-wrap pb-6 text-strong">
         {companyData.companies.length !== 0 && (
           <>
             <div className="body-sb-14">선택된 기업:</div>
@@ -56,15 +56,27 @@ export const CompanyFilterList = ({
             onClick={() => toggleCompany(item.company)}
           />
         ))}
-        <img
+        {/* <img
           src={modal ? PopOn : PopOff}
           alt="toggle modal"
-          className="mb-6 cursor-pointer"
+          className="mb-6 cursor-pointer "
           onClick={e => {
             e.stopPropagation();
             setModal(pre => !pre);
           }}
-        />
+        /> */}
+        <div
+          onClick={e => {
+            e.stopPropagation();
+            setModal(pre => !pre);
+          }}
+          className={clsx(
+            "bg-primary flex items-center justify-center size-20 border rounded-2xl cursor-pointer mb-6 ",
+            modal ? "border-blue-500" : "border-bgNormal",
+          )}
+        >
+          <Ellipsis className=" text-strong" />
+        </div>
         {modal && (
           <div
             onClick={e => e.stopPropagation()}

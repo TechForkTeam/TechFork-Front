@@ -21,7 +21,7 @@ export const CompanyItem = ({
       )}
       <div
         className={cn(
-          "p-3 rounded-2xl  border-bgNormal  bg-white border-2 mb-2",
+          "p-3 rounded-2xl  border-bgNormal  bg-primary border-2 mb-2",
           selected && "border-blue-500 shadow-ds150 border-2",
         )}
         onClick={onClick}

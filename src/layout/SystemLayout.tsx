@@ -4,7 +4,7 @@ import { SystemHeader } from "../shared/SystemHeader";
 export const SystemLayout = () => {
   return (
     <>
-      <div className="w-full bg-white">
+      <div className="w-full bg-bgPrimary">
         <SystemHeader />
       </div>
       <div className="max-w-480 mx-auto px-14 min-h-screen  bg-bgPrimary items-center">
