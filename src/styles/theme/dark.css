@@ -1,17 +1,6 @@
 @layer base {
   .dark {
-    --color-blue-900: var(--color-dark-blue-900);
-    --color-blue-850: var(--color-dark-blue-850);
-    --color-blue-800: var(--color-dark-blue-800);
-    --color-blue-700: var(--color-dark-blue-700);
-    --color-blue-600: var(--color-dark-blue-600);
     --color-blue-500: var(--color-dark-blue-500);
-    --color-blue-400: var(--color-dark-blue-400);
-    --color-blue-300: var(--color-dark-blue-300);
-    --color-blue-200: var(--color-dark-blue-200);
-    --color-blue-150: var(--color-dark-blue-150);
-    --color-blue-100: var(--color-dark-blue-100);
-    --color-blue-50: var(--color-dark-blue-50);
 
     --color-sub-900: var(--color-dark-sub-900);
     --color-sub-800: var(--color-dark-sub-800);

@@ -72,8 +72,8 @@ export const OnboardingTag = () => {
             선택 분야를 바탕으로 맞춤형 게시글을 추천해 드려요
           </p>
           <div className="flex gap-2 mb-6">
-            <p className="body-r-14 font-alternative">선택한 기술: </p>
-            <p className="text-point1 body-sb-16">{tag.length}</p>
+            <p className="body-r-14 ">선택한 기술: </p>
+            <p className="text-point1 body-sb-16">{tag.length}개</p>
           </div>
 
           <article className="w-full max-h-69 overflow-scroll overflow-x-hidden scrollbar-hide">
@@ -87,7 +87,7 @@ export const OnboardingTag = () => {
               return (
                 <div
                   key={idx}
-                  className={`rounded-lg border border-alternative w-full px-4 py-1 mb-3 cursor-pointer ${hasAnySelected && " bg-[#f3f6ff]"} ${
+                  className={`rounded-lg border border-bgNormal w-full px-4 py-1 mb-3 cursor-pointer ${hasAnySelected && " bg-[#f3f6ff]"} ${
                     isOpen && "bg-sub-400"
                   }`}
                 >

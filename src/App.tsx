@@ -7,20 +7,24 @@ import { useEffect } from "react";
 
 function App() {
   const { isDark } = useThemeToggle();
-  console.log(isDark);
 
   useEffect(() => {
     const root = document.documentElement;
+    root.classList.add("theme-switching");
+    requestAnimationFrame(() => {
+      if (isDark) root.classList.add("dark");
+      else root.classList.remove("dark");
+    });
 
-    if (isDark) root.classList.add("dark");
-    else root.classList.remove("dark");
+    const timeout = setTimeout(() => {
+      root.classList.remove("theme-switching");
+    }, 300);
+
+    return () => clearTimeout(timeout);
   }, [isDark]);
   return (
     <div
-      className={cn(
-        "w-full min-h-dvh mx-auto overflow-y-auto bg-bgPrimary",
-        isDark && "dark",
-      )}
+      className={cn("w-full min-h-dvh mx-auto overflow-y-auto bg-bgPrimary")}
     >
       <main>
         <RouterProvider router={router} />

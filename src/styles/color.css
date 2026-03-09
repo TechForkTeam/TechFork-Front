@@ -22,7 +22,7 @@
   --color-light-sub-500: #f0f2f5;
   --color-light-sub-400: #f6f7f9e3;
 
-  --color-light-point1: #00c7be;
+  --color-light-point1: #00e1d5;
   --color-light-point2: #e3faf8;
 
   --color-light-alert: #f33326;
@@ -53,32 +53,18 @@
   /* =========================
      2) Dark palette
   ========================= */
-  --color-dark-blue-900: #010d33;
-  --color-dark-blue-850: #01134c;
-  --color-dark-blue-800: #011966;
-  --color-dark-blue-700: #022699;
-  --color-dark-blue-600: #0232cc;
-  --color-dark-blue-500: #033fff;
-  --color-dark-blue-400: #3565ff;
-  --color-dark-blue-300: #688cff;
-  --color-dark-blue-200: #688cff;
-  --color-dark-blue-150: #b3c5ff;
-  --color-dark-blue-100: #cdd9ff;
-  --color-dark-blue-50: #181a1f;
 
-  --color-dark-sub-900: #22272e; /*마이페이지 관심분야*/
+  --color-dark-blue-500: #033fff;
+
+  --color-dark-sub-900: #22272e; /*마이페이지관심분야*/
   --color-dark-sub-800: #333d4c; /*온보딩 관심분야*/
   --color-dark-sub-700: #d1d7e0;
   --color-dark-sub-600: #e0e4eb;
   --color-dark-sub-500: #22272e;
   --color-dark-sub-400: #141414; /*온보딩 태그*/
 
-  --color-dark-point1: #00c7be;
+  --color-dark-point1: #00e1d5;
   --color-dark-point2: #e3faf8;
-
-  --color-dark-alert: #f33326;
-  --color-dark-caution: #fa9538;
-  --color-dark-positive: #3dc061;
 
   --color-dark-strong: #0d0d0d;
 
@@ -91,7 +77,7 @@
   /* 텍스트 */
   --color-dark-text-strong: #e0e4eb;
   --color-dark-text-alternative: #8b95a1;
-  --color-dark-text-assistive: #8b95a1;
+  --color-dark-text-assistive: #4e5968;
   --color-dark-text-normal: #e0e4eb;
   --color-dark-text-disabled: #333;
 
@@ -101,10 +87,7 @@
   --color-dark-assistive: #d1d6db;
   --color-dark-disabled: #6b7280;
 
-  /* =========================
-     3) Semantic tokens (default = light)
-     utility는 이것만 사용
-  ========================= */
+  /* default */
   --color-blue-900: var(--color-light-blue-900);
   --color-blue-850: var(--color-light-blue-850);
   --color-blue-800: var(--color-light-blue-800);
