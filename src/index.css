@@ -88,6 +88,19 @@
     display: none;
     background: transparent;
   }
+  .scrollbar-style::-webkit-scrollbar-track {
+    background: transparent; /* 트랙을 투명하게, 배경색 유지 */
+  }
+  .scrollbar-style::-webkit-scrollbar-thumb {
+    background: var(--color-sub-800);
+    border-radius: 10px;
+  }
+
+  /* Firefox 대응 */
+  .scrollbar-style {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-sub-800) transparent;
+  }
 
   @layer utilities {
     .bg-primary {

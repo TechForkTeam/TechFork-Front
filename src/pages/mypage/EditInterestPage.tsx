@@ -75,16 +75,16 @@ export const EditInterestPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <header className="mt-16 mb-8 rounded-xl border border-bgNormal bg-white p-8">
+    <div className="min-h-screen flex flex-col font-strong">
+      <header className="mt-16 mb-8 rounded-xl border border-bgNormal bg-bgStrong p-8">
         <h3 className="body-sb-16">관심 분야를 수정해보세요.</h3>
-        <h5 className="body-r-14 text-alternative">
+        <h5 className="body-r-14 font-alternative">
           선택 분야를 바탕으로 맞춤형 게시글을 추천해드려요.
         </h5>
       </header>
 
       <article>
-        <div className="bg-white p-8 rounded-t-xl border border-bgNormal">
+        <div className="bg-bgStrong p-8 rounded-t-xl border border-bgNormal font-strong">
           <h3 className="mb-4 body-sb-16">선택된 관심사</h3>
 
           <div className="flex items-start">
@@ -98,8 +98,8 @@ export const EditInterestPage = () => {
             </div>
             <button
               className={cn(
-                "ml-auto rounded-xl px-3 py-2 body-r-14 text-white items-start shrink-0 cursor-pointer",
-                isEqual ? "bg-sub-900" : "bg-blue-500",
+                "ml-auto rounded-xl px-3 py-2 body-r-14 items-start font-assistive shrink-0 cursor-pointer",
+                isEqual ? "bg-sub-500" : "bg-blue-500",
               )}
               onClick={handleSave}
             >
@@ -114,7 +114,7 @@ export const EditInterestPage = () => {
           >
             <h6 className="py-4 body-r-14">카테고리</h6>
 
-            <ul className="w-65 flex flex-col h-150 overflow-scroll overflow-x-hidden">
+            <ul className="w-65 flex flex-col h-150 overflow-scroll overflow-x-hidden scrollbar-style">
               {INTERESTS_MOCK.interests.map(item => {
                 const count = myInterestMap[item.code] ?? 0;
 
@@ -134,9 +134,9 @@ export const EditInterestPage = () => {
             </ul>
           </aside>
           {/* 기술 */}
-          <div className="p-10 bg-white w-full">
+          <div className="p-10 bg-bgStrong w-full">
             <h5 className="body-sb-18">{selectedCategoryData?.label}</h5>
-            <p className="body-r-14 text-alternative mb-6">
+            <p className="body-r-14 font-alternative mb-6">
               관심있는 기술을 선택하세요.
             </p>
 
