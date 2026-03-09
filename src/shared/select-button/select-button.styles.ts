@@ -9,7 +9,7 @@ export const SelectBtnVariants = cva(
         sm: "w-17 text-xs py-1 px-6",
       },
       state: {
-        default: "text-black border border-bgNormal bg-white",
+        default: "text-black border border-bgNormal bg-primary",
         select: " border border-translate bg-blue-500 text-white",
       },
     },

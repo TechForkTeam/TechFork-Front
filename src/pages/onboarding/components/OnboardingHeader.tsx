@@ -33,7 +33,7 @@ export const OnboardingHeader = ({ basic = true }: OnboardingHeaderProps) => {
         <span
           className={clsx(
             "size-8 rounded-full relative",
-            basic ? "bg-assistive" : "bg-blue-500",
+            basic ? "bg-sub-800" : "bg-blue-500",
           )}
         >
           <p className="absolute left-3 top-1 text-white">2</p>

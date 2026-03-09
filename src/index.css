@@ -1,14 +1,17 @@
 @import "tailwindcss";
+@import "./styles/theme/dark.css";
+@import "./styles/fonts.css";
+@import "./styles/color.css";
 
 @theme {
   /* 폰트 패밀리 변수 */
-  --font-sans:
+  /* --font-sans:
     "Pretendard Variable", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --font-inter: "Inter", "Helvetica Neue", Arial, sans-serif;
-  --font-roboto: "Roboto", "sans-serif";
+  --font-roboto: "Roboto", "sans-serif"; */
 
   /*main color-light*/
-  --color-blue-900: #010d33;
+  /* --color-blue-900: #010d33;
   --color-blue-850: #01134c;
   --color-blue-800: #011966;
   --color-blue-700: #022699;
@@ -19,34 +22,34 @@
   --color-blue-200: #688cff;
   --color-blue-150: #b3c5ff;
   --color-blue-100: #cdd9ff;
-  --color-blue-50: #e6ecff;
+  --color-blue-50: #e6ecff; */
 
   /*sub color*/
-  --color-sub-900: #b2bdcc;
+  /* --color-sub-900: #b2bdcc;
   --color-sub-800: #c2cad6;
   --color-sub-700: #d1d7e0;
   --color-sub-600: #e0e4eb;
   --color-sub-500: #f0f2f5;
-  --color-sub-400: #f6f7f9e3;
+  --color-sub-400: #f6f7f9e3; */
   /*point color*/
-  --color-point1: #00c7be;
-  --color-point2: #e3faf8;
+  /* --color-point1: #00c7be;
+  --color-point2: #e3faf8; */
 
   /*status Color*/
-  --color-alert: #f33326;
+  /* --color-alert: #f33326;
   --color-caution: #fa9538;
-  --color-positive: #3dc061;
+  --color-positive: #3dc061; */
 
   /*text color*/
-  --color-strong: #000000;
+  /* --color-strong: #000000;
   --color-normal: #171717;
   --color-alternative: #595959;
   --color-assistive: #8b95a1;
-  --color-disabled: #d9d9d9;
+  --color-disabled: #d9d9d9; */
 
   /*line, bg status*/
-  --color-bgNormal: #e5e8eb;
-  --color-bgPrimary: #f7f8f9;
+  /* --color-bgNormal: #e5e8eb;
+  --color-bgPrimary: #f7f8f9; */
 
   /*etc*/
   --color-kakao: #fee500;
@@ -58,9 +61,9 @@
 }
 
 @layer base {
-  html {
+  /* html {
     font-family: var(--font-sans);
-  }
+  } */
   #root {
     /* overflow: hidden; */
     /* 헤더 스크롤이 안되서 임시 주석 */
@@ -86,103 +89,305 @@
     background: transparent;
   }
 
-  /*typography*/
+  @layer utilities {
+    .bg-primary {
+      background-color: var(--color-primary);
+    }
 
-  .large-title {
-    font-family: var(--font-sans);
-    font-size: 2.5rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
-  }
-  .large-title-32 {
-    font-family: var(--font-sans);
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 120%;
+    .bg-blue-900 {
+      background-color: var(--color-blue-900);
+    }
+    .bg-blue-850 {
+      background-color: var(--color-blue-850);
+    }
+    .bg-blue-800 {
+      background-color: var(--color-blue-800);
+    }
+    .bg-blue-700 {
+      background-color: var(--color-blue-700);
+    }
+    .bg-blue-600 {
+      background-color: var(--color-blue-600);
+    }
+    .bg-blue-500 {
+      background-color: var(--color-blue-500);
+    }
+    .bg-blue-400 {
+      background-color: var(--color-blue-400);
+    }
+    .bg-blue-300 {
+      background-color: var(--color-blue-300);
+    }
+    .bg-blue-200 {
+      background-color: var(--color-blue-200);
+    }
+    .bg-blue-150 {
+      background-color: var(--color-blue-150);
+    }
+    .bg-blue-100 {
+      background-color: var(--color-blue-100);
+    }
+    .bg-blue-50 {
+      background-color: var(--color-blue-50);
+    }
+
+    .text-primary {
+      color: var(--color-primary);
+    }
+    .text-blue-900 {
+      color: var(--color-blue-900);
+    }
+    .text-blue-850 {
+      color: var(--color-blue-850);
+    }
+    .text-blue-800 {
+      color: var(--color-blue-800);
+    }
+    .text-blue-700 {
+      color: var(--color-blue-700);
+    }
+    .text-blue-600 {
+      color: var(--color-blue-600);
+    }
+    .text-blue-500 {
+      color: var(--color-blue-500);
+    }
+    .text-blue-400 {
+      color: var(--color-blue-400);
+    }
+    .text-blue-300 {
+      color: var(--color-blue-300);
+    }
+    .text-blue-200 {
+      color: var(--color-blue-200);
+    }
+    .text-blue-150 {
+      color: var(--color-blue-150);
+    }
+    .text-blue-100 {
+      color: var(--color-blue-100);
+    }
+    .text-blue-50 {
+      color: var(--color-blue-50);
+    }
+
+    .border-blue-900 {
+      border-color: var(--color-blue-900);
+    }
+    .border-blue-850 {
+      border-color: var(--color-blue-850);
+    }
+    .border-blue-800 {
+      border-color: var(--color-blue-800);
+    }
+    .border-blue-700 {
+      border-color: var(--color-blue-700);
+    }
+    .border-blue-600 {
+      border-color: var(--color-blue-600);
+    }
+    .border-blue-500 {
+      border-color: var(--color-blue-500);
+    }
+    .border-blue-400 {
+      border-color: var(--color-blue-400);
+    }
+    .border-blue-300 {
+      border-color: var(--color-blue-300);
+    }
+    .border-blue-200 {
+      border-color: var(--color-blue-200);
+    }
+    .border-blue-150 {
+      border-color: var(--color-blue-150);
+    }
+    .border-blue-100 {
+      border-color: var(--color-blue-100);
+    }
+    .border-blue-50 {
+      border-color: var(--color-blue-50);
+    }
+
+    .bg-sub-900 {
+      background-color: var(--color-sub-900);
+    }
+    .bg-sub-800 {
+      background-color: var(--color-sub-800);
+    }
+    .bg-sub-700 {
+      background-color: var(--color-sub-700);
+    }
+    .bg-sub-600 {
+      background-color: var(--color-sub-600);
+    }
+    .bg-sub-500 {
+      background-color: var(--color-sub-500);
+    }
+    .bg-sub-400 {
+      background-color: var(--color-sub-400);
+    }
+
+    .text-sub-900 {
+      color: var(--color-sub-900);
+    }
+    .text-sub-800 {
+      color: var(--color-sub-800);
+    }
+    .text-sub-700 {
+      color: var(--color-sub-700);
+    }
+    .text-sub-600 {
+      color: var(--color-sub-600);
+    }
+    .text-sub-500 {
+      color: var(--color-sub-500);
+    }
+    .text-sub-400 {
+      color: var(--color-sub-400);
+    }
+
+    .border-sub-900 {
+      border-color: var(--color-sub-900);
+    }
+    .border-sub-800 {
+      border-color: var(--color-sub-800);
+    }
+    .border-sub-700 {
+      border-color: var(--color-sub-700);
+    }
+    .border-sub-600 {
+      border-color: var(--color-sub-600);
+    }
+    .border-sub-500 {
+      border-color: var(--color-sub-500);
+    }
+    .border-sub-400 {
+      border-color: var(--color-sub-400);
+    }
+
+    .bg-point1 {
+      background-color: var(--color-point1);
+    }
+    .bg-point2 {
+      background-color: var(--color-point2);
+    }
+
+    .text-point1 {
+      color: var(--color-point1);
+    }
+    .text-point2 {
+      color: var(--color-point2);
+    }
+
+    .border-point1 {
+      border-color: var(--color-point1);
+    }
+    .border-point2 {
+      border-color: var(--color-point2);
+    }
+
+    .bg-alert {
+      background-color: var(--color-alert);
+    }
+    .bg-caution {
+      background-color: var(--color-caution);
+    }
+    .bg-positive {
+      background-color: var(--color-positive);
+    }
+
+    .text-alert {
+      color: var(--color-alert);
+    }
+    .text-caution {
+      color: var(--color-caution);
+    }
+    .text-positive {
+      color: var(--color-positive);
+    }
+
+    .border-alert {
+      border-color: var(--color-alert);
+    }
+    .border-caution {
+      border-color: var(--color-caution);
+    }
+    .border-positive {
+      border-color: var(--color-positive);
+    }
+
+    .bg-strong {
+      background-color: var(--color-strong);
+    }
+    .bg-normal {
+      background-color: var(--color-normal);
+    }
+    .bg-alternative {
+      background-color: var(--color-alternative);
+    }
+    .bg-assistive {
+      background-color: var(--color-assistive);
+    }
+    .bg-disabled {
+      background-color: var(--color-disabled);
+    }
+
+    /* 텍스트 */
+    .text-strong {
+      color: var(--color-strong);
+    }
+    .font-normal {
+      color: var(--color-text-normal);
+    }
+    .font-alternative {
+      color: var(--color-text-alternative);
+    }
+    .font-assistive {
+      color: var(--color-text-assistive);
+    }
+    .font-disabled {
+      color: var(--color-text-disabled);
+    }
+
+    .border-strong {
+      border-color: var(--color-strong);
+    }
+    .border-normal {
+      border-color: var(--color-normal);
+    }
+    .border-alternative {
+      border-color: var(--color-alternative);
+    }
+    .border-assistive {
+      border-color: var(--color-assistive);
+    }
+    .border-disabled {
+      border-color: var(--color-disabled);
+    }
+
+    .bg-bgNormal {
+      background-color: var(--color-bgNormal);
+    }
+    .bg-bgPrimary {
+      background-color: var(--color-bgPrimary);
+    }
+
+    .text-bgNormal {
+      color: var(--color-bgNormal);
+    }
+    .text-bgPrimary {
+      color: var(--color-bgPrimary);
+    }
+
+    .border-bgNormal {
+      border-color: var(--color-bgNormal);
+    }
+    .border-bgPrimary {
+      border-color: var(--color-bgPrimary);
+    }
   }
 
-  .title1 {
-    font-family: var(--font-sans);
-    font-size: 1.75rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 2rem; /* 114.286% */
-  }
-  .title-sb-24 {
-    font-family: var(--font-sans);
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 2.4rem; /* 133.333% */
-  }
-  .subtitle-sb-20 {
-    font-family: var(--font-sans);
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.75rem; /* 140% */
-  }
-  /*body*/
-  .body-sb-18 {
-    font-family: var(--font-sans);
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.5rem; /* 133.333% */
-  }
-  .body-sb-16 {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.25rem; /* 125% */
-  }
-  .body-sb-14 {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 160%;
-  }
-
-  .body-r-18 {
-    font-family: var(--font-sans);
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.5rem; /* 133.333% */
-  }
-  .body-r-16 {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.25rem; /* 125% */
-  }
-  .body-r-14 {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 160%;
-  }
-  /**/
-  .button-r-14 {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 1.125rem; /* 128.571% */
-  }
-  .detail-r-12 {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 0.875rem; /* 116.667% */
-  }
+  /*-------------색상 정의----------------*/
 }
 
 .scrollbar-hide::-webkit-scrollbar {

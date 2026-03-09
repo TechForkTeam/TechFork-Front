@@ -26,8 +26,8 @@ export const Onboarding = () => {
     <div className=" ">
       <section className="flex flex-col  items-center ">
         <OnboardingHeader />
-        <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 ">
-          <h1 className="subtitle-sb-20 mb-4">회원 가입</h1>
+        <section className="bg-pirmary rounded-lg shadow-ds50 bg-primary  flex flex-col items-center justify-center p-6 w-100 ">
+          <h1 className="subtitle-sb-20 mb-4 text-strong">회원 가입</h1>
 
           <InputField
             label={"닉네임"}
@@ -61,9 +61,10 @@ export const Onboarding = () => {
                 setTemp({ check: !check });
               }}
             />
-            <p className="body-r-14 flex gap-1">
-              <p className="text-blue-500">이용약관</p> 및
-              <p className="text-blue-500">개인정보취급방침에</p>동의합니다.
+            <p className="body-r-14 flex gap-1 text-strong">
+              <p className="text-blue-500">이용약관</p>및
+              <p className="text-blue-500">개인정보취급방침에</p>
+              동의합니다.
             </p>
           </div>
 
@@ -75,7 +76,7 @@ export const Onboarding = () => {
             }}
             className={cn(
               " p-2.5",
-              BtnAble && "bg-gray-200 cursor-not-allowed",
+              BtnAble && "bg-sub-500 cursor-not-allowed text-strong ",
             )}
           >
             다음

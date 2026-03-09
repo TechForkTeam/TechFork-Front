@@ -1,0 +1,48 @@
+@layer base {
+  .dark {
+    --color-blue-900: var(--color-dark-blue-900);
+    --color-blue-850: var(--color-dark-blue-850);
+    --color-blue-800: var(--color-dark-blue-800);
+    --color-blue-700: var(--color-dark-blue-700);
+    --color-blue-600: var(--color-dark-blue-600);
+    --color-blue-500: var(--color-dark-blue-500);
+    --color-blue-400: var(--color-dark-blue-400);
+    --color-blue-300: var(--color-dark-blue-300);
+    --color-blue-200: var(--color-dark-blue-200);
+    --color-blue-150: var(--color-dark-blue-150);
+    --color-blue-100: var(--color-dark-blue-100);
+    --color-blue-50: var(--color-dark-blue-50);
+
+    --color-sub-900: var(--color-dark-sub-900);
+    --color-sub-800: var(--color-dark-sub-800);
+    --color-sub-700: var(--color-dark-sub-700);
+    --color-sub-600: var(--color-dark-sub-600);
+    --color-sub-500: var(--color-dark-sub-500);
+    --color-sub-400: var(--color-dark-sub-400);
+
+    --color-point1: var(--color-dark-point1);
+    --color-point2: var(--color-dark-point2);
+
+    --color-alert: var(--color-dark-alert);
+    --color-caution: var(--color-dark-caution);
+    --color-positive: var(--color-dark-positive);
+
+    /* 라인 */
+    --color-strong: var(--color-dark-strong);
+    --color-normal: var(--color-dark-normal);
+    --color-alternative: var(--color-dark-alternative);
+    --color-assistive: var(--color-dark-assistive);
+    --color-disabled: var(--color-dark-disabled);
+
+    /* text*/
+
+    --color-text-normal: var(--color-dark-text-normal);
+    --color-text-alternative: var(--color-dark-text-alternative);
+    --color-text-assistive: var(--color-dark-text-assistive);
+    --color-text-disabled: var(--color-dark-text-disabled);
+
+    --color-bgNormal: var(--color-dark-bgNormal);
+    --color-bgPrimary: var(--color-dark-bgPrimary);
+    --color-primary: var(--color-dark-primary);
+  }
+}

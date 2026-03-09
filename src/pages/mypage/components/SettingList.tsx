@@ -10,6 +10,7 @@ interface SettingListProps {
   version?: string;
   isToggle?: boolean;
   dark?: boolean;
+  onClickDark?: () => void;
 }
 
 export const SettingList = ({
@@ -20,6 +21,7 @@ export const SettingList = ({
   version,
   isToggle,
   dark,
+  onClickDark,
 }: SettingListProps) => {
   return (
     <div
@@ -40,6 +42,7 @@ export const SettingList = ({
           src={dark ? ToggleOn : ToggleOff}
           alt={label}
           className="ml-auto "
+          onClick={onClickDark}
         />
       )}
     </div>

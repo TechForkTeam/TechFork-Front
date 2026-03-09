@@ -27,15 +27,15 @@ export const InputField = ({
   return (
     <div className="w-full">
       <div className="flex">
-        <p className={cn("mb-3 body-sb-16", className)}>{label}</p>
+        <p className={cn("mb-3 body-sb-16 text-strong", className)}>{label}</p>
         {isDot && <p className="text-alert">*</p>}
       </div>
       <div className="w-full  rounded-xl mb-5">
         {!area ? (
           <input
-            type="text"
+            type="text "
             className={clsx(
-              "w-full p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300 ",
+              "w-full p-3 body-r-14  rounded-xl text-assistive  border bg-bgPrimary  border-normal  focus:outline-none focus:border-blue-300 ",
               disabled && "text-gray-400",
             )}
             placeholder={placeholder}
@@ -45,7 +45,7 @@ export const InputField = ({
           />
         ) : (
           <textarea
-            className="w-full    p-3 body-r-14  rounded-xl border  border-[#E5E8EB] bg-[#F7F8F9] focus:outline-none focus:border-blue-300
+            className="w-full    p-3 body-r-14  rounded-xl border  border-normal  focus:outline-none focus:border-blue-300
         h-30 resize-none
         "
             placeholder={placeholder}

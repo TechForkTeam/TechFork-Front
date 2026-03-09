@@ -12,7 +12,7 @@ export const MultiSelectedTag = ({
 }: MultiSelectedTagProps) => {
   return (
     <TagBtn
-      className="w-fit cursor-pointer"
+      className="w-fit cursor-pointer text-stron border border-normal"
       state={selected ? "select" : "default"}
       onClick={e => {
         e.stopPropagation();

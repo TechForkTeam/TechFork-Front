@@ -1,11 +1,28 @@
 import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import { Slide, ToastContainer } from "react-toastify";
+import { useThemeToggle } from "./hooks/useThemToggle";
+import { cn } from "./utils/cn";
+import { useEffect } from "react";
 
 function App() {
+  const { isDark } = useThemeToggle();
+  console.log(isDark);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (isDark) root.classList.add("dark");
+    else root.classList.remove("dark");
+  }, [isDark]);
   return (
-    <div className="w-full min-h-dvh mx-auto overflow-y-auto bg-bgPrimary">
-      <main className="">
+    <div
+      className={cn(
+        "w-full min-h-dvh mx-auto overflow-y-auto bg-bgPrimary",
+        isDark && "dark",
+      )}
+    >
+      <main>
         <RouterProvider router={router} />
       </main>
       <ToastContainer

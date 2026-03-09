@@ -10,10 +10,10 @@ export const LoginPage = () => {
     <div className=" flex flex-col  items-center justify-center">
       <section className=" w-full flex flex-col items-center  flex-1">
         <div className="flex gap-2 large-title-32 mb-8  items-center ">
-          <p>개발자를 위한 모든 인사이트,</p>
+          <p className="text-strong">개발자를 위한 모든 인사이트,</p>
           <p className="text-blue-500">테크포크</p>
         </div>
-        <div className="body-sb-16 flex flex-col justify-center items-center text-alternative mb-16">
+        <div className="body-sb-16 flex flex-col justify-center items-center font-alternative mb-16">
           <p>흩어진 기술 블로그를 한 곳에 모아,</p>
           <p>커리어의 새로운 분기점을 열다.</p>
         </div>

@@ -1,4 +1,5 @@
 import Tag from "@assets/icons/tag.svg";
+import DarkTag from "@assets/icons/dark_tag.svg";
 import ArrowDown from "@assets/icons/arrow_down.svg";
 import ArrowUp from "@assets/icons/arrow_up.svg";
 import { TAG, TAG_MAP } from "../../constants/tag";
@@ -11,6 +12,7 @@ import { useTagStore } from "../../store/useTagStore";
 import { useOnboardingStore } from "../../store/useOnboardingStore";
 import { useSubmitOnboarding } from "../../lib/onboarding";
 import { ClipLoader } from "react-spinners";
+import { useThemeToggle } from "../../hooks/useThemToggle";
 
 export const OnboardingTag = () => {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ export const OnboardingTag = () => {
   const { tag, toggleTag, getApiPayload } = useTagStore();
   const { nickname, aboutMe, email } = useOnboardingStore();
   const handleForm = useSubmitOnboarding();
+  const { isDark } = useThemeToggle();
   const isSubmitting = handleForm.isPending;
 
   const initialOpenedIndices = useMemo(() => {
@@ -60,16 +63,16 @@ export const OnboardingTag = () => {
   // console.log(tag);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center text-strong">
       <section className="flex flex-col items-center">
         <OnboardingHeader basic={false} />
-        <section className="bg-white rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100">
-          <h1 className="subtitle-sb-20 mb-2">관심 분야를 선택해 주세요</h1>
-          <p className="body-r-14 text-alternative mb-2">
+        <section className="  rounded-lg shadow-ds50 flex flex-col items-center justify-center p-6 w-100 bg-primary">
+          <h1 className="subtitle-sb-20 mb-2 ">관심 분야를 선택해 주세요</h1>
+          <p className="body-r-14 font-alternative mb-2">
             선택 분야를 바탕으로 맞춤형 게시글을 추천해 드려요
           </p>
           <div className="flex gap-2 mb-6">
-            <p className="body-r-14">선택한 기술: </p>
+            <p className="body-r-14 font-alternative">선택한 기술: </p>
             <p className="text-point1 body-sb-16">{tag.length}</p>
           </div>
 
@@ -84,7 +87,7 @@ export const OnboardingTag = () => {
               return (
                 <div
                   key={idx}
-                  className={`rounded-lg border border-sub-600 w-full px-4 py-1 mb-3 cursor-pointer ${hasAnySelected && " bg-[#f3f6ff]"} ${
+                  className={`rounded-lg border border-alternative w-full px-4 py-1 mb-3 cursor-pointer ${hasAnySelected && " bg-[#f3f6ff]"} ${
                     isOpen && "bg-sub-400"
                   }`}
                 >
@@ -92,8 +95,8 @@ export const OnboardingTag = () => {
                     className="justify-between flex items-center"
                     onClick={() => toggleCategory(idx)}
                   >
-                    <div className="flex items-center gap-2">
-                      <img src={Tag} alt="tag" />
+                    <div className="flex items-center gap-2 text-strong">
+                      <img src={isDark ? DarkTag : Tag} alt="tag" />
                       <p>{item}</p>
                     </div>
                     <img
@@ -124,7 +127,7 @@ export const OnboardingTag = () => {
             <Button
               color="grey1"
               textColor="black"
-              className="body-r-14 p-2.5"
+              className="body-r-14 p-2.5 text-strong"
               onClick={() => navigate(-1)}
             >
               이전

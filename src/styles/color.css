@@ -1,0 +1,146 @@
+@theme {
+  /* =========================
+     1) Light palette
+  ========================= */
+  --color-light-blue-900: #010d33;
+  --color-light-blue-850: #01134c;
+  --color-light-blue-800: #011966;
+  --color-light-blue-700: #022699;
+  --color-light-blue-600: #0232cc;
+  --color-light-blue-500: #033fff;
+  --color-light-blue-400: #3565ff;
+  --color-light-blue-300: #688cff;
+  --color-light-blue-200: #688cff;
+  --color-light-blue-150: #b3c5ff;
+  --color-light-blue-100: #cdd9ff;
+  --color-light-blue-50: #e6ecff;
+
+  --color-light-sub-900: #b2bdcc;
+  --color-light-sub-800: #c2cad6;
+  --color-light-sub-700: #d1d7e0;
+  --color-light-sub-600: #e0e4eb;
+  --color-light-sub-500: #f0f2f5;
+  --color-light-sub-400: #f6f7f9e3;
+
+  --color-light-point1: #00c7be;
+  --color-light-point2: #e3faf8;
+
+  --color-light-alert: #f33326;
+  --color-light-caution: #fa9538;
+  --color-light-positive: #3dc061;
+
+  /* 텍스트 */
+
+  --color-light-text-alternative: #4e5968;
+  --color-light-text-assistive: #8b95a1;
+  --color-light-text-normal: #14181f;
+  --color-light-text-disabled: #d4d8dd;
+
+  /* 라인 */
+  --color-light-strong: #000000;
+  --color-light-normal: #e5e8eb;
+  --color-light-alternative: #8b95a1;
+  --color-light-assistive: #8b95a1;
+  --color-light-disabled: #d9d9d9;
+
+  --color-light-bgNormal: #e5e8eb;
+  --color-light-bgPrimary: #f7f8f9; /*배경*/
+  --color-light-primary: #fff; /*화이트*/
+
+  /* =========================
+     2) Dark palette
+  ========================= */
+  --color-dark-blue-900: #010d33;
+  --color-dark-blue-850: #01134c;
+  --color-dark-blue-800: #011966;
+  --color-dark-blue-700: #022699;
+  --color-dark-blue-600: #0232cc;
+  --color-dark-blue-500: #033fff;
+  --color-dark-blue-400: #3565ff;
+  --color-dark-blue-300: #688cff;
+  --color-dark-blue-200: #688cff;
+  --color-dark-blue-150: #b3c5ff;
+  --color-dark-blue-100: #cdd9ff;
+  --color-dark-blue-50: #e6ecff;
+
+  --color-dark-sub-900: #b2bdcc;
+  --color-dark-sub-800: #333d4c; /*온보딩 관심분야*/
+  --color-dark-sub-700: #d1d7e0;
+  --color-dark-sub-600: #e0e4eb;
+  --color-dark-sub-500: #22272e;
+  --color-dark-sub-400: #141414; /*온보딩 태그*/
+
+  --color-dark-point1: #00c7be;
+  --color-dark-point2: #e3faf8;
+
+  --color-dark-alert: #f33326;
+  --color-dark-caution: #fa9538;
+  --color-dark-positive: #3dc061;
+
+  --color-dark-strong: #ffffff;
+
+  --color-dark-bgNormal: #2a2f36;
+  --color-dark-bgPrimary: #141414; /*배경*/
+  --color-dark-primary: #181a1f; /*카드배경*/
+
+  /* 텍스트 */
+
+  --color-dark-text-alternative: #8b95a1;
+  --color-dark-text-assistive: #4e5968;
+  --color-dark-text-normal: #e0e4eb;
+  --color-dark-text-disabled: #333;
+
+  /* 라인 border */
+  --color-dark-normal: #1f2428; /**/
+  --color-dark-alternative: #2f363c; /**/
+  --color-dark-assistive: #d1d6db;
+  --color-dark-disabled: #6b7280;
+
+  /* =========================
+     3) Semantic tokens (default = light)
+     utility는 이것만 사용
+  ========================= */
+  --color-blue-900: var(--color-light-blue-900);
+  --color-blue-850: var(--color-light-blue-850);
+  --color-blue-800: var(--color-light-blue-800);
+  --color-blue-700: var(--color-light-blue-700);
+  --color-blue-600: var(--color-light-blue-600);
+  --color-blue-500: var(--color-light-blue-500);
+  --color-blue-400: var(--color-light-blue-400);
+  --color-blue-300: var(--color-light-blue-300);
+  --color-blue-200: var(--color-light-blue-200);
+  --color-blue-150: var(--color-light-blue-150);
+  --color-blue-100: var(--color-light-blue-100);
+  --color-blue-50: var(--color-light-blue-50);
+
+  --color-sub-900: var(--color-light-sub-900);
+  --color-sub-800: var(--color-light-sub-800);
+  --color-sub-700: var(--color-light-sub-700);
+  --color-sub-600: var(--color-light-sub-600);
+  --color-sub-500: var(--color-light-sub-500);
+  --color-sub-400: var(--color-light-sub-400);
+
+  --color-point1: var(--color-light-point1);
+  --color-point2: var(--color-light-point2);
+
+  --color-alert: var(--color-light-alert);
+  --color-caution: var(--color-light-caution);
+  --color-positive: var(--color-light-positive);
+
+  /* border line */
+  --color-strong: var(--color-light-strong);
+  --color-normal: var(--color-light-normal);
+  --color-alternative: var(--color-light-alternative);
+  --color-assistive: var(--color-light-assistive);
+  --color-disabled: var(--color-light-disabled);
+
+  /*text */
+  --color-text-normal: var(--color-light-text-normal);
+  --color-text-alternative: var(--color-light-text-alternative);
+  --color-text-assistive: var(--color-light-text-assistive);
+  --color-text-disabled: var(--color-light-text-disabled);
+
+  --color-bgNormal: var(--color-light-bgNormal);
+  --color-bgPrimary: var(--color-light-bgPrimary);
+  --color-primary: var(--color-light-primary);
+}

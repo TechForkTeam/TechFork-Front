@@ -1,0 +1,112 @@
+@theme {
+  --font-sans:
+    "Pretendard Variable", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --font-inter: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-roboto: "Roboto", "sans-serif";
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+  /*typography*/
+
+  .large-title {
+    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
+  .large-title-32 {
+    font-family: var(--font-sans);
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
+
+  .title1 {
+    font-family: var(--font-sans);
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem; /* 114.286% */
+  }
+  .title-sb-24 {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2.4rem; /* 133.333% */
+  }
+  .subtitle-sb-20 {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.75rem; /* 140% */
+  }
+  /*body*/
+  .body-sb-18 {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5rem; /* 133.333% */
+  }
+  .body-sb-16 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem; /* 125% */
+  }
+  .body-sb-14 {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160%;
+  }
+
+  .body-r-18 {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; /* 133.333% */
+  }
+  .body-r-16 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem; /* 125% */
+  }
+  .body-r-14 {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+  }
+  /**/
+  .button-r-14 {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.125rem; /* 128.571% */
+  }
+  .detail-r-12 {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 0.875rem; /* 116.667% */
+  }
+}
