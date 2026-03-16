@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useThemeToggle } from "@/hooks/useThemToggle";
 import { cn } from "@/utils/cn";
 import router from "@/routes";
+import { ErrorBoundary } from "@/shared/ErrorBoundary";
 
 function App() {
   const { isDark } = useThemeToggle();
@@ -26,9 +27,11 @@ function App() {
     <div
       className={cn("w-full min-h-dvh mx-auto overflow-y-auto bg-bgPrimary")}
     >
-      <main>
-        <RouterProvider router={router} />
-      </main>
+      <ErrorBoundary>
+        <main>
+          <RouterProvider router={router} />
+        </main>
+      </ErrorBoundary>
       <ToastContainer
         position="top-center"
         autoClose={1000}

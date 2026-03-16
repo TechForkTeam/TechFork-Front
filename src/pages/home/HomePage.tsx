@@ -6,6 +6,7 @@ import { usePostRecommendPostList } from "@/lib/recommendation";
 import { CompanyFilterList } from "@/pages/home/components/CompanyFilterList";
 import PostCardList from "@/pages/home/components/PostCardList";
 import { TabSelectList } from "@/pages/home/components/TabSelectList";
+import { ErrorBoundary } from "@/shared/ErrorBoundary";
 import { Loading } from "@/shared/Loading";
 import { SkeletonList } from "@/shared/SkeletonList";
 import { useCompanyStore } from "@/store/uesCompanyStore";
@@ -73,7 +74,6 @@ const HomePage = () => {
           content="네이버, 카카오, 토스 등 최신 기술 아티클을 한눈에 확인하세요."
         />
       </Helmet>
-
       <div className="bg-bgPrimary  py-12" onClick={() => setModal(false)}>
         <TabSelectList
           className={
@@ -85,9 +85,11 @@ const HomePage = () => {
         />
         {isSearching ? (
           <>
-            <Suspense fallback={<SkeletonList />}>
-              <SearchPostList query={debouncedInput ?? ""} />
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<SkeletonList />}>
+                <SearchPostList query={debouncedInput ?? ""} />
+              </Suspense>
+            </ErrorBoundary>
           </>
         ) : (
           <>
@@ -106,12 +108,14 @@ const HomePage = () => {
             )}
             {/* 나와맞는 게시글 */}
             {selectedTab === 1 && isLogin && (
-              <Suspense fallback={<Loading />}>
-                <InterestPage
-                  onRefresh={postRecommendList}
-                  isRefreshing={isRefreshing}
-                />
-              </Suspense>
+              <ErrorBoundary>
+                <Suspense fallback={<Loading />}>
+                  <InterestPage
+                    onRefresh={postRecommendList}
+                    isRefreshing={isRefreshing}
+                  />
+                </Suspense>
+              </ErrorBoundary>
             )}
 
             {(selectedTab === 2 || selectedTab === 3) && (
