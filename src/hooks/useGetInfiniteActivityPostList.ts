@@ -1,5 +1,5 @@
+import { getActivityPostList, type ActivityPostType } from "@/lib/activity";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { getActivityPostList, type ActivityPostType } from "../lib/activity";
 
 export const useInfiniteActivityPosts = (type: ActivityPostType, size = 20) => {
   return useSuspenseInfiniteQuery({

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../shared/button/Button";
-import { InputField } from "../../shared/InputField";
-import { useGetMyProfile } from "../../lib/my";
-import { AskConfirmModal } from "./components/AskConfirmModal";
-import { ASK_MAP } from "../../constants/mypage";
-import { useThemeToggle } from "../../hooks/useThemToggle";
+
 import clsx from "clsx";
+import { useGetMyProfile } from "@/lib/my";
+import { useThemeToggle } from "@/hooks/useThemToggle";
+import { AskConfirmModal } from "@/pages/mypage/components/AskConfirmModal";
+import { InputField } from "@/shared/InputField";
+import { ASK_MAP } from "@/constants/mypage";
+import { Button } from "@/shared/button/Button";
 
 export const AskPage = () => {
   useEffect(() => {

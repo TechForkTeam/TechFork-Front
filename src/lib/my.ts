@@ -6,14 +6,14 @@ import {
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
-import api from "./api";
 import type {
   InterestDataDto,
   InterestResponseDto,
   InterestTypeDto,
   MyProfileType,
-} from "../types/my";
-import { useEditTagStore } from "../store/useEditTagStore";
+} from "@/types/my";
+import { useEditTagStore } from "@/store/useEditTagStore";
+import api from "@/lib/api";
 
 // 내 프로필 조회
 export const getMyProfile = async () => {

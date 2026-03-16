@@ -1,4 +1,4 @@
-import { TabBtn } from "../../../shared/button/TabBtn";
+import { TabBtn } from "@/shared/button/TabBtn";
 import clsx from "clsx";
 
 interface TabSelectList {

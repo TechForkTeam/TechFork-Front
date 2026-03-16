@@ -1,5 +1,6 @@
 import Dot from "@/assets/icons/dot.svg";
-import { cn } from "../../../utils/cn";
+import { cn } from "@/utils/cn";
+
 interface CompanyItemProps {
   company?: string;
   logoUrl?: string;

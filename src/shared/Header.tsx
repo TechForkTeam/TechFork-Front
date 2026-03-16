@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { cn } from "../utils/cn";
 import Logo from "@/assets/images/logo.png";
 import DarkLogo from "@/assets/images/logo_dark.png";
-
-import { useThemeToggle } from "../hooks/useThemToggle";
+import { useThemeToggle } from "@/hooks/useThemToggle";
+import { cn } from "@/utils/cn";
 
 interface HeaderProps {
   className?: string;

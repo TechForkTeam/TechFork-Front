@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { TAG_MAP } from "../constants/tag";
-import type { InterestType } from "../types/onboarding";
+import type { InterestType } from "@/types/onboarding";
+import { TAG_MAP } from "@/constants/tag";
 
 //onboarding에서 선택한 것,
 interface TagStore {

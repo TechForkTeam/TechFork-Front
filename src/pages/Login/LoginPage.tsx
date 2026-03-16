@@ -1,8 +1,9 @@
 import Apple from "@/assets/images/apple.png";
 import DarkApple from "@/assets/images/apple_dark.png";
 import Kakao from "@/assets/images/kakao.png";
-import { getOAuthUrl, type OAuthProvider } from "../../constants/login";
-import { useThemeToggle } from "../../hooks/useThemToggle";
+import { getOAuthUrl, type OAuthProvider } from "@/constants/login";
+import { useThemeToggle } from "@/hooks/useThemToggle";
+
 import clsx from "clsx";
 
 export const LoginPage = () => {

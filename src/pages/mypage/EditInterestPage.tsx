@@ -1,13 +1,13 @@
+import { TAG_MAP } from "@/constants/tag";
+import { useGetMyInterest, usePutMyInterst } from "@/lib/my";
+import { INTERESTS_MOCK } from "@/Mock/tag";
+import { InterstBtn } from "@/pages/mypage/components/IntersetBtn";
+import { TagItem } from "@/pages/mypage/components/TagItem";
+import { TechSelection } from "@/pages/mypage/components/TechSelection";
+import { useEditTagStore } from "@/store/useEditTagStore";
+import { cn } from "@/utils/cn";
+import { TagCodeToLabel } from "@/utils/tagCodeToLabel";
 import { useEffect, useRef, useState } from "react";
-import { INTERESTS_MOCK } from "../../Mock/tag";
-import { useEditTagStore } from "../../store/useEditTagStore";
-import { TagItem } from "./components/TagItem";
-import { TechSelection } from "./components/TechSelection";
-import { cn } from "../../utils/cn";
-import { InterstBtn } from "./components/IntersetBtn";
-import { useGetMyInterest, usePutMyInterst } from "../../lib/my";
-import { TagCodeToLabel } from "../../utils/tagCodeToLabel";
-import { TAG_MAP } from "../../constants/tag";
 
 export const EditInterestPage = () => {
   const { selectedTags, setFromServer, toggleTag, originalTags } =

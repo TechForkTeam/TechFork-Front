@@ -1,6 +1,6 @@
+import { ThemeContext } from "@/providers/ThemeContext";
+import { THEME, THEME_STORAGE_KEY, type Theme } from "@/types/theme";
 import { useEffect, useState, type PropsWithChildren } from "react";
-import { THEME, THEME_STORAGE_KEY, type Theme } from "../types/theme";
-import { ThemeContext } from "./ThemeContext";
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
   const [theme, setTheme] = useState<Theme>(() => {

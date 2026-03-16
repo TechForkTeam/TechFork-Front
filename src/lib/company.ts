@@ -1,5 +1,5 @@
+import api from "@/lib/api";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import api from "./api";
 
 //게시글이 있는 회사 목록 조회
 export const getCompanyList = async () => {

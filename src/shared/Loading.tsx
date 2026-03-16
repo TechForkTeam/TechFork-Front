@@ -1,5 +1,5 @@
+import { useThemeToggle } from "@/hooks/useThemToggle";
 import { ClipLoader } from "react-spinners";
-import { useThemeToggle } from "../hooks/useThemToggle";
 
 export const Loading = () => {
   const { isDark } = useThemeToggle();

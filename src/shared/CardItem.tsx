@@ -2,15 +2,15 @@ import BookOn from "@/assets/icons/book-on.svg";
 import BookOff from "@/assets/icons/book-off.svg";
 import Eye from "@/assets/icons/eye.svg";
 import { forwardRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Alert from "@/assets/icons/alert2.svg";
 import {
   useDeleteBookmark,
   usePostBookmark,
   usePostReadPost,
-} from "../lib/activity";
-import useUserStore from "../store/useUserStore";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import Alert from "@/assets/icons/alert2.svg";
+} from "@/lib/activity";
+import useUserStore from "@/store/useUserStore";
 
 interface CardItemProps {
   id?: number;

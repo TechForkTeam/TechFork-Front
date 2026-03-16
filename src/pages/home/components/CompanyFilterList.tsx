@@ -1,9 +1,9 @@
-import type { CompanyResponseDto, CompanyType } from "../../../types/company";
-import { HomeCompanySelectBtn } from "./HomeCompanySelectBtn";
-import { CompanyItem } from "./CompanyItem";
-import { CompaniesModal } from "./CompaniesModal";
 import { Ellipsis } from "lucide-react";
 import clsx from "clsx";
+import type { CompanyResponseDto, CompanyType } from "@/types/company";
+import { HomeCompanySelectBtn } from "@/pages/home/components/HomeCompanySelectBtn";
+import { CompanyItem } from "@/pages/home/components/CompanyItem";
+import { CompaniesModal } from "@/pages/home/components/CompaniesModal";
 
 interface CompanyFilterListProps {
   companies: string[];

@@ -1,5 +1,5 @@
-import { THEME } from "../types/theme";
-import { useThemeContext } from "./useThemeContext";
+import { useThemeContext } from "@/hooks/useThemeContext";
+import { THEME } from "@/types/theme";
 
 export const useThemeToggle = () => {
   const { theme, setTheme } = useThemeContext();

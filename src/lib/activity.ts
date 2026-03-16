@@ -1,9 +1,9 @@
 //사용자 활동 api
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import api from "./api";
-import type { ReadPostType } from "../types/post";
-import { updateBookmarkState } from "../utils/queryUpdata";
+import { updateBookmarkState } from "@/utils/queryUpdata";
+import type { ReadPostType } from "@/types/post";
+import api from "@/lib/api";
 
 //무한스크롤
 export type ActivityPostType = "bookmark" | "read";

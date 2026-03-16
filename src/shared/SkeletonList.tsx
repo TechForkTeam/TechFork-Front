@@ -1,4 +1,4 @@
-import { SkeletonCard } from "./SkeletonCard";
+import { SkeletonCard } from "@/shared/SkeletonCard";
 
 export const SkeletonList = () => {
   return (

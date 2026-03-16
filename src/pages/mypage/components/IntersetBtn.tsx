@@ -1,5 +1,5 @@
 import Close from "@/assets/icons/close-blue.svg";
-import { useEditTagStore } from "../../../store/useEditTagStore";
+import { useEditTagStore } from "@/store/useEditTagStore";
 
 interface InterstBtnProps {
   label: string;

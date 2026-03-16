@@ -1,7 +1,7 @@
 // 최근 게시글 , 인기있는 게시글
 
-import type { PostResponseDto } from "../types/post";
-import api from "./api";
+import api from "@/lib/api";
+import type { PostResponseDto } from "@/types/post";
 
 export interface GetPostListParams {
   sortBy: "LATEST" | "POPULAR";

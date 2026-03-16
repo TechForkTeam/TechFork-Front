@@ -1,6 +1,6 @@
+import { SelectBtnVariants } from "@/shared/select-button/select-button.styles";
+import { cn } from "@/utils/cn";
 import type { VariantProps } from "class-variance-authority";
-import { SelectBtnVariants } from "./select-button.styles";
-import { cn } from "../../utils/cn";
 
 interface ButtonProps extends VariantProps<typeof SelectBtnVariants> {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;

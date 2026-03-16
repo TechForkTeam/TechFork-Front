@@ -1,20 +1,20 @@
-import { cn } from "../utils/cn";
 import Search from "@/assets/icons/search.svg";
 import User from "@/assets/images/user.png";
 import Logo from "@/assets/images/logo.png";
 import DarkLogo from "@/assets/images/logo_dark.png";
-import { Button } from "./button/Button";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { MYPAGE_NAV } from "../constants/mypage";
-import useUserStore from "../store/useUserStore";
-import { postLogout } from "../lib/auth";
-import { useGetMyProfile } from "../lib/my";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
 import Logout from "@/assets/icons/confirm.svg";
-import { useCompanyStore } from "../store/uesCompanyStore";
-import { useThemeToggle } from "../hooks/useThemToggle";
+import { useThemeToggle } from "@/hooks/useThemToggle";
+import useUserStore from "@/store/useUserStore";
+import { useCompanyStore } from "@/store/uesCompanyStore";
+import { useGetMyProfile } from "@/lib/my";
+import { postLogout } from "@/lib/auth";
+import { cn } from "@/utils/cn";
+import { Button } from "@/shared/button/Button";
+import { MYPAGE_NAV } from "@/constants/mypage";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();

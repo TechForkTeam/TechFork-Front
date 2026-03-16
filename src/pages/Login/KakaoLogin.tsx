@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import useUserStore from "../../store/useUserStore";
-import { useOnboardingStore } from "../../store/useOnboardingStore";
+
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
+import useUserStore from "@/store/useUserStore";
+import { useOnboardingStore } from "@/store/useOnboardingStore";
 
 export const KakaoLogin = () => {
   const [searchParams] = useSearchParams();

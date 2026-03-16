@@ -1,5 +1,5 @@
+import { useThemeToggle } from "@/hooks/useThemToggle";
 import clsx from "clsx";
-import { useThemeToggle } from "../hooks/useThemToggle";
 
 export const SkeletonCard = () => {
   const { isDark } = useThemeToggle();

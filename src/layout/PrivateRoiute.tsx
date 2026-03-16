@@ -1,7 +1,7 @@
 import { useNavigate, Outlet } from "react-router-dom"; // Outlet 임포트
 import { useEffect } from "react";
-import { ScrollToTop } from "../shared/ScrollToTop";
-import useUserStore from "../store/useUserStore";
+import useUserStore from "@/store/useUserStore";
+import { ScrollToTop } from "@/shared/ScrollToTop";
 
 export const PrivateRoute = () => {
   const navigate = useNavigate();

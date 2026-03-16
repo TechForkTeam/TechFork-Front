@@ -1,12 +1,12 @@
+import { useInfiniteCompaniesPosts } from "@/hooks/useGetInfiniteCompaniesList";
+import { useInfinitePosts } from "@/hooks/useGetInfinitePostList";
+import { useGetRecommendPostList } from "@/lib/recommendation";
+import { CardItem } from "@/shared/CardItem";
+import { Loading } from "@/shared/Loading";
+import { useCompanyStore } from "@/store/uesCompanyStore";
+import useUserStore from "@/store/useUserStore";
+import type { CardItemProps, PostResponseDto } from "@/types/post";
 import { useRef, useEffect } from "react";
-import { useCompanyStore } from "../../../store/uesCompanyStore";
-import { useInfiniteCompaniesPosts } from "../../../hooks/useGetInfiniteCompaniesList";
-import { useInfinitePosts } from "../../../hooks/useGetInfinitePostList";
-import { useGetRecommendPostList } from "../../../lib/recommendation";
-import type { CardItemProps, PostResponseDto } from "../../../types/post";
-import { CardItem } from "../../../shared/CardItem";
-import { Loading } from "../../../shared/Loading";
-import useUserStore from "../../../store/useUserStore";
 
 interface PostCardListProps {
   selectedTab: number;

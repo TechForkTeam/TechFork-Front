@@ -1,20 +1,21 @@
-import { TabSelectList } from "./components/TabSelectList";
-import { CompanyFilterList } from "./components/CompanyFilterList";
-import { PostCardList } from "./components/PostCardList";
-import { Suspense, useEffect, useState } from "react";
-import { useCompanyStore } from "../../store/uesCompanyStore";
-import { useGetCompany } from "../../lib/company";
-import { usePostRecommendPostList } from "../../lib/recommendation";
-import { TAB_MAP } from "../../constants/tab";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { useDebounce } from "../../hooks/useDebouce";
-import { SearchPostList } from "./components/SearchPostList";
-import useUserStore from "../../store/useUserStore";
-import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
-import { SkeletonList } from "../../shared/SkeletonList";
-import { InterestPage } from "./components/InterestPage";
-import { Loading } from "../../shared/Loading";
+import { TAB_MAP } from "@/constants/tab";
+import { useDebounce } from "@/hooks/useDebouce";
+import { useGetCompany } from "@/lib/company";
+import { usePostRecommendPostList } from "@/lib/recommendation";
+import { CompanyFilterList } from "@/pages/home/components/CompanyFilterList";
+import { InterestPage } from "@/pages/home/components/InterestPage";
+import { PostCardList } from "@/pages/home/components/PostCardList";
+import { SearchPostList } from "@/pages/home/components/SearchPostList";
+import { TabSelectList } from "@/pages/home/components/TabSelectList";
+import { Loading } from "@/shared/Loading";
+import { SkeletonList } from "@/shared/SkeletonList";
+import { useCompanyStore } from "@/store/uesCompanyStore";
+import useUserStore from "@/store/useUserStore";
+import { Suspense, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);

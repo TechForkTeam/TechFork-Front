@@ -1,6 +1,6 @@
+import api from "@/lib/api";
+import type { OnboardingRequestType } from "@/types/onboarding";
 import { useMutation } from "@tanstack/react-query";
-import type { OnboardingRequestType } from "../types/onboarding";
-import api from "./api";
 import { useNavigate } from "react-router-dom";
 
 //회원가입

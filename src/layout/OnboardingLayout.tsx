@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
-import { Header } from "../shared/Header";
 import clsx from "clsx";
+import { Header } from "@/shared/Header";
 
 export const OnboardingLayout = () => {
   const { pathname } = useLocation();

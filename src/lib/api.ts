@@ -1,6 +1,6 @@
 import axios, { type InternalAxiosRequestConfig } from "axios";
-import useUserStore from "../store/useUserStore";
-import { postRefreshToken } from "./auth";
+import useUserStore from "@/store/useUserStore";
+import { postRefreshToken } from "@/lib/auth";
 
 // const TEMP_TOKEN = import.meta.env.VITE_APP_DEV_TOKEN;
 interface CustomInternalAxiosRequestConfig extends InternalAxiosRequestConfig {

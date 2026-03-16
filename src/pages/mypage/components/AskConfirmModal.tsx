@@ -1,6 +1,6 @@
 //문의 접수 확인 modal
 import Flight from "@/assets/icons/flight.svg";
-import { Button } from "../../../shared/button/Button";
+import { Button } from "@/shared/button/Button";
 
 interface AskConfirmModalProps {
   onCancel: () => void;

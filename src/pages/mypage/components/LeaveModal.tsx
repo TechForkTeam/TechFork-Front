@@ -1,11 +1,11 @@
-import { Button } from "../../../shared/button/Button";
 import Close from "@/assets/icons/close_black.svg";
 import Warning from "@/assets/icons/warning.svg";
 import CheckOn from "@/assets/icons/check_on.svg";
 import CheckOff from "@/assets/icons/check_off.svg";
 import { useState } from "react";
-import { useDeleteAccount } from "../../../lib/onboarding";
-import useUserStore from "../../../store/useUserStore";
+import useUserStore from "@/store/useUserStore";
+import { Button } from "@/shared/button/Button";
+import { useDeleteAccount } from "@/lib/onboarding";
 interface LeaveModalProps {
   onClose?: () => void;
 }

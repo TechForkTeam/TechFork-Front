@@ -1,4 +1,5 @@
-import { TagBtn } from "./select-button/TagBtn";
+import { TagBtn } from "@/shared/select-button/TagBtn";
+
 interface MultiSelectedTagProps {
   tag: string;
   selected: boolean;

@@ -1,8 +1,8 @@
+import { useGetSearchPost, useSearchHistory } from "@/lib/search";
+import { CardItem } from "@/shared/CardItem";
+import useUserStore from "@/store/useUserStore";
+import type { CardItemProps } from "@/types/post";
 import { useEffect } from "react";
-import { useGetSearchPost, useSearchHistory } from "../../../lib/search";
-import { CardItem } from "../../../shared/CardItem";
-import type { CardItemProps } from "../../../types/post";
-import useUserStore from "../../../store/useUserStore";
 
 interface SearchPostListProps {
   query: string;

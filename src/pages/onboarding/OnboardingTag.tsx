@@ -2,17 +2,18 @@ import Tag from "@assets/icons/tag.svg";
 import DarkTag from "@assets/icons/dark_tag.svg";
 import ArrowDown from "@assets/icons/arrow_down.svg";
 import ArrowUp from "@assets/icons/arrow_up.svg";
-import { TAG, TAG_MAP } from "../../constants/tag";
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MultiSelectedTag } from "../../shared/MultiSelectedTag";
-import { Button } from "../../shared/button/Button";
-import { OnboardingHeader } from "./components/OnboardingHeader";
-import { useTagStore } from "../../store/useTagStore";
-import { useOnboardingStore } from "../../store/useOnboardingStore";
-import { useSubmitOnboarding } from "../../lib/onboarding";
+
 import { ClipLoader } from "react-spinners";
-import { useThemeToggle } from "../../hooks/useThemToggle";
+import { useTagStore } from "@/store/useTagStore";
+import { useOnboardingStore } from "@/store/useOnboardingStore";
+import { useSubmitOnboarding } from "@/lib/onboarding";
+import { useThemeToggle } from "@/hooks/useThemToggle";
+import { TAG, TAG_MAP } from "@/constants/tag";
+import { OnboardingHeader } from "@/pages/onboarding/components/OnboardingHeader";
+import { MultiSelectedTag } from "@/shared/MultiSelectedTag";
+import { Button } from "@/shared/button/Button";
 
 export const OnboardingTag = () => {
   const navigate = useNavigate();

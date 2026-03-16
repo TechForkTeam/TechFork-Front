@@ -1,6 +1,6 @@
 //refreshToken
 
-import api from "./api";
+import api from "@/lib/api";
 
 export const postRefreshToken = async () => {
   const { data } = await api.post("/api/v1/auth/refresh");

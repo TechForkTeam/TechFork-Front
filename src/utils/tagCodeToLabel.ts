@@ -1,4 +1,4 @@
-import { TAG_CATEGORY_MAP, TAG_MAP } from "../constants/tag";
+import { TAG_CATEGORY_MAP, TAG_MAP } from "@/constants/tag";
 
 //서버=>ui 변환용
 export function TagCodeToLabel(

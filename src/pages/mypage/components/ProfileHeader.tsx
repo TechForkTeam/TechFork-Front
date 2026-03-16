@@ -1,4 +1,4 @@
-import { Button } from "../../../shared/button/Button";
+import { Button } from "@/shared/button/Button";
 
 interface ProfileHeaderProps {
   onEdit: () => void;

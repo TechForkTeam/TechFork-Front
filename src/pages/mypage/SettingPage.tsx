@@ -2,12 +2,13 @@ import { Moon, Info, FileText, LockKeyhole, MessageSquare } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { ProfileHeader } from "./components/ProfileHeader";
-import { LeaveModal } from "./components/LeaveModal";
-import { ProfileEditHeader } from "./components/ProfileEditHeader";
-import { SettingList } from "./components/SettingList";
-import { useGetMyProfile } from "../../lib/my";
-import { useThemeToggle } from "../../hooks/useThemToggle";
+import { useGetMyProfile } from "@/lib/my";
+import { useThemeToggle } from "@/hooks/useThemToggle";
+import { ProfileHeader } from "@/pages/mypage/components/ProfileHeader";
+import { ProfileEditHeader } from "@/pages/mypage/components/ProfileEditHeader";
+import { SettingList } from "@/pages/mypage/components/SettingList";
+import { LeaveModal } from "@/pages/mypage/components/LeaveModal";
+
 interface SettingItem {
   icon: LucideIcon;
   label: string;

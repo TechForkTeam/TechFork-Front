@@ -1,5 +1,5 @@
 import Close from "@/assets/icons/close.svg";
-import { useCompanyStore } from "../../../store/uesCompanyStore";
+import { useCompanyStore } from "@/store/uesCompanyStore";
 
 interface HomeCompanySelectBtnProps {
   company: string;

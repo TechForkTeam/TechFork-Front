@@ -1,7 +1,7 @@
-import { useGetMyInterest } from "../../../lib/my";
-import { SkeletonList } from "../../../shared/SkeletonList";
-import { InterestFilterList } from "./InterestFilterList";
-import { PostCardList } from "./PostCardList";
+import { useGetMyInterest } from "@/lib/my";
+import { InterestFilterList } from "@/pages/home/components/InterestFilterList";
+import { PostCardList } from "@/pages/home/components/PostCardList";
+import { SkeletonList } from "@/shared/SkeletonList";
 
 interface InterestPageProps {
   onRefresh: () => void;

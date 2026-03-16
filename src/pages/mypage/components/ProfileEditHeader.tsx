@@ -1,7 +1,7 @@
+import { usePatchMyProfile } from "@/lib/my";
+import { Button } from "@/shared/button/Button";
+import { InputField } from "@/shared/InputField";
 import { useState } from "react";
-import { usePatchMyProfile } from "../../../lib/my";
-import { InputField } from "../../../shared/InputField";
-import { Button } from "../../../shared/button/Button";
 
 interface ProfileEditHEaderProps {
   onSubmit: () => void;

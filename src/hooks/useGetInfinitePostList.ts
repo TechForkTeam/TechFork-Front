@@ -1,10 +1,10 @@
 // src/hooks/useInfinitePosts.ts
+import { getPostList } from "@/lib/post";
+import type { PageParamType, PostResponseDto } from "@/types/post";
 import {
   useSuspenseInfiniteQuery,
   type QueryFunctionContext,
 } from "@tanstack/react-query";
-import type { PageParamType, PostResponseDto } from "../types/post";
-import { getPostList } from "../lib/post";
 
 interface UseInfinitePostsParams {
   sortBy: "LATEST" | "POPULAR";

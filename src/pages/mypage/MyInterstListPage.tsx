@@ -1,9 +1,9 @@
+import { MYPAGE_TAP } from "@/constants/tab";
+import { useInfiniteActivityPosts } from "@/hooks/useGetInfiniteActivityPostList";
+import { TabSelectList } from "@/pages/home/components/TabSelectList";
+import { CardItem } from "@/shared/CardItem";
+import { Loading } from "@/shared/Loading";
 import { useEffect, useRef, useState } from "react";
-import { MYPAGE_TAP } from "../../constants/tab";
-import { TabSelectList } from "../home/components/TabSelectList";
-import { CardItem } from "../../shared/CardItem";
-import { Loading } from "../../shared/Loading";
-import { useInfiniteActivityPosts } from "../../hooks/useGetInfiniteActivityPostList";
 
 // mypage 관심사 list
 export const MyIntersListPage = () => {

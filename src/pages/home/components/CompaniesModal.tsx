@@ -1,7 +1,7 @@
-import { CompanyModalItem } from "./CompanyModalItem";
-import { useCompanyStore } from "../../../store/uesCompanyStore";
+import { CompanyModalItem } from "@/pages/home/components/CompanyModalItem";
+import { useCompanyStore } from "@/store/uesCompanyStore";
+import type { CompanyResponseDto } from "@/types/company";
 import { useEffect, useRef } from "react";
-import type { CompanyResponseDto } from "../../../types/company";
 
 interface CompaniesModalProps {
   companyData: CompanyResponseDto;
