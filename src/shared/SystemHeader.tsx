@@ -1,7 +1,5 @@
 import Search from "@/assets/icons/search.svg";
 import User from "@/assets/images/user.png";
-import Logo from "@/assets/images/logo.png";
-import DarkLogo from "@/assets/images/logo_dark.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -99,13 +97,14 @@ export const SystemHeader = () => {
     <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14   ")}>
       <div className="flex items-center justify-between w-full relative">
         <img
-          src={isDark ? DarkLogo : Logo}
+          src={isDark ? "/dark_logo.svg" : "/logo.svg"}
           alt="로고"
           className="w-35 h-12 cursor-pointer"
           onClick={() => {
             navigate("/");
             setInput("");
           }}
+          fetchPriority="high"
         />
         <div className="w-160 flex  bg-bgPrimary rounded-lg border border-bgNormal px-3">
           <img src={Search} alt="" className="search" />
