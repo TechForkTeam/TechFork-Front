@@ -1,6 +1,6 @@
 import { useGetMyInterest } from "@/lib/my";
 import { InterestFilterList } from "@/pages/home/components/InterestFilterList";
-import { PostCardList } from "@/pages/home/components/PostCardList";
+import PostCardList from "@/pages/home/components/PostCardList";
 import { SkeletonList } from "@/shared/SkeletonList";
 
 interface InterestPageProps {
@@ -8,10 +8,7 @@ interface InterestPageProps {
   isRefreshing: boolean;
 }
 
-export const InterestPage = ({
-  onRefresh,
-  isRefreshing,
-}: InterestPageProps) => {
+const InterestPage = ({ onRefresh, isRefreshing }: InterestPageProps) => {
   const { data: myInterest } = useGetMyInterest();
 
   return (
@@ -21,3 +18,5 @@ export const InterestPage = ({
     </>
   );
 };
+
+export default InterestPage;

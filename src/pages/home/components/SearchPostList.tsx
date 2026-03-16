@@ -8,7 +8,7 @@ interface SearchPostListProps {
   query: string;
 }
 
-export const SearchPostList = ({ query }: SearchPostListProps) => {
+const SearchPostList = ({ query }: SearchPostListProps) => {
   const { data: searchData } = useGetSearchPost(query);
   const history = useSearchHistory();
   const { user } = useUserStore();
@@ -50,3 +50,5 @@ export const SearchPostList = ({ query }: SearchPostListProps) => {
     </div>
   );
 };
+
+export default SearchPostList;

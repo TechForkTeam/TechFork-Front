@@ -4,17 +4,20 @@ import { useDebounce } from "@/hooks/useDebouce";
 import { useGetCompany } from "@/lib/company";
 import { usePostRecommendPostList } from "@/lib/recommendation";
 import { CompanyFilterList } from "@/pages/home/components/CompanyFilterList";
-import { InterestPage } from "@/pages/home/components/InterestPage";
-import { PostCardList } from "@/pages/home/components/PostCardList";
-import { SearchPostList } from "@/pages/home/components/SearchPostList";
+import PostCardList from "@/pages/home/components/PostCardList";
 import { TabSelectList } from "@/pages/home/components/TabSelectList";
 import { Loading } from "@/shared/Loading";
 import { SkeletonList } from "@/shared/SkeletonList";
 import { useCompanyStore } from "@/store/uesCompanyStore";
 import useUserStore from "@/store/useUserStore";
-import { Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+
+const InterestPage = lazy(() => import("@/pages/home/components/InterestPage"));
+const SearchPostList = lazy(
+  () => import("@/pages/home/components/SearchPostList"),
+);
 
 export const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -56,7 +59,6 @@ export const HomePage = () => {
       resetCompanies();
     };
   }, []);
-  console.log("test2");
 
   return (
     <div className="bg-bgPrimary  py-12" onClick={() => setModal(false)}>

@@ -12,7 +12,7 @@ interface PostCardListProps {
   selectedTab: number;
 }
 
-export const PostCardList = ({ selectedTab }: PostCardListProps) => {
+const PostCardList = ({ selectedTab }: PostCardListProps) => {
   const { companies } = useCompanyStore();
   const infiniteRef = useRef<HTMLDivElement | null>(null);
 
@@ -66,3 +66,5 @@ export const PostCardList = ({ selectedTab }: PostCardListProps) => {
     </>
   );
 };
+
+export default PostCardList;

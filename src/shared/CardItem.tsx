@@ -93,36 +93,42 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
     };
     return (
       <li
-        className=" h-90 rounded-lg bg-primary font-strong p-4 relative hover:scale-103  transition-transform duration-200"
+        className="min-h rounded-lg bg-primary font-strong p-4 relative hover:scale-103 will-change-transform transition-transform duration-200"
         ref={ref}
       >
-        <div className="flex justify-between mb-3">
-          <img src={logoUrl} alt={company} className="size-10" />
-          <img
-            src={isBookmarked ? BookOn : BookOff}
-            alt="북마크"
-            className=" z-15 cursor-pointer"
-            onClick={e => handleClick(e)}
-          />
-        </div>
-        <div className="flex flex-col gap-4 pb-3 border-b border-bgNormal mb-2">
-          <h3 className="body-sb-18 min-h-12  line-clamp-2 overflow-hidden text-clip">
-            {title}
-          </h3>
-          {thumbnailUrl ? (
+        <div className="flex flex-col flex-1">
+          <div className="flex justify-between mb-3">
+            <img src={logoUrl} alt={company} className="size-10" />
             <img
-              src={thumbnailUrl}
-              alt="썸네일"
-              className="object-cover h-45"
+              src={isBookmarked ? BookOn : BookOff}
+              alt="북마크"
+              className=" z-15 cursor-pointer"
+              onClick={e => handleClick(e)}
             />
-          ) : (
-            <p className="line-clamp-9 overflow-hidden text-clip min-h-45 text-sm">
-              {shortSummary}
-            </p>
-          )}
+          </div>
+          <div className="flex flex-col gap-4 pb-3 border-b border-bgNormal mb-2">
+            <h3 className="body-sb-18 min-h-12  line-clamp-2 overflow-hidden text-clip">
+              {title}
+            </h3>
+            <div className="w-full items-center aspect-video rounded-md overflow-hidden">
+              {thumbnailUrl ? (
+                <img
+                  src={thumbnailUrl}
+                  alt={`{${title} - 썸네일}`}
+                  className=" w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <p className="line-clamp-9 overflow-hidden text-clip min-h-45 text-sm">
+                  {shortSummary}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
         <div className="flex items-center gap-2">
-          <img src={Eye} alt="" className="" />
+          <img src={Eye} alt="본 횟수" />
           <p className="text-xs ">{viewCount}</p>
           <p className="text-xs font-assistive">{publishedAt?.split("T")[0]}</p>
         </div>
