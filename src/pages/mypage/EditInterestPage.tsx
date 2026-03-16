@@ -10,7 +10,7 @@ import { TagCodeToLabel } from "@/utils/tagCodeToLabel";
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
-export const EditInterestPage = () => {
+const EditInterestPage = () => {
   const { selectedTags, setFromServer, toggleTag, originalTags } =
     useEditTagStore();
   const { data } = useGetMyInterest();
@@ -184,3 +184,5 @@ export const EditInterestPage = () => {
     </>
   );
 };
+
+export default EditInterestPage;

@@ -7,7 +7,7 @@ import { useThemeToggle } from "@/hooks/useThemToggle";
 import clsx from "clsx";
 import { Helmet } from "react-helmet-async";
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const handleLogin = (provider: OAuthProvider) => {
     window.location.assign(getOAuthUrl(provider));
   };
@@ -62,3 +62,5 @@ export const LoginPage = () => {
     </>
   );
 };
+
+export default LoginPage;

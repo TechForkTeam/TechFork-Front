@@ -9,7 +9,7 @@ import { ASK_MAP } from "@/constants/mypage";
 import { Button } from "@/shared/button/Button";
 import { Helmet } from "react-helmet-async";
 
-export const AskPage = () => {
+const AskPage = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -148,3 +148,5 @@ export const AskPage = () => {
     </>
   );
 };
+
+export default AskPage;

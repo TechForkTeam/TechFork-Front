@@ -16,7 +16,7 @@ import { MultiSelectedTag } from "@/shared/MultiSelectedTag";
 import { Button } from "@/shared/button/Button";
 import { Helmet } from "react-helmet-async";
 
-export const OnboardingTag = () => {
+const OnboardingTag = () => {
   const navigate = useNavigate();
   // 상태관리
   const { tag, toggleTag, getApiPayload } = useTagStore();
@@ -158,3 +158,5 @@ export const OnboardingTag = () => {
     </>
   );
 };
+
+export default OnboardingTag;

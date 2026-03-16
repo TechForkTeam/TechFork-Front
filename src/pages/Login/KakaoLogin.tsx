@@ -6,7 +6,7 @@ import Alert from "@/assets/icons/alert2.svg";
 import useUserStore from "@/store/useUserStore";
 import { useOnboardingStore } from "@/store/useOnboardingStore";
 
-export const KakaoLogin = () => {
+const KakaoLogin = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { setUser } = useUserStore();
@@ -35,3 +35,5 @@ export const KakaoLogin = () => {
   console.log(searchParams);
   return <div></div>;
 };
+
+export default KakaoLogin;

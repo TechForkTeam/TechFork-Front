@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 // mypage 관심사 list
-export const MyIntersListPage = () => {
+const MyIntersListPage = () => {
   const [selectedTab, setSelected] = useState(0);
   const infiniteRef = useRef<HTMLDivElement | null>(null);
 
@@ -74,3 +74,5 @@ export const MyIntersListPage = () => {
     </>
   );
 };
+
+export default MyIntersListPage;

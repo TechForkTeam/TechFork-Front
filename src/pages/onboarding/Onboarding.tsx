@@ -9,7 +9,7 @@ import { Button } from "@/shared/button/Button";
 import { cn } from "@/utils/cn";
 import { Helmet } from "react-helmet-async";
 
-export const Onboarding = () => {
+const Onboarding = () => {
   const navigate = useNavigate();
   const { nickname, aboutMe, setTemp, check, email } = useOnboardingStore();
 
@@ -102,3 +102,5 @@ export const Onboarding = () => {
     </>
   );
 };
+
+export default Onboarding;

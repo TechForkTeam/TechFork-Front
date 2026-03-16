@@ -20,7 +20,7 @@ interface SettingItem {
   onClick?: () => void;
   onClickDark?: () => void;
 }
-export const SettingPage = () => {
+const SettingPage = () => {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [IsModal, setIsModal] = useState<boolean>(false);
@@ -124,3 +124,5 @@ export const SettingPage = () => {
     </>
   );
 };
+
+export default SettingPage;

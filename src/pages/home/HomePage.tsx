@@ -20,7 +20,7 @@ const SearchPostList = lazy(
   () => import("@/pages/home/components/SearchPostList"),
 );
 
-export const HomePage = () => {
+const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
   const { companies, toggleCompany, resetCompanies } = useCompanyStore();
@@ -123,3 +123,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage;
