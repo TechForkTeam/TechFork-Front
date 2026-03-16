@@ -8,6 +8,7 @@ import { useEditTagStore } from "@/store/useEditTagStore";
 import { cn } from "@/utils/cn";
 import { TagCodeToLabel } from "@/utils/tagCodeToLabel";
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 export const EditInterestPage = () => {
   const { selectedTags, setFromServer, toggleTag, originalTags } =
@@ -75,99 +76,111 @@ export const EditInterestPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-strong">
-      <header className="mt-16 mb-8 rounded-xl border border-bgNormal bg-bgStrong p-8">
-        <h3 className="body-sb-16">관심 분야를 수정해보세요.</h3>
-        <h5 className="body-r-14 font-alternative">
-          선택 분야를 바탕으로 맞춤형 게시글을 추천해드려요.
-        </h5>
-      </header>
+    <>
+      <Helmet>
+        <title>관심사 수정하기 | TechFork</title>
+        <meta property="og:title" content="관심사 설정 | TechFork" />
+        <meta
+          property="og:description"
+          content="관심 분야를 설정하고 맞춤형 기술 아티클을 받아보세요."
+        />
+      </Helmet>
 
-      <article>
-        <div className="bg-bgStrong p-8 rounded-t-xl border border-bgNormal font-strong">
-          <h3 className="mb-4 body-sb-16">선택된 관심사</h3>
+      <div className="min-h-screen flex flex-col font-strong">
+        <header className="mt-16 mb-8 rounded-xl border border-bgNormal bg-bgStrong p-8">
+          <h3 className="body-sb-16">관심 분야를 수정해보세요.</h3>
+          <h5 className="body-r-14 font-alternative">
+            선택 분야를 바탕으로 맞춤형 게시글을 추천해드려요.
+          </h5>
+        </header>
 
-          <div className="flex items-start">
-            <div className="flex gap-2 flex-wrap">
-              {selectedTags.map(tag => {
-                const [categoryCode, keywordCode] = tag.split(":");
-                const label =
-                  TagCodeToLabel(categoryCode, [keywordCode])[0] ?? keywordCode;
-                return <InterstBtn key={tag} label={label} value={tag} />;
-              })}
+        <article>
+          <div className="bg-bgStrong p-8 rounded-t-xl border border-bgNormal font-strong">
+            <h3 className="mb-4 body-sb-16">선택된 관심사</h3>
+
+            <div className="flex items-start">
+              <div className="flex gap-2 flex-wrap">
+                {selectedTags.map(tag => {
+                  const [categoryCode, keywordCode] = tag.split(":");
+                  const label =
+                    TagCodeToLabel(categoryCode, [keywordCode])[0] ??
+                    keywordCode;
+                  return <InterstBtn key={tag} label={label} value={tag} />;
+                })}
+              </div>
+              <button
+                className={cn(
+                  "ml-auto rounded-xl px-3 py-2 body-r-14 items-start  shrink-0 cursor-pointer",
+                  isEqual
+                    ? "bg-sub-500 font-assistive"
+                    : "bg-blue-500 text-white!",
+                )}
+                onClick={handleSave}
+              >
+                저장하기
+              </button>
             </div>
-            <button
-              className={cn(
-                "ml-auto rounded-xl px-3 py-2 body-r-14 items-start  shrink-0 cursor-pointer",
-                isEqual
-                  ? "bg-sub-500 font-assistive"
-                  : "bg-blue-500 text-white!",
-              )}
-              onClick={handleSave}
+          </div>
+          <section className="flex min-h-screen ">
+            <aside
+              ref={scrollRef}
+              className="w-75 bg-sub-400 px-6 text-[#8B95A1] border-x border-b border-bgNormal "
             >
-              저장하기
-            </button>
-          </div>
-        </div>
-        <section className="flex min-h-screen ">
-          <aside
-            ref={scrollRef}
-            className="w-75 bg-sub-400 px-6 text-[#8B95A1] border-x border-b border-bgNormal "
-          >
-            <h6 className="py-4 body-r-14">카테고리</h6>
+              <h6 className="py-4 body-r-14">카테고리</h6>
 
-            <ul className="w-65 flex flex-col h-150 overflow-scroll overflow-x-hidden scrollbar-style">
-              {INTERESTS_MOCK.interests.map(item => {
-                const count = myInterestMap[item.code] ?? 0;
+              <ul className="w-65 flex flex-col h-150 overflow-scroll overflow-x-hidden scrollbar-style">
+                {INTERESTS_MOCK.interests.map(item => {
+                  const count = myInterestMap[item.code] ?? 0;
 
-                return (
-                  <TagItem
-                    key={item.code}
-                    tag={item.label}
-                    length={count}
-                    selected={item.code === selectedCategory}
-                    onClick={() => {
-                      setSelectedCategory(item.code);
-                      scrollToTop();
-                    }}
-                  />
-                );
-              })}
-            </ul>
-          </aside>
-          {/* 기술 */}
-          <div className="p-10 bg-bgStrong w-full">
-            <h5 className="body-sb-18">{selectedCategoryData?.label}</h5>
-            <p className="body-r-14 font-alternative mb-6">
-              관심있는 기술을 선택하세요.
-            </p>
+                  return (
+                    <TagItem
+                      key={item.code}
+                      tag={item.label}
+                      length={count}
+                      selected={item.code === selectedCategory}
+                      onClick={() => {
+                        setSelectedCategory(item.code);
+                        scrollToTop();
+                      }}
+                    />
+                  );
+                })}
+              </ul>
+            </aside>
+            {/* 기술 */}
+            <div className="p-10 bg-bgStrong w-full">
+              <h5 className="body-sb-18">{selectedCategoryData?.label}</h5>
+              <p className="body-r-14 font-alternative mb-6">
+                관심있는 기술을 선택하세요.
+              </p>
 
-            <div className="grid grid-cols-5 gap-4">
-              {selectedCategoryData?.keywords.map(keyword => {
-                const categoryLabel = selectedCategoryData.label;
-                const keywordCode = TAG_MAP[
-                  categoryLabel as keyof typeof TAG_MAP
-                ]?.find(item => item.label === keyword)?.code;
+              <div className="grid grid-cols-5 gap-4">
+                {selectedCategoryData?.keywords.map(keyword => {
+                  const categoryLabel = selectedCategoryData.label;
+                  const keywordCode = TAG_MAP[
+                    categoryLabel as keyof typeof TAG_MAP
+                  ]?.find(item => item.label === keyword)?.code;
 
-                if (!keywordCode) return null;
+                  if (!keywordCode) return null;
 
-                const value = `${selectedCategoryData.code}:${keywordCode}`;
+                  const value = `${selectedCategoryData.code}:${keywordCode}`;
 
-                return (
-                  <TechSelection
-                    key={value}
-                    label={keyword}
-                    selected={selectedTags.includes(value)}
-                    onClick={() =>
-                      toggleTag(selectedCategoryData.code, keywordCode)
-                    }
-                  />
-                );
-              })}
+                  return (
+                    <TechSelection
+                      key={value}
+                      label={keyword}
+                      selected={selectedTags.includes(value)}
+                      onClick={() =>
+                        toggleTag(selectedCategoryData.code, keywordCode)
+                      }
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </section>
-      </article>
-    </div>
+          </section>
+        </article>
+      </div>
+    </>
   );
 };

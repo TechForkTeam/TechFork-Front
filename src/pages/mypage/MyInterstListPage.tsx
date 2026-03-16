@@ -4,6 +4,7 @@ import { TabSelectList } from "@/pages/home/components/TabSelectList";
 import { CardItem } from "@/shared/CardItem";
 import { Loading } from "@/shared/Loading";
 import { useEffect, useRef, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 // mypage 관심사 list
 export const MyIntersListPage = () => {
@@ -39,26 +40,37 @@ export const MyIntersListPage = () => {
   // console.log(posts);
 
   return (
-    <div className="py-12">
-      <TabSelectList
-        className="mb-20"
-        onChange={setSelected}
-        selected={selectedTab}
-        tagList={MYPAGE_TAP}
-      />
-      <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-4">
-        {posts.map(item => {
-          return (
-            <CardItem
-              key={item.readPostId || item.bookmarkId}
-              {...item}
-              id={item.postId}
-            />
-          );
-        })}
-      </ul>
-      {isFetchingNextPage && <Loading />}
-      <div ref={infiniteRef} className="h-10 w-full" />
-    </div>
+    <>
+      <Helmet>
+        <title>내 활동 | TechFork</title>
+        <meta property="og:title" content="내 활동 | TechFork" />
+        <meta
+          property="og:description"
+          content="북마크한 게시글과 최근 방문한 기술 아티클을 확인하세요."
+        />
+      </Helmet>
+
+      <div className="py-12">
+        <TabSelectList
+          className="mb-20"
+          onChange={setSelected}
+          selected={selectedTab}
+          tagList={MYPAGE_TAP}
+        />
+        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-4">
+          {posts.map(item => {
+            return (
+              <CardItem
+                key={item.readPostId || item.bookmarkId}
+                {...item}
+                id={item.postId}
+              />
+            );
+          })}
+        </ul>
+        {isFetchingNextPage && <Loading />}
+        <div ref={infiniteRef} className="h-10 w-full" />
+      </div>
+    </>
   );
 };
