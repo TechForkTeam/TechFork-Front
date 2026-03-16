@@ -78,7 +78,7 @@ const EditInterestPage = () => {
   return (
     <>
       <Helmet>
-        <title>관심사 수정하기 | TechFork</title>
+        <title>관심사 수정 | TechFork</title>
         <meta property="og:title" content="관심사 설정 | TechFork" />
         <meta
           property="og:description"
