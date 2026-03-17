@@ -29,7 +29,7 @@ export const CompanyItem = ({
       >
         <img src={logoUrl} alt="company" className="size-8" />
       </div>
-      <p className="body-r-14">{company}</p>
+      <p className="body-r-14 font-strong">{company}</p>
     </div>
   );
 };
