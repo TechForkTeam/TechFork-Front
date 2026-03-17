@@ -116,8 +116,8 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
                   src={thumbnailUrl}
                   alt={`{${title} - 썸네일}`}
                   className=" w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
+                  // loading="lazy"
+                  // decoding="async"
                 />
               ) : (
                 <p className="line-clamp-9 overflow-hidden text-clip min-h-45 text-sm">
