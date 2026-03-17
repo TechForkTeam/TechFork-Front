@@ -1,20 +1,26 @@
-import { OnboardingLayout } from "@/layout/OnboardingLayout";
-import { PrivateRoute } from "@/layout/PrivateRoiute";
-import { SystemLayout } from "@/layout/SystemLayout";
+import { OnboardingLayout } from "@/widgets/layout/OnboardingLayout";
+import { PrivateRoute } from "@/widgets/layout/PrivateRoiute";
+import { SystemLayout } from "@/widgets/layout/SystemLayout";
 
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 // Lazy Loading 적용
-const HomePage = lazy(() => import("@/pages/home/HomePage"));
-const LoginPage = lazy(() => import("@/pages/Login/LoginPage"));
-const KakaoLogin = lazy(() => import("@/pages/Login/KakaoLogin"));
-const Onboarding = lazy(() => import("@/pages/onboarding/Onboarding"));
-const OnboardingTag = lazy(() => import("@/pages/onboarding/OnboardingTag"));
-const EditInterestPage = lazy(() => import("@/pages/mypage/EditInterestPage"));
-const MyIntersListPage = lazy(() => import("@/pages/mypage/MyInterstListPage"));
-const SettingPage = lazy(() => import("@/pages/mypage/SettingPage"));
-const AskPage = lazy(() => import("@/pages/mypage/AskPage"));
+const HomePage = lazy(() => import("@/app/pages/home/HomePage"));
+const LoginPage = lazy(() => import("@/app/pages/login/LoginPage"));
+const KakaoLogin = lazy(() => import("@/app/pages/login/KakaoLogin"));
+const Onboarding = lazy(() => import("@/app/pages/onboarding/Onboarding"));
+const OnboardingTag = lazy(
+  () => import("@/app/pages/onboarding/OnboardingTag"),
+);
+const EditInterestPage = lazy(
+  () => import("@/app/pages/mypage/EditInterestPage"),
+);
+const MyIntersListPage = lazy(
+  () => import("@/app/pages/mypage/MyInterstListPage"),
+);
+const SettingPage = lazy(() => import("@/app/pages/mypage/SettingPage"));
+const AskPage = lazy(() => import("@/app/pages/mypage/AskPage"));
 const router = createBrowserRouter([
   {
     element: <SystemLayout />,

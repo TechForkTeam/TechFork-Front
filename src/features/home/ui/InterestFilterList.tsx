@@ -1,0 +1,37 @@
+import { SelectionBtn } from "@/shared/ui/select-button/SelectionBtn";
+import type { InterestTypeDto } from "@/features/home/types/my";
+import { TagCodeToLabel } from "@/features/home/model/tagCodeToLabel";
+import { RotateCcw } from "lucide-react";
+
+interface InterestFilterListProps {
+  myInterest: InterestTypeDto[];
+  onRefresh: () => void;
+}
+
+export const InterestFilterList = ({
+  myInterest,
+  onRefresh,
+}: InterestFilterListProps) => {
+  return (
+    <>
+      <div className="flex gap-2 flex-wrap py-4">
+        <p className="body-r-14 mr-2 font-strong">나의 관심 분야:</p>
+        {myInterest?.map(item =>
+          TagCodeToLabel(item.category, item.keywords).map(label => (
+            <SelectionBtn key={`${item.category}-${label}`}>
+              {label}
+            </SelectionBtn>
+          )),
+        )}
+      </div>
+
+      <button
+        className="cursor-pointer flex items-center ml-auto my-5 py-2 px-4 body-r-14 gap-3 border border-bgNormal rounded-xl  bg-primary font-alternative hover:bg-gray-50 transition-colors"
+        onClick={() => onRefresh()}
+      >
+        새로고침
+        <RotateCcw className="size-5" />
+      </button>
+    </>
+  );
+};
