@@ -1,7 +1,7 @@
 import { TAG_MAP } from "@/features/home/model/tag";
 import { TagCodeToLabel } from "@/features/home/model/tagCodeToLabel";
 import { usePutMyInterst } from "@/features/mypage/api/myEdit";
-import { INTERESTS_MOCK } from "@/features/mypage/data/tag";
+import { INTERESTS_MOCK } from "@/features/mypage/model/tag";
 import { useEditTagStore } from "@/features/mypage/model/useEditTagStore";
 import { InterstBtn } from "@/features/mypage/ui/IntersetBtn";
 import { TagItem } from "@/features/mypage/ui/TagItem";
