@@ -1,8 +1,8 @@
 // 최근 게시글 , 인기있는 게시글
 
 import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/constants/endpoints";
-import type { PostResponseDto } from "@/features/home/types/post";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
+import type { PostResponseDto } from "@/features/home/api/post.types";
 
 export interface GetPostListParams {
   sortBy: "LATEST" | "POPULAR";

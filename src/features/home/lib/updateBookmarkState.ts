@@ -5,7 +5,6 @@ export const updateBookmarkState = (
 ) => {
   if (!old) return old;
 
-  // 무한 스크롤
   if (old.pages && Array.isArray(old.pages)) {
     return {
       ...old,
@@ -20,8 +19,6 @@ export const updateBookmarkState = (
 
         if (!dataKey || !page.data[dataKey]) return page;
 
-        // 북마크 리스트 filter
-        // 나머지는 상태만 업데이트
         if (dataKey === "bookmarks" && !isBookmarked) {
           return {
             ...page,
@@ -33,6 +30,7 @@ export const updateBookmarkState = (
             },
           };
         }
+
         return {
           ...page,
           data: {
@@ -48,7 +46,6 @@ export const updateBookmarkState = (
     };
   }
 
-  // 2. 추천 게시글
   const isRec = old.recommendations || (old.data && old.data.recommendations);
   if (isRec) {
     const isRoot = !!old.recommendations;
@@ -65,7 +62,6 @@ export const updateBookmarkState = (
     return isRoot ? updated : { ...old, data: updated };
   }
 
-  // 3. 일반 배열 구조 또는 data 속성 내 배열 구조
   if (Array.isArray(old)) {
     return old.map((post: any) =>
       post.id === postId || post.postId === postId

@@ -1,13 +1,13 @@
 import Alert from "@/assets/icons/alert2.svg";
-import { TAB_MAP } from "@/features/home/model/tab";
-import { useDebounce } from "@/shared/hooks/useDebouce";
+import { TAB_MAP } from "@/features/home/consts/tab";
+import { useDebounce } from "@/shared/lib/useDebounce";
 import { useGetCompany } from "@/features/home/api/company";
 import { usePostRecommendPostList } from "@/features/home/api/recommendation";
 
 import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
 import { Loading } from "@/shared/ui/Loading";
 import { SkeletonList } from "@/shared/ui/SkeletonList";
-import { useCompanyStore } from "@/features/home/model/uesCompanyStore";
+import { useCompanyStore } from "@/features/home/model/useCompanyStore";
 import useUserStore from "@/shared/model/useUserStore";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";

@@ -10,7 +10,7 @@ import { useTagStore } from "@/features/onboarding/model/useTagStore";
 import { useOnboardingStore } from "@/features/onboarding/model/useOnboardingStore";
 import { useSubmitOnboarding } from "@/features/onboarding/api/onboarding";
 import { useThemeToggle } from "@/app/providers/useThemToggle";
-import { TAG, TAG_MAP } from "@/features/home/model/tag";
+import { TAG, TAG_MAP } from "@/features/home/consts/tag";
 import { MultiSelectedTag } from "@/shared/ui/MultiSelectedTag";
 import { Button } from "@/shared/ui/button/Button";
 import { Helmet } from "react-helmet-async";

@@ -1,5 +1,5 @@
 import { ButtonVariants } from "@/shared/ui/button/button.styles";
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared/lib/cn";
 import type { VariantProps } from "class-variance-authority";
 
 interface ButtonProps extends VariantProps<typeof ButtonVariants> {

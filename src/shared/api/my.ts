@@ -4,9 +4,9 @@ import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import type {
   InterestResponseDto,
   InterestTypeDto,
-} from "@/features/home/types/my";
+} from "@/features/home/api/my.types";
 import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/constants/endpoints";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 
 // 내 프로필 조회 =>공통
 export const getMyProfile = async () => {

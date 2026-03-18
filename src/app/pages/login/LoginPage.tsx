@@ -1,7 +1,8 @@
 import Apple from "@/assets/images/apple.png";
 import DarkApple from "@/assets/images/apple_dark.png";
 import Kakao from "@/assets/images/kakao.png";
-import { getOAuthUrl, type OAuthProvider } from "@/features/Login/model/login";
+import { type OAuthProvider } from "@/features/Login/consts/oauth";
+import { getOAuthUrl } from "@/features/Login/lib/getOAuthUrl";
 import { useThemeToggle } from "@/app/providers/useThemToggle";
 
 import clsx from "clsx";

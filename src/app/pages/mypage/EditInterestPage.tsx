@@ -1,13 +1,13 @@
-import { TAG_MAP } from "@/features/home/model/tag";
-import { TagCodeToLabel } from "@/features/home/model/tagCodeToLabel";
+import { TAG_MAP } from "@/features/home/consts/tag";
+import { tagCodeToLabel } from "@/features/home/lib/tagCodeToLabel";
 import { usePutMyInterst } from "@/features/mypage/api/myEdit";
-import { INTERESTS_MOCK } from "@/features/mypage/model/tag";
+import { INTERESTS_MOCK } from "@/features/mypage/consts/interests";
 import { useEditTagStore } from "@/features/mypage/model/useEditTagStore";
 import { InterstBtn } from "@/features/mypage/ui/IntersetBtn";
 import { TagItem } from "@/features/mypage/ui/TagItem";
 import { TechSelection } from "@/features/mypage/ui/TechSelection";
 import { useGetMyInterest } from "@/shared/api/my";
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared/lib/cn";
 
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -105,7 +105,7 @@ const EditInterestPage = () => {
                 {selectedTags.map(tag => {
                   const [categoryCode, keywordCode] = tag.split(":");
                   const label =
-                    TagCodeToLabel(categoryCode, [keywordCode])[0] ??
+                    tagCodeToLabel(categoryCode, [keywordCode])[0] ??
                     keywordCode;
                   return <InterstBtn key={tag} label={label} value={tag} />;
                 })}

@@ -3,7 +3,7 @@ import clsx from "clsx";
 import type {
   CompanyResponseDto,
   CompanyType,
-} from "@/features/home/types/company";
+} from "@/features/home/api/company.types";
 import { HomeCompanySelectBtn } from "@/features/home/ui/HomeCompanySelectBtn";
 import { CompanyItem } from "@/features/home/ui/CompanyItem";
 import { CompaniesModal } from "@/features/home/ui/CompaniesModal";

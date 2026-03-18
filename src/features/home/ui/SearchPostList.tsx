@@ -1,7 +1,7 @@
 import { useGetSearchPost, useSearchHistory } from "@/features/home/api/search";
 import { CardItem } from "@/shared/ui/CardItem";
 import useUserStore from "@/shared/model/useUserStore";
-import type { CardItemProps } from "@/features/home/types/post";
+import type { CardItemProps } from "@/features/home/api/post.types";
 import { useEffect } from "react";
 
 interface SearchPostListProps {

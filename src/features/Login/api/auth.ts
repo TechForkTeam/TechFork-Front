@@ -1,7 +1,7 @@
 //refreshToken
 
 import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/constants/endpoints";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 
 export const postRefreshToken = async () => {
   const { data } = await api.post(API_ENDPOINTS.auth.refresh);

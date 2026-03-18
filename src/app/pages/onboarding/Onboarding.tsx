@@ -5,7 +5,7 @@ import clsx from "clsx";
 import { useOnboardingStore } from "@/features/onboarding/model/useOnboardingStore";
 import { InputField } from "@/shared/ui/InputField";
 import { Button } from "@/shared/ui/button/Button";
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared/lib/cn";
 import { Helmet } from "react-helmet-async";
 import { OnboardingHeader } from "@/features/onboarding/ui/OnboardingHeader";
 

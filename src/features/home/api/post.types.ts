@@ -1,4 +1,3 @@
-// 페이지 게시글 응답 DTO
 export type PostParamsDto = {
   sortBy: string;
   lastViewCount: number;
@@ -7,7 +6,6 @@ export type PostParamsDto = {
   size: number;
 };
 
-//페이지 단위 무한스클롤 응답
 export type PostResponseDto = {
   data: PostListResponse;
   code: string;
@@ -15,7 +13,6 @@ export type PostResponseDto = {
   message: string;
 };
 
-//페이지 내부 게시글 응답 리스트 타입
 type PostListResponse = {
   hasNext: boolean;
   lastPostId: number;
@@ -24,7 +21,6 @@ type PostListResponse = {
   posts: CardItemProps[];
 };
 
-//card Item
 export type CardItemProps = {
   id?: number;
   title: string;
@@ -45,8 +41,6 @@ export type PageParamType = {
   lastPostId?: number;
 };
 
-// 북마크+읽은게시글
-
 export type PostListBookmarkResponse = {
   bookmarkId: number;
   postId: number;
@@ -57,7 +51,6 @@ export type PostListBookmarkResponse = {
   publishedAt: string;
 };
 
-//북마크 단위
 export type PostBookmarkResponseDto = {
   data: PostListBookmarkResponse;
   code: string;
@@ -65,7 +58,6 @@ export type PostBookmarkResponseDto = {
   message: string;
 };
 
-//읽은 게시글 저장
 export type ReadPostType = {
   postId: number;
   readAt: string;
@@ -73,7 +65,7 @@ export type ReadPostType = {
 };
 
 export interface ActivityPostResponseDTO {
-  readPost: number; // bookmark,read
+  readPost: number;
   postId: number;
   title: string;
   shortSummary: string;
@@ -85,5 +77,5 @@ export interface ActivityPostResponseDTO {
   viewCount: number;
   keywords?: string[];
   isBookmarked: boolean;
-  readAt?: string; // read 전용
+  readAt?: string;
 }

@@ -1,6 +1,6 @@
+import type { OnboardingRequestType } from "@/features/onboarding/api/onboarding.types";
 import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/constants/endpoints";
-import type { OnboardingRequestType } from "@/features/onboarding/types/onboarding";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 

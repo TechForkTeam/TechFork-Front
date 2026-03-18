@@ -1,4 +1,4 @@
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared/lib/cn";
 import clsx from "clsx";
 
 interface InputFieldProps {

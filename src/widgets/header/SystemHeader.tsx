@@ -7,12 +7,12 @@ import Alert from "@/assets/icons/alert2.svg";
 import Logout from "@/assets/icons/confirm.svg";
 import { useThemeToggle } from "@/app/providers/useThemToggle";
 import useUserStore from "@/shared/model/useUserStore";
-import { useCompanyStore } from "@/features/home/model/uesCompanyStore";
+import { useCompanyStore } from "@/features/home/model/useCompanyStore";
 import { useGetMyProfile } from "@/shared/api/my";
 import { postLogout } from "@/features/Login/api/auth";
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared/lib/cn";
 import { Button } from "@/shared/ui/button/Button";
-import { MYPAGE_NAV } from "@/features/mypage/model/mypage";
+import { MYPAGE_NAV } from "@/features/mypage/consts/mypage";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();

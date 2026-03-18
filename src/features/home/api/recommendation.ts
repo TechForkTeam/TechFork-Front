@@ -1,5 +1,5 @@
 import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/constants/endpoints";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //추천 게시글 조회

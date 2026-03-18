@@ -1,8 +1,8 @@
 //통합 검색
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import type { SearchType } from "@/features/home/types/search";
+import type { SearchType } from "@/features/home/api/search.types";
 import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/constants/endpoints";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 
 export const getSearchPost = async (query: string) => {
   const { data } = await api.get(API_ENDPOINTS.search, { params: { query } });

@@ -1,6 +1,6 @@
 import { SelectionBtn } from "@/shared/ui/select-button/SelectionBtn";
-import type { InterestTypeDto } from "@/features/home/types/my";
-import { TagCodeToLabel } from "@/features/home/model/tagCodeToLabel";
+import type { InterestTypeDto } from "@/features/home/api/my.types";
+import { tagCodeToLabel } from "@/features/home/lib/tagCodeToLabel";
 import { RotateCcw } from "lucide-react";
 
 interface InterestFilterListProps {
@@ -17,7 +17,7 @@ export const InterestFilterList = ({
       <div className="flex gap-2 flex-wrap py-4">
         <p className="body-r-14 mr-2 font-strong">나의 관심 분야:</p>
         {myInterest?.map(item =>
-          TagCodeToLabel(item.category, item.keywords).map(label => (
+          tagCodeToLabel(item.category, item.keywords).map(label => (
             <SelectionBtn key={`${item.category}-${label}`}>
               {label}
             </SelectionBtn>

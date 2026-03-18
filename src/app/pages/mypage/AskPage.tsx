@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { useGetMyProfile } from "@/shared/api/my";
 import { useThemeToggle } from "@/app/providers/useThemToggle";
 import { InputField } from "@/shared/ui/InputField";
-import { ASK_MAP } from "@/features/mypage/model/mypage";
+import { ASK_MAP } from "@/features/mypage/consts/mypage";
 import { Button } from "@/shared/ui/button/Button";
 import { Helmet } from "react-helmet-async";
 import { AskConfirmModal } from "@/features/mypage/ui/AskConfirmModal";

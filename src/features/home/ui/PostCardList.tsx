@@ -1,14 +1,14 @@
-import { useInfiniteCompaniesPosts } from "@/features/home/hooks/useGetInfiniteCompaniesList";
-import { useInfinitePosts } from "@/features/home/hooks/useGetInfinitePostList";
+import { useInfiniteCompaniesPosts } from "@/features/home/model/useInfiniteCompaniesPosts";
+import { useInfinitePosts } from "@/features/home/model/useInfinitePosts";
 import { useGetRecommendPostList } from "@/features/home/api/recommendation";
 import { CardItem } from "@/shared/ui/CardItem";
 import { Loading } from "@/shared/ui/Loading";
-import { useCompanyStore } from "@/features/home/model/uesCompanyStore";
+import { useCompanyStore } from "@/features/home/model/useCompanyStore";
 import useUserStore from "@/shared/model/useUserStore";
 import type {
   CardItemProps,
   PostResponseDto,
-} from "@/features/home/types/post";
+} from "@/features/home/api/post.types";
 import { useRef, useEffect } from "react";
 
 interface PostCardListProps {

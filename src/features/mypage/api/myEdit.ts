@@ -2,10 +2,10 @@ import type {
   InterestDataDto,
   InterestTypeDto,
   MyProfileType,
-} from "@/features/home/types/my";
+} from "@/features/home/api/my.types";
 import { useEditTagStore } from "@/features/mypage/model/useEditTagStore";
 import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/constants/endpoints";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // 내 관심사 수정 =>mypage

@@ -1,9 +1,8 @@
-// src/hooks/useInfinitePosts.ts
 import { getPostList } from "@/features/home/api/post";
 import type {
   PageParamType,
   PostResponseDto,
-} from "@/features/home/types/post";
+} from "@/features/home/api/post.types";
 import {
   useSuspenseInfiniteQuery,
   type QueryFunctionContext,
@@ -19,10 +18,10 @@ export const useInfinitePosts = ({
   size = 20,
 }: UseInfinitePostsParams) => {
   return useSuspenseInfiniteQuery<
-    PostResponseDto, // queryFn return
-    Error, // error
-    PostResponseDto[], // select result
-    ["posts", typeof sortBy], // queryKey
+    PostResponseDto,
+    Error,
+    PostResponseDto[],
+    ["posts", typeof sortBy],
     PageParamType
   >({
     queryKey: ["posts", sortBy],

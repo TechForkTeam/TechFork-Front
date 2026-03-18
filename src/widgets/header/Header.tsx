@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useThemeToggle } from "@/app/providers/useThemToggle";
-import { cn } from "@/shared/utils/cn";
+import { cn } from "@/shared/lib/cn";
 
 interface HeaderProps {
   className?: string;

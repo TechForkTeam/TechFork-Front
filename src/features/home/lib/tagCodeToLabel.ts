@@ -1,10 +1,6 @@
-import { TAG_CATEGORY_MAP, TAG_MAP } from "@/features/home/model/tag";
+import { TAG_CATEGORY_MAP, TAG_MAP } from "@/features/home/consts/tag";
 
-//서버=>ui 변환용
-export function TagCodeToLabel(
-  serverCategory: string,
-  codes: string[],
-): string[] {
+export function tagCodeToLabel(serverCategory: string, codes: string[]): string[] {
   const clientCategory =
     TAG_CATEGORY_MAP[serverCategory as keyof typeof TAG_CATEGORY_MAP];
 

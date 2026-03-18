@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateBookmarkState } from "@/features/home/model/queryUpdata";
-import type { ReadPostType } from "@/features/home/types/post";
+import { updateBookmarkState } from "@/features/home/lib/updateBookmarkState";
+import type { ReadPostType } from "@/features/home/api/post.types";
 import api from "@/shared/api/api";
 import {
   API_ENDPOINTS,
   getActivityPostsEndpoint,
-} from "@/shared/constants/endpoints";
+} from "@/shared/consts/endpoints";
 
 export type ActivityPostType = "bookmark" | "read";
 
