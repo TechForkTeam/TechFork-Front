@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
 import useUserStore from "@/shared/model/useUserStore";
-import { useOnboardingStore } from "@/features/onboarding/model/useOnboardingStore";
+import { useOnboardingStore } from "@/features/onboarding";
 
 const KakaoLogin = () => {
   const [searchParams] = useSearchParams();

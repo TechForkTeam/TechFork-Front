@@ -2,8 +2,8 @@ import type {
   InterestDataDto,
   InterestTypeDto,
   MyProfileType,
-} from "@/features/home/api/my.types";
-import { useEditTagStore } from "@/features/mypage/model/useEditTagStore";
+} from "@/shared/api/my.types";
+import { useEditTagStore } from "../model/useEditTagStore";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";

@@ -1,8 +1,8 @@
-import { MYPAGE_TAP } from "@/features/home/consts/tab";
-import { TabSelectList } from "@/features/home/ui/TabSelectList";
-import { useInfiniteActivityPosts } from "@/features/mypage/model/useInfiniteActivityPosts";
+import { MYPAGE_TAP } from "@/features/home";
+import { useInfiniteActivityPosts } from "@/features/mypage";
 import { CardItem } from "@/shared/ui/CardItem";
 import { Loading } from "@/shared/ui/Loading";
+import { TabSelectList } from "@/shared/ui/TabSelectList";
 import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 

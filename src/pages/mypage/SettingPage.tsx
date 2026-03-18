@@ -3,13 +3,15 @@ import type { LucideIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useGetMyProfile } from "@/shared/api/my";
-import { useThemeToggle } from "@/app/providers/useThemToggle";
+import { useThemeToggle } from "@/shared/lib/useThemeToggle";
 
 import { Helmet } from "react-helmet-async";
-import { ProfileHeader } from "@/features/mypage/ui/ProfileHeader";
-import { ProfileEditHeader } from "@/features/mypage/ui/ProfileEditHeader";
-import { SettingList } from "@/features/mypage/ui/SettingList";
-import { LeaveModal } from "@/features/mypage/ui/LeaveModal";
+import {
+  LeaveModal,
+  ProfileEditHeader,
+  ProfileHeader,
+  SettingList,
+} from "@/features/mypage";
 
 interface SettingItem {
   icon: LucideIcon;

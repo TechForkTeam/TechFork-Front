@@ -1,7 +1,7 @@
 import { RouterProvider } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
 import { cn } from "@/shared/lib/cn";
-import router from "@/routes";
+import router from "@/app/routes";
 import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
 
 function App() {

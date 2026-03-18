@@ -1,9 +1,9 @@
-import { getPostList } from "@/features/home/api/post";
-import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
+import { getPostList } from "../api/post";
+import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import type {
   PageParamType,
   PostResponseDto,
-} from "@/features/home/api/post.types";
+} from "../api/post.types";
 import {
   useSuspenseInfiniteQuery,
   type QueryFunctionContext,

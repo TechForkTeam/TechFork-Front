@@ -6,15 +6,17 @@ import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ClipLoader } from "react-spinners";
-import { useTagStore } from "@/features/onboarding/model/useTagStore";
-import { useOnboardingStore } from "@/features/onboarding/model/useOnboardingStore";
-import { useSubmitOnboarding } from "@/features/onboarding/api/onboarding";
-import { useThemeToggle } from "@/app/providers/useThemToggle";
-import { TAG, TAG_MAP } from "@/features/home/consts/tag";
+import {
+  OnboardingHeader,
+  useOnboardingStore,
+  useSubmitOnboarding,
+  useTagStore,
+} from "@/features/onboarding";
+import { TAG, TAG_MAP } from "@/shared/consts/tags";
+import { useThemeToggle } from "@/shared/lib/useThemeToggle";
 import { MultiSelectedTag } from "@/shared/ui/MultiSelectedTag";
 import { Button } from "@/shared/ui/button/Button";
 import { Helmet } from "react-helmet-async";
-import { OnboardingHeader } from "@/features/onboarding/ui/OnboardingHeader";
 
 const OnboardingTag = () => {
   const navigate = useNavigate();

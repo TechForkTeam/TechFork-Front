@@ -1,4 +1,4 @@
-import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
+import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useSuspenseQuery } from "@tanstack/react-query";

@@ -1,9 +1,8 @@
 import Apple from "@/assets/images/apple.png";
 import DarkApple from "@/assets/images/apple_dark.png";
 import Kakao from "@/assets/images/kakao.png";
-import { type OAuthProvider } from "@/features/Login/consts/oauth";
-import { getOAuthUrl } from "@/features/Login/lib/getOAuthUrl";
-import { useThemeToggle } from "@/app/providers/useThemToggle";
+import { getOAuthUrl, type OAuthProvider } from "@/features/Login";
+import { useThemeToggle } from "@/shared/lib/useThemeToggle";
 
 import clsx from "clsx";
 import { Helmet } from "react-helmet-async";

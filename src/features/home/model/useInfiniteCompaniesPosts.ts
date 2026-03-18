@@ -1,5 +1,5 @@
-import { getCompaniesPostList } from "@/features/home/api/post";
-import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
+import { getCompaniesPostList } from "../api/post";
+import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 interface UseInfiniteCompaniesPostsParams {

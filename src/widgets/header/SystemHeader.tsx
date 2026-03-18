@@ -5,14 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
 import Logout from "@/assets/icons/confirm.svg";
-import { useThemeToggle } from "@/app/providers/useThemToggle";
+import { useThemeToggle } from "@/shared/lib/useThemeToggle";
 import useUserStore from "@/shared/model/useUserStore";
-import { useCompanyStore } from "@/features/home/model/useCompanyStore";
+import { MYPAGE_NAV } from "@/features/mypage";
+import { useCompanyStore } from "@/features/home";
 import { useGetMyProfile } from "@/shared/api/my";
-import { postLogout } from "@/features/Login/api/auth";
+import { postLogout } from "@/features/Login";
 import { cn } from "@/shared/lib/cn";
 import { Button } from "@/shared/ui/button/Button";
-import { MYPAGE_NAV } from "@/features/mypage/consts/mypage";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();

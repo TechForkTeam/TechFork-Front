@@ -1,4 +1,4 @@
-import { TAG_CATEGORY_MAP, TAG_MAP } from "@/features/home/consts/tag";
+import { TAG_CATEGORY_MAP, TAG_MAP } from "../consts/tags";
 
 export function tagCodeToLabel(serverCategory: string, codes: string[]): string[] {
   const clientCategory =

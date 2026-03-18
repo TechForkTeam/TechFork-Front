@@ -1,35 +1,20 @@
-import type { OnboardingRequestType } from "@/features/onboarding/api/onboarding.types";
-import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
+import type { OnboardingRequestType } from "./onboarding.types";
 
-//회원가입
 export const postOnboarding = async (body: OnboardingRequestType) => {
   const res = await api.post(API_ENDPOINTS.onboarding.complete, body);
   return res.data;
 };
 
-//post
 export const useSubmitOnboarding = () => {
   const navigate = useNavigate();
+
   return useMutation({
     mutationFn: (body: OnboardingRequestType) => postOnboarding(body),
     onSuccess: () => navigate("/"),
     onError: err => console.log(err),
-  });
-};
-
-//회원탈퇴
-export const deleteAccount = async () => {
-  const { data } = await api.patch(API_ENDPOINTS.users.me.withdrawal);
-  return data;
-};
-
-export const useDeleteAccount = (onSuccess: () => void) => {
-  return useMutation({
-    mutationFn: deleteAccount,
-    onSuccess: () => onSuccess?.(),
-    onError: err => console.error(err),
   });
 };

@@ -2,7 +2,7 @@ import {
   getActivityPostList,
   type ActivityPostType,
 } from "@/shared/api/activity";
-import { MYPAGE_QUERY_KEY } from "@/features/mypage/consts/queryKeys";
+import { MYPAGE_QUERY_KEY } from "../consts/queryKeys";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 

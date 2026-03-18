@@ -1,4 +1,4 @@
-import { usePatchMyProfile } from "@/features/mypage/api/myEdit";
+import { usePatchMyProfile } from "../api/myEdit";
 import { Button } from "@/shared/ui/button/Button";
 import { InputField } from "@/shared/ui/InputField";
 import { useState } from "react";

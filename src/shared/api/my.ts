@@ -4,10 +4,10 @@ import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 import type {
   InterestResponseDto,
   InterestTypeDto,
-} from "@/features/home/api/my.types";
-import api from "@/shared/api/api";
-import { API_ENDPOINTS } from "@/shared/consts/endpoints";
-import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
+} from "./my.types";
+import api from "./api";
+import { API_ENDPOINTS } from "../consts/endpoints";
+import { SHARED_QUERY_KEY } from "../consts/queryKeys";
 
 // 내 프로필 조회 =>공통
 export const getMyProfile = async () => {

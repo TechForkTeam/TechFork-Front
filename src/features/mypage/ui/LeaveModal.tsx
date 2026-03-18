@@ -5,7 +5,7 @@ import CheckOff from "@/assets/icons/check_off.svg";
 import { useState } from "react";
 import useUserStore from "@/shared/model/useUserStore";
 import { Button } from "@/shared/ui/button/Button";
-import { useDeleteAccount } from "@/features/onboarding/api/onboarding";
+import { useDeleteAccount } from "@/shared/api/account";
 interface LeaveModalProps {
   onClose?: () => void;
 }

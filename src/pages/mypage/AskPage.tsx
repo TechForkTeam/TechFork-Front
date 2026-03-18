@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 
 import clsx from "clsx";
 import { useGetMyProfile } from "@/shared/api/my";
-import { useThemeToggle } from "@/app/providers/useThemToggle";
+import { useThemeToggle } from "@/shared/lib/useThemeToggle";
 import { InputField } from "@/shared/ui/InputField";
-import { ASK_MAP } from "@/features/mypage/consts/mypage";
+import { ASK_MAP, AskConfirmModal } from "@/features/mypage";
 import { Button } from "@/shared/ui/button/Button";
 import { Helmet } from "react-helmet-async";
-import { AskConfirmModal } from "@/features/mypage/ui/AskConfirmModal";
 
 const AskPage = () => {
   useEffect(() => {

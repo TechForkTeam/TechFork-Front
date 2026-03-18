@@ -1,8 +1,8 @@
-import { ThemeContext } from "@/app/providers/ThemeContext";
 import { useContext } from "react";
+import { ThemeContext } from "./ThemeContext";
 
 export const useThemeContext = () => {
   const context = useContext(ThemeContext);
-  if (!context) throw new Error("오류발생");
+  if (!context) throw new Error("Theme context is not available");
   return context;
 };

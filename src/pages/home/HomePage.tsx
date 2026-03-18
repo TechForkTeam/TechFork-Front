@@ -1,25 +1,32 @@
 import Alert from "@/assets/icons/alert2.svg";
-import { TAB_MAP } from "@/features/home/consts/tab";
+import {
+  CompanyFilterList,
+  PostCardList,
+  TAB_MAP,
+  useCompanyStore,
+  useGetCompany,
+  usePostRecommendPostList,
+} from "@/features/home";
 import { useDebounce } from "@/shared/lib/useDebounce";
-import { useGetCompany } from "@/features/home/api/company";
-import { usePostRecommendPostList } from "@/features/home/api/recommendation";
 
 import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
 import { Loading } from "@/shared/ui/Loading";
 import { SkeletonList } from "@/shared/ui/SkeletonList";
-import { useCompanyStore } from "@/features/home/model/useCompanyStore";
 import useUserStore from "@/shared/model/useUserStore";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { TabSelectList } from "@/features/home/ui/TabSelectList";
-import PostCardList from "@/features/home/ui/PostCardList";
-import { CompanyFilterList } from "@/features/home/ui/CompanyFilterList";
-// import InterestPage from "@/features/home/ui/InterestPage";
+import { TabSelectList } from "@/shared/ui/TabSelectList";
 
-const InterestPage = lazy(() => import("@/features/home/ui/InterestPage"));
-const SearchPostList = lazy(() => import("@/features/home/ui/SearchPostList"));
+const InterestPage = lazy(() =>
+  import("@/features/home").then(module => ({ default: module.InterestPage })),
+);
+const SearchPostList = lazy(() =>
+  import("@/features/home").then(module => ({
+    default: module.SearchPostList,
+  })),
+);
 
 const HomePage = () => {
   const [selectedTab, setSelectedTab] = useState(0);

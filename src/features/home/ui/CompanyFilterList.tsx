@@ -3,10 +3,10 @@ import clsx from "clsx";
 import type {
   CompanyResponseDto,
   CompanyType,
-} from "@/features/home/api/company.types";
-import { HomeCompanySelectBtn } from "@/features/home/ui/HomeCompanySelectBtn";
-import { CompanyItem } from "@/features/home/ui/CompanyItem";
-import { CompaniesModal } from "@/features/home/ui/CompaniesModal";
+} from "../api/company.types";
+import { CompaniesModal } from "./CompaniesModal";
+import { CompanyItem } from "./CompanyItem";
+import { HomeCompanySelectBtn } from "./HomeCompanySelectBtn";
 import { useMemo } from "react";
 
 interface CompanyFilterListProps {

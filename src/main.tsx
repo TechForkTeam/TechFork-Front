@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
+import "@/app/styles/index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "@/app/providers/ThemProvider.tsx";
 import { HelmetProvider } from "react-helmet-async";
+import App from "@/app/App";
 
 const queryClient = new QueryClient();
 

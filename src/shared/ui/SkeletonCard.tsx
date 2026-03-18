@@ -1,4 +1,4 @@
-import { useThemeToggle } from "@/app/providers/useThemToggle";
+import { useThemeToggle } from "../lib/useThemeToggle";
 import clsx from "clsx";
 
 export const SkeletonCard = () => {

@@ -1,11 +1,13 @@
-import { TAG_MAP } from "@/features/home/consts/tag";
-import { tagCodeToLabel } from "@/features/home/lib/tagCodeToLabel";
-import { usePutMyInterst } from "@/features/mypage/api/myEdit";
-import { INTERESTS_MOCK } from "@/features/mypage/consts/interests";
-import { useEditTagStore } from "@/features/mypage/model/useEditTagStore";
-import { InterstBtn } from "@/features/mypage/ui/IntersetBtn";
-import { TagItem } from "@/features/mypage/ui/TagItem";
-import { TechSelection } from "@/features/mypage/ui/TechSelection";
+import { TAG_MAP } from "@/shared/consts/tags";
+import { tagCodeToLabel } from "@/shared/lib/tagCodeToLabel";
+import {
+  INTERESTS_MOCK,
+  InterstBtn,
+  TagItem,
+  TechSelection,
+  useEditTagStore,
+  usePutMyInterst,
+} from "@/features/mypage";
 import { useGetMyInterest } from "@/shared/api/my";
 import { cn } from "@/shared/lib/cn";
 

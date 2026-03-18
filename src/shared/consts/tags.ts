@@ -51,14 +51,12 @@ export const TAG_MAP = {
     { code: "UIKIT", label: "UIKit" },
     { code: "XCODE", label: "Xcode" },
   ],
-
   Android: [
     { code: "KOTLIN", label: "Kotlin" },
     { code: "ANDROID_JAVA", label: "Java" },
     { code: "JETPACK_COMPOSE", label: "Jetpack Compose" },
     { code: "ANDROID_STUDIO", label: "Android Studio" },
   ],
-
   Frontend: [
     { code: "REACT", label: "React" },
     { code: "VUE_JS", label: "Vue.js" },
@@ -66,7 +64,6 @@ export const TAG_MAP = {
     { code: "JAVASCRIPT", label: "JavaScript" },
     { code: "TYPESCRIPT", label: "TypeScript" },
   ],
-
   Backend: [
     { code: "JAVA", label: "Java" },
     { code: "SPRING", label: "Spring" },
@@ -74,14 +71,12 @@ export const TAG_MAP = {
     { code: "PYTHON", label: "Python" },
     { code: "DJANGO", label: "Django" },
   ],
-
   Data_Engineering: [
     { code: "APACHE_SPARK", label: "Apache Spark" },
     { code: "APACHE_KAFKA", label: "Apache Kafka" },
     { code: "AIRFLOW", label: "Airflow" },
     { code: "ETL", label: "ETL" },
   ],
-
   Data_Science: [
     { code: "DS_PYTHON", label: "Python" },
     { code: "PANDAS", label: "Pandas" },
@@ -89,7 +84,6 @@ export const TAG_MAP = {
     { code: "JUPYTER", label: "Jupyter" },
     { code: "SQL", label: "SQL" },
   ],
-
   Database: [
     { code: "MYSQL", label: "MySQL" },
     { code: "POSTGRESQL", label: "PostgreSQL" },
@@ -97,14 +91,12 @@ export const TAG_MAP = {
     { code: "REDIS", label: "Redis" },
     { code: "ORACLE", label: "Oracle" },
   ],
-
   AI_ML: [
     { code: "TENSORFLOW", label: "TensorFlow" },
     { code: "PYTORCH", label: "PyTorch" },
     { code: "MACHINE_LEARNING", label: "Machine Learning" },
     { code: "DEEP_LEARNING", label: "Deep Learning" },
   ],
-
   DevOps: [
     { code: "DOCKER", label: "Docker" },
     { code: "KUBERNETES", label: "Kubernetes" },
@@ -112,49 +104,42 @@ export const TAG_MAP = {
     { code: "CI_CD", label: "CI/CD" },
     { code: "JENKINS", label: "Jenkins" },
   ],
-
   Cloud: [
     { code: "AWS", label: "AWS" },
     { code: "AZURE", label: "Azure" },
     { code: "GCP", label: "GCP" },
     { code: "FIREBASE", label: "Firebase" },
   ],
-
   Systems_OS: [
     { code: "LINUX", label: "Linux" },
     { code: "UNIX", label: "Unix" },
     { code: "WINDOWS_SERVER", label: "Windows Server" },
     { code: "SYSTEM_PROGRAMMING", label: "시스템 프로그래밍" },
   ],
-
   Networking: [
     { code: "TCP_IP", label: "TCP/IP" },
     { code: "HTTP_HTTPS", label: "HTTP/HTTPS" },
     { code: "RESTFUL_API", label: "RESTful API" },
     { code: "WEBSOCKET", label: "WebSocket" },
   ],
-
   Security: [
     { code: "NETWORK_SECURITY", label: "네트워크 보안" },
     { code: "WEB_SECURITY", label: "웹 보안" },
     { code: "ENCRYPTION", label: "암호화" },
     { code: "AUTHENTICATION", label: "인증" },
   ],
-
   Game_Dev: [
     { code: "UNITY", label: "Unity" },
     { code: "UNREAL_ENGINE", label: "Unreal Engine" },
     { code: "GAME_CSHARP", label: "C#" },
     { code: "GAME_CPP", label: "C++" },
   ],
-
   AR_VR_XR: [
     { code: "ARKIT", label: "ARKit" },
     { code: "REALITYKIT", label: "RealityKit" },
     { code: "UNITY_AR", label: "Unity AR" },
     { code: "VR_DEVELOPMENT", label: "VR Development" },
   ],
-
   Embedded_IoT: [
     { code: "C", label: "C" },
     { code: "CPP", label: "C++" },
@@ -162,7 +147,6 @@ export const TAG_MAP = {
     { code: "RASPBERRY_PI", label: "Raspberry Pi" },
     { code: "RTOS", label: "RTOS" },
   ],
-
   Blockchain_Web3: [
     { code: "ETHEREUM", label: "이더리움" },
     { code: "SMART_CONTRACT", label: "스마트 컨트랙트" },
@@ -173,21 +157,18 @@ export const TAG_MAP = {
     { code: "NFT", label: "NFT" },
     { code: "CRYPTOCURRENCY", label: "암호화폐" },
   ],
-
   QA_Test: [
     { code: "JUNIT", label: "JUnit" },
     { code: "SELENIUM", label: "Selenium" },
     { code: "TEST_AUTOMATION", label: "Test Automation" },
     { code: "TDD", label: "TDD" },
   ],
-
   Product_UX: [
     { code: "FIGMA", label: "Figma" },
     { code: "SKETCH", label: "Sketch" },
     { code: "ADOBE_XD", label: "Adobe XD" },
     { code: "PROTOTYPING", label: "프로토타이핑" },
   ],
-
   Architecture: [
     { code: "MICROSERVICES", label: "Microservices" },
     { code: "DDD", label: "DDD" },

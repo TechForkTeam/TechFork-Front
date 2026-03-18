@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateBookmarkState } from "@/features/home/lib/updateBookmarkState";
-import type { ReadPostType } from "@/features/home/api/post.types";
-import api from "@/shared/api/api";
-import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
+import type { ActivityPostType, ReadPostType } from "./activity.types";
+import api from "./api";
+import { SHARED_QUERY_KEY } from "../consts/queryKeys";
+import { updateBookmarkState } from "../lib/updateBookmarkState";
 import {
   API_ENDPOINTS,
   getActivityPostsEndpoint,
-} from "@/shared/consts/endpoints";
+} from "../consts/endpoints";
 
-export type ActivityPostType = "bookmark" | "read";
+export type { ActivityPostType };
 
 export const postBookmark = async (postId: number) => {
   const { data } = await api.post(API_ENDPOINTS.activities.bookmarks, {

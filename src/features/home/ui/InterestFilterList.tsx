@@ -1,6 +1,6 @@
 import { SelectionBtn } from "@/shared/ui/select-button/SelectionBtn";
-import type { InterestTypeDto } from "@/features/home/api/my.types";
-import { tagCodeToLabel } from "@/features/home/lib/tagCodeToLabel";
+import type { InterestTypeDto } from "@/shared/api/my.types";
+import { tagCodeToLabel } from "@/shared/lib/tagCodeToLabel";
 import { RotateCcw } from "lucide-react";
 
 interface InterestFilterListProps {

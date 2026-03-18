@@ -2,12 +2,11 @@ import { useNavigate } from "react-router-dom";
 
 import { Check } from "lucide-react";
 import clsx from "clsx";
-import { useOnboardingStore } from "@/features/onboarding/model/useOnboardingStore";
+import { OnboardingHeader, useOnboardingStore } from "@/features/onboarding";
 import { InputField } from "@/shared/ui/InputField";
 import { Button } from "@/shared/ui/button/Button";
 import { cn } from "@/shared/lib/cn";
 import { Helmet } from "react-helmet-async";
-import { OnboardingHeader } from "@/features/onboarding/ui/OnboardingHeader";
 
 const Onboarding = () => {
   const navigate = useNavigate();

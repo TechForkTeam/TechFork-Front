@@ -3,10 +3,7 @@
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 
-export const postRefreshToken = async () => {
-  const { data } = await api.post(API_ENDPOINTS.auth.refresh);
-  return data.data.accessToken;
-};
+export { postRefreshToken } from "@/shared/api/auth";
 
 //로그아웃,쿠키
 export const postLogout = async () => {

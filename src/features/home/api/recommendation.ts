@@ -1,5 +1,5 @@
 import api from "@/shared/api/api";
-import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
+import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";

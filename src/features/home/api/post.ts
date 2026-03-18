@@ -2,7 +2,7 @@
 
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
-import type { PostResponseDto } from "@/features/home/api/post.types";
+import type { PostResponseDto } from "./post.types";
 
 export interface GetPostListParams {
   sortBy: "LATEST" | "POPULAR";

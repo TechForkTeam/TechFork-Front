@@ -1,7 +1,7 @@
 //통합 검색
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import type { SearchType } from "@/features/home/api/search.types";
-import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
+import type { SearchType } from "./search.types";
+import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 

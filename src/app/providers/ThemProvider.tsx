@@ -1,5 +1,5 @@
-import { ThemeContext } from "@/app/providers/ThemeContext";
-import { THEME, THEME_STORAGE_KEY, type Theme } from "@/app/providers/theme";
+import { THEME, THEME_STORAGE_KEY, type Theme } from "@/shared/config/theme";
+import { ThemeContext } from "@/shared/lib/ThemeContext";
 import { useEffect, useState, type PropsWithChildren } from "react";
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {

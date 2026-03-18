@@ -1,5 +1,5 @@
-import { InterestFilterList } from "@/features/home/ui/InterestFilterList";
-import PostCardList from "@/features/home/ui/PostCardList";
+import { InterestFilterList } from "./InterestFilterList";
+import PostCardList from "./PostCardList";
 import { useGetMyInterest } from "@/shared/api/my";
 
 import { SkeletonList } from "@/shared/ui/SkeletonList";

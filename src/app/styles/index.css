@@ -1,7 +1,7 @@
 @import "tailwindcss";
-@import "./app/styles/color.css";
-@import "./app/styles/fonts.css";
-@import "./app/styles/theme/dark.css";
+@import "../styles/color.css";
+@import "../styles/fonts.css";
+@import "../styles/theme/dark.css";
 
 @theme {
   --color-kakao: #fee500;

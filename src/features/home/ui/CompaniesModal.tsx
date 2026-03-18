@@ -1,6 +1,6 @@
-import { CompanyModalItem } from "@/features/home/ui/CompanyModalItem";
-import { useCompanyStore } from "@/features/home/model/useCompanyStore";
-import type { CompanyResponseDto } from "@/features/home/api/company.types";
+import type { CompanyResponseDto } from "../api/company.types";
+import { useCompanyStore } from "../model/useCompanyStore";
+import { CompanyModalItem } from "./CompanyModalItem";
 import { useEffect, useRef } from "react";
 
 interface CompaniesModalProps {
@@ -20,7 +20,7 @@ export const CompaniesModal = ({ companyData }: CompaniesModalProps) => {
     }
   }, [companies]);
 
-  console.log(companies);
+  // console.log(companies);
   return (
     <section
       className="relative h-130 w-125  shadow-ds100 rounded-2xl overflow-hidden bg-primary z-250"

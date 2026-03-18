@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useThemeToggle } from "@/app/providers/useThemToggle";
+import { useThemeToggle } from "@/shared/lib/useThemeToggle";
 import { cn } from "@/shared/lib/cn";
 
 interface HeaderProps {
