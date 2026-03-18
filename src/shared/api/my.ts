@@ -7,6 +7,7 @@ import type {
 } from "@/features/home/api/my.types";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
+import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 
 // 내 프로필 조회 =>공통
 export const getMyProfile = async () => {
@@ -16,7 +17,7 @@ export const getMyProfile = async () => {
 
 export const useGetMyProfile = (enabled?: boolean) => {
   return useQuery({
-    queryKey: ["my", "profile"],
+    queryKey: [SHARED_QUERY_KEY.MY, SHARED_QUERY_KEY.MY_PROFILE],
     queryFn: getMyProfile,
     select: res => res.data,
     enabled,
@@ -31,7 +32,7 @@ export const getMyInterest = async () => {
 
 export const useGetMyInterest = () => {
   return useSuspenseQuery<InterestResponseDto, Error, InterestTypeDto[]>({
-    queryKey: ["my", "interest"],
+    queryKey: [SHARED_QUERY_KEY.MY, SHARED_QUERY_KEY.MY_INTEREST],
     queryFn: getMyInterest,
     select: res => res.data.interests,
   });

@@ -1,6 +1,7 @@
 //통합 검색
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import type { SearchType } from "@/features/home/api/search.types";
+import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 
@@ -11,7 +12,7 @@ export const getSearchPost = async (query: string) => {
 
 export const useGetSearchPost = (query: string) => {
   return useSuspenseQuery({
-    queryKey: ["posts", "search", query],
+    queryKey: [HOME_QUERY_KEY.POSTS, HOME_QUERY_KEY.POSTS_SEARCH, query],
     queryFn: () => getSearchPost(query),
     select: res => res.data,
   });

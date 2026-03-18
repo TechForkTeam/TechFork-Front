@@ -1,4 +1,5 @@
 import { getCompaniesPostList } from "@/features/home/api/post";
+import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 interface UseInfiniteCompaniesPostsParams {
@@ -11,7 +12,11 @@ export const useInfiniteCompaniesPosts = ({
   size = 20,
 }: UseInfiniteCompaniesPostsParams) => {
   return useSuspenseInfiniteQuery({
-    queryKey: ["posts", "companies", companies],
+    queryKey: [
+      HOME_QUERY_KEY.POSTS,
+      HOME_QUERY_KEY.POSTS_COMPANIES,
+      companies,
+    ] as const,
     queryFn: ({ pageParam }) =>
       getCompaniesPostList({
         companies,

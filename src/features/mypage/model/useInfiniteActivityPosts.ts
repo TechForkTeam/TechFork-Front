@@ -2,11 +2,17 @@ import {
   getActivityPostList,
   type ActivityPostType,
 } from "@/shared/api/activity";
+import { MYPAGE_QUERY_KEY } from "@/features/mypage/consts/queryKeys";
+import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
 export const useInfiniteActivityPosts = (type: ActivityPostType, size = 20) => {
   return useSuspenseInfiniteQuery({
-    queryKey: ["posts", "activity", type],
+    queryKey: [
+      SHARED_QUERY_KEY.POSTS,
+      MYPAGE_QUERY_KEY.POSTS_ACTIVITY,
+      type,
+    ] as const,
 
     queryFn: ({ pageParam }) =>
       getActivityPostList(type, {

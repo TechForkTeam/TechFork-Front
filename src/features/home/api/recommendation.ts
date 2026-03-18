@@ -1,4 +1,6 @@
 import api from "@/shared/api/api";
+import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
+import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -10,7 +12,11 @@ export const getRecommendPostList = async () => {
 
 export const useGetRecommendPostList = (isLogin: boolean) => {
   return useQuery({
-    queryKey: ["posts", "my", "recommend"],
+    queryKey: [
+      HOME_QUERY_KEY.POSTS,
+      SHARED_QUERY_KEY.MY,
+      HOME_QUERY_KEY.POSTS_RECOMMEND,
+    ],
     queryFn: getRecommendPostList,
     select: res => res.data,
     enabled: isLogin,
@@ -25,22 +31,28 @@ export const postRecommendList = async () => {
 
 export const usePostRecommendPostList = () => {
   const queryClient = useQueryClient();
+  const queryKey = [
+    HOME_QUERY_KEY.POSTS,
+    SHARED_QUERY_KEY.MY,
+    HOME_QUERY_KEY.POSTS_RECOMMEND,
+  ] as const;
+
   return useMutation({
     mutationFn: postRecommendList,
 
     onMutate: async () => {
       await queryClient.cancelQueries({
-        queryKey: ["posts", "my", "recommend"],
+        queryKey,
       });
-      const prev = queryClient.getQueryData(["posts", "my", "recommend"]);
+      const prev = queryClient.getQueryData(queryKey);
       queryClient.removeQueries({
-        queryKey: ["posts", "my", "recommend"],
+        queryKey,
         exact: true,
       });
       return { prev };
     },
     onError: (_err, _var, ctx) => {
-      queryClient.setQueryData(["posts", "my", "recommend"], ctx?.prev);
+      queryClient.setQueryData(queryKey, ctx?.prev);
     },
   });
 };

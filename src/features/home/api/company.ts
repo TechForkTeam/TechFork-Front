@@ -1,3 +1,4 @@
+import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ export const getCompanyList = async () => {
 export const useGetCompany = () => {
   return useSuspenseQuery({
     queryFn: getCompanyList,
-    queryKey: ["company"],
+    queryKey: [HOME_QUERY_KEY.COMPANY],
     select: res => res.data,
   });
 };

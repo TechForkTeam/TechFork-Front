@@ -1,4 +1,5 @@
 import { getPostList } from "@/features/home/api/post";
+import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
 import type {
   PageParamType,
   PostResponseDto,
@@ -21,13 +22,16 @@ export const useInfinitePosts = ({
     PostResponseDto,
     Error,
     PostResponseDto[],
-    ["posts", typeof sortBy],
+    readonly [typeof HOME_QUERY_KEY.POSTS, "LATEST" | "POPULAR"],
     PageParamType
   >({
-    queryKey: ["posts", sortBy],
+    queryKey: [HOME_QUERY_KEY.POSTS, sortBy] as const,
     queryFn: ({
       pageParam,
-    }: QueryFunctionContext<["posts", typeof sortBy], PageParamType>) =>
+    }: QueryFunctionContext<
+      readonly [typeof HOME_QUERY_KEY.POSTS, "LATEST" | "POPULAR"],
+      PageParamType
+    >) =>
       getPostList({
         sortBy,
         size,

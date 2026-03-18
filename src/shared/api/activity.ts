@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBookmarkState } from "@/features/home/lib/updateBookmarkState";
 import type { ReadPostType } from "@/features/home/api/post.types";
 import api from "@/shared/api/api";
+import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import {
   API_ENDPOINTS,
   getActivityPostsEndpoint,
@@ -18,24 +19,26 @@ export const postBookmark = async (postId: number) => {
 
 export const usePostBookmark = () => {
   const queryClient = useQueryClient();
+  const postsQueryKey = [SHARED_QUERY_KEY.POSTS] as const;
 
   return useMutation({
     mutationFn: (postId: number) => postBookmark(postId),
     onMutate: async postId => {
-      await queryClient.cancelQueries({ queryKey: ["posts"] });
+      await queryClient.cancelQueries({ queryKey: postsQueryKey });
 
       const previousQueries = queryClient.getQueriesData({
-        queryKey: ["posts"],
+        queryKey: postsQueryKey,
       });
 
       queryClient.setQueriesData(
-        { queryKey: ["posts"], exact: false },
+        { queryKey: postsQueryKey, exact: false },
         (old: any) => updateBookmarkState(old, postId, true),
       );
 
       return { previousQueries };
     },
-    onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+    onError: () =>
+      queryClient.invalidateQueries({ queryKey: postsQueryKey }),
   });
 };
 
@@ -48,23 +51,25 @@ export const deleteBookmark = async (postId: number) => {
 
 export const useDeleteBookmark = () => {
   const queryClient = useQueryClient();
+  const postsQueryKey = [SHARED_QUERY_KEY.POSTS] as const;
 
   return useMutation({
     mutationFn: (postId: number) => deleteBookmark(postId),
     onMutate: async postId => {
-      await queryClient.cancelQueries({ queryKey: ["posts"] });
+      await queryClient.cancelQueries({ queryKey: postsQueryKey });
 
       const previousQueries = queryClient.getQueriesData({
-        queryKey: ["posts"],
+        queryKey: postsQueryKey,
       });
       queryClient.setQueriesData(
-        { queryKey: ["posts"], exact: false },
+        { queryKey: postsQueryKey, exact: false },
         (old: any) => updateBookmarkState(old, postId, false),
       );
 
       return { previousQueries };
     },
-    onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+    onError: () =>
+      queryClient.invalidateQueries({ queryKey: postsQueryKey }),
   });
 };
 
@@ -96,12 +101,13 @@ export const postReadPosts = async (body: ReadPostType) => {
 
 export const usePostReadPost = () => {
   const queryClient = useQueryClient();
+  const postsReadQueryKey = [SHARED_QUERY_KEY.POSTS, SHARED_QUERY_KEY.POSTS_READ] as const;
 
   return useMutation({
     mutationFn: (body: ReadPostType) => postReadPosts(body),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["posts", "read"],
+        queryKey: postsReadQueryKey,
       });
     },
     onError: err => console.log(err),

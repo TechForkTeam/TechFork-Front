@@ -6,6 +6,7 @@ import type {
 import { useEditTagStore } from "@/features/mypage/model/useEditTagStore";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
+import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // 내 관심사 수정 =>mypage
@@ -16,7 +17,7 @@ export const putMyInterst = async (body: InterestDataDto) => {
 
 export const usePutMyInterst = () => {
   const queryClient = useQueryClient();
-  const queryKey = ["my", "interest"];
+  const queryKey = [SHARED_QUERY_KEY.MY, SHARED_QUERY_KEY.MY_INTEREST] as const;
 
   return useMutation({
     mutationFn: (body: InterestDataDto) => putMyInterst(body),
@@ -55,12 +56,13 @@ export const patchMyProfile = async (body: MyProfileType) => {
 
 export const usePatchMyProfile = (onSuccess?: () => void) => {
   const queryClient = useQueryClient();
+  const queryKey = [SHARED_QUERY_KEY.MY, SHARED_QUERY_KEY.MY_PROFILE] as const;
 
   return useMutation({
     mutationFn: patchMyProfile,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["my", "profile"],
+        queryKey,
       });
       onSuccess?.();
     },
