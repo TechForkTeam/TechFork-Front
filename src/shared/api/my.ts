@@ -6,10 +6,11 @@ import type {
   InterestTypeDto,
 } from "@/features/home/types/my";
 import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/constants/endpoints";
 
 // 내 프로필 조회 =>공통
 export const getMyProfile = async () => {
-  const { data } = await api.get("/api/v1/users/me/profile");
+  const { data } = await api.get(API_ENDPOINTS.users.me.profile);
   return data;
 };
 
@@ -24,7 +25,7 @@ export const useGetMyProfile = (enabled?: boolean) => {
 
 //내 관심사 조회  =>공통
 export const getMyInterest = async () => {
-  const { data } = await api.get("/api/v1/users/me/interests");
+  const { data } = await api.get(API_ENDPOINTS.users.me.interests);
   return data;
 };
 

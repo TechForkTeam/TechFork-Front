@@ -1,6 +1,7 @@
 // 최근 게시글 , 인기있는 게시글
 
 import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/constants/endpoints";
 import type { PostResponseDto } from "@/features/home/types/post";
 
 export interface GetPostListParams {
@@ -13,7 +14,7 @@ export interface GetPostListParams {
 export const getPostList = async (
   params: GetPostListParams,
 ): Promise<PostResponseDto> => {
-  const res = await api.get("/api/v2/posts/recent", {
+  const res = await api.get(API_ENDPOINTS.posts.recent, {
     params,
   });
 
@@ -31,7 +32,7 @@ export interface GetCompaniesPostListParams {
 export const getCompaniesPostList = async (
   params: GetCompaniesPostListParams,
 ): Promise<PostResponseDto> => {
-  const res = await api.get("/api/v2/posts/by-company", {
+  const res = await api.get(API_ENDPOINTS.posts.byCompany, {
     params,
   });
 

@@ -5,11 +5,12 @@ import type {
 } from "@/features/home/types/my";
 import { useEditTagStore } from "@/features/mypage/model/useEditTagStore";
 import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/constants/endpoints";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // 내 관심사 수정 =>mypage
 export const putMyInterst = async (body: InterestDataDto) => {
-  const { data } = await api.put("/api/v1/users/me/interests", body);
+  const { data } = await api.put(API_ENDPOINTS.users.me.interests, body);
   return data;
 };
 
@@ -48,7 +49,7 @@ export const usePutMyInterst = () => {
 //내프로필 수정 =>마페
 
 export const patchMyProfile = async (body: MyProfileType) => {
-  const { data } = await api.patch("/api/v1/users/me/profile", body);
+  const { data } = await api.patch(API_ENDPOINTS.users.me.profile, body);
   return data;
 };
 

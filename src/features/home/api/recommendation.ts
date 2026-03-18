@@ -1,9 +1,10 @@
 import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/constants/endpoints";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 //추천 게시글 조회
 export const getRecommendPostList = async () => {
-  const { data } = await api.get("/api/v1/recommendations");
+  const { data } = await api.get(API_ENDPOINTS.recommendations.list);
   return data;
 };
 
@@ -18,7 +19,7 @@ export const useGetRecommendPostList = (isLogin: boolean) => {
 
 //추천 새로고침
 export const postRecommendList = async () => {
-  const { data } = await api.post("/api/v1/recommendations/regenerate");
+  const { data } = await api.post(API_ENDPOINTS.recommendations.regenerate);
   return data;
 };
 

@@ -1,11 +1,12 @@
 import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/constants/endpoints";
 import type { OnboardingRequestType } from "@/features/onboarding/types/onboarding";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 //회원가입
 export const postOnboarding = async (body: OnboardingRequestType) => {
-  const res = await api.post("/api/v1/onboarding/complete", body);
+  const res = await api.post(API_ENDPOINTS.onboarding.complete, body);
   return res.data;
 };
 
@@ -21,7 +22,7 @@ export const useSubmitOnboarding = () => {
 
 //회원탈퇴
 export const deleteAccount = async () => {
-  const { data } = await api.patch("/api/v1/users/me/withdrawal");
+  const { data } = await api.patch(API_ENDPOINTS.users.me.withdrawal);
   return data;
 };
 

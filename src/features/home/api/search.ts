@@ -2,9 +2,10 @@
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import type { SearchType } from "@/features/home/types/search";
 import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/constants/endpoints";
 
 export const getSearchPost = async (query: string) => {
-  const { data } = await api.get("/api/v1/search", { params: { query } });
+  const { data } = await api.get(API_ENDPOINTS.search, { params: { query } });
   return data;
 };
 
@@ -18,7 +19,7 @@ export const useGetSearchPost = (query: string) => {
 
 //검색 히스토리 저장
 export const searchHistory = async (body: SearchType) => {
-  const { data } = await api.post("/api/v1/activities/searches", body);
+  const { data } = await api.post(API_ENDPOINTS.activities.searches, body);
   return data;
 };
 

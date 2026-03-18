@@ -1,16 +1,18 @@
-//사용자 활동 api
-
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateBookmarkState } from "@/features/home/model/queryUpdata";
 import type { ReadPostType } from "@/features/home/types/post";
 import api from "@/shared/api/api";
+import {
+  API_ENDPOINTS,
+  getActivityPostsEndpoint,
+} from "@/shared/constants/endpoints";
 
-//무한스크롤
 export type ActivityPostType = "bookmark" | "read";
 
-// 북마크 추가
 export const postBookmark = async (postId: number) => {
-  const { data } = await api.post("/api/v1/activities/bookmarks", { postId });
+  const { data } = await api.post(API_ENDPOINTS.activities.bookmarks, {
+    postId,
+  });
   return data;
 };
 
@@ -20,10 +22,8 @@ export const usePostBookmark = () => {
   return useMutation({
     mutationFn: (postId: number) => postBookmark(postId),
     onMutate: async postId => {
-      //post로 시작하는 query모두 취소
       await queryClient.cancelQueries({ queryKey: ["posts"] });
 
-      //복구위한 데이터 백업
       const previousQueries = queryClient.getQueriesData({
         queryKey: ["posts"],
       });
@@ -36,13 +36,11 @@ export const usePostBookmark = () => {
       return { previousQueries };
     },
     onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
-    // onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
 
-//북마크 제거
 export const deleteBookmark = async (postId: number) => {
-  const { data } = await api.delete("/api/v1/activities/bookmarks", {
+  const { data } = await api.delete(API_ENDPOINTS.activities.bookmarks, {
     data: { postId },
   });
   return data;
@@ -67,7 +65,6 @@ export const useDeleteBookmark = () => {
       return { previousQueries };
     },
     onError: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
-    // onSettled: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
   });
 };
 
@@ -77,39 +74,32 @@ export type UseInfiniteActivityPostsParams = {
   size: number;
 };
 
-//읽은게시글 + 북마크 목록 통합
 export const getActivityPostList = async (
   type: ActivityPostType,
   { pageParam, size }: { pageParam?: number; size: number },
 ) => {
-  const url =
-    type === "bookmark"
-      ? "/api/v1/activities/bookmarks"
-      : "/api/v1/activities/read-posts";
-
   const params = {
     size,
     ...(pageParam !== undefined && {
       [type === "bookmark" ? "lastBookmarkId" : "lastReadPostId"]: pageParam,
     }),
   };
-  const { data } = await api.get(url, { params });
+
+  const { data } = await api.get(getActivityPostsEndpoint(type), { params });
   return data;
 };
 
-//읽은 게시글 저장
-
 export const postReadPosts = async (body: ReadPostType) => {
-  const { data } = await api.post("/api/v1/activities/read-posts", body);
+  const { data } = await api.post(API_ENDPOINTS.activities.readPosts, body);
   return data;
 };
 
 export const usePostReadPost = () => {
   const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (body: ReadPostType) => postReadPosts(body),
     onSuccess: () => {
-      console.log("읽은 게시글 저장");
       queryClient.invalidateQueries({
         queryKey: ["posts", "read"],
       });
