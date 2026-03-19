@@ -82,6 +82,7 @@ const EditInterestPage = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
         <title>관심사 수정 | TechFork</title>
         <meta property="og:title" content="관심사 설정 | TechFork" />
         <meta

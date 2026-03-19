@@ -64,6 +64,7 @@ const SettingPage = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
         <title>계정 설정 | TechFork</title>
         <meta property="og:title" content="계정 설정 | TechFork" />
         <meta

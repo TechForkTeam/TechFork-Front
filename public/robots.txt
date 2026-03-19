@@ -1,3 +1,13 @@
 User-agent: *
 Allow: /
+
+Disallow: /login
+Disallow: /auth/callback
+Disallow: /onboarding
+Disallow: /onboarding/tag
+Disallow: /edit
+Disallow: /interested
+Disallow: /setting
+Disallow: /ask
+
 Sitemap: https://techfork-fe.vercel.app/sitemap.xml

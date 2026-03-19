@@ -42,6 +42,7 @@ const MyIntersListPage = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
         <title>내 활동 | TechFork</title>
         <meta property="og:title" content="내 활동 | TechFork" />
         <meta

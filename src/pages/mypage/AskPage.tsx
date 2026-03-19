@@ -48,6 +48,7 @@ const AskPage = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
         <title>문의하기 | TechFork</title>
         <meta property="og:title" content="문의하기 | TechFork" />
         <meta

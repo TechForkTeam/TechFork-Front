@@ -16,6 +16,7 @@ const LoginPage = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
         <title>로그인 하기 | TechFork</title>
         <meta property="og:title" content="로그인 | TechFork" />
         <meta

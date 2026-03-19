@@ -67,6 +67,7 @@ const OnboardingTag = () => {
   return (
     <>
       <Helmet>
+        <meta name="robots" content="noindex, nofollow" />
         <title>회원가입 | TechFork</title>
         <meta property="og:title" content="회원가입 | TechFork" />
         <meta
