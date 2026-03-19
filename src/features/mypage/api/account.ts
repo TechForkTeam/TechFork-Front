@@ -1,6 +1,6 @@
+import api from "@/shared/api/api";
+import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { useMutation } from "@tanstack/react-query";
-import api from "../../../shared/api/api";
-import { API_ENDPOINTS } from "../../../shared/consts/endpoints";
 
 export const deleteAccount = async () => {
   const { data } = await api.patch(API_ENDPOINTS.users.me.withdrawal);
