@@ -3,6 +3,7 @@ import type { ActivityPostType, ReadPostType } from "./activity.types";
 import api from "./api";
 import { SHARED_QUERY_KEY } from "../consts/queryKeys";
 import { updateBookmarkState } from "../lib/updateBookmarkState";
+import { updateReadPostState } from "../lib/updateReadPostState";
 import {
   API_ENDPOINTS,
   getActivityPostsEndpoint,
@@ -101,15 +102,32 @@ export const postReadPosts = async (body: ReadPostType) => {
 
 export const usePostReadPost = () => {
   const queryClient = useQueryClient();
-  const postsReadQueryKey = [SHARED_QUERY_KEY.POSTS, SHARED_QUERY_KEY.POSTS_READ] as const;
+  const postsQueryKey = [SHARED_QUERY_KEY.POSTS] as const;
 
   return useMutation({
     mutationFn: (body: ReadPostType) => postReadPosts(body),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: postsReadQueryKey,
+    onMutate: async ({ postId }) => {
+      await queryClient.cancelQueries({ queryKey: postsQueryKey });
+
+      const previousQueries = queryClient.getQueriesData({
+        queryKey: postsQueryKey,
+      });
+
+      queryClient.setQueriesData(
+        { queryKey: postsQueryKey, exact: false },
+        (old: any) => updateReadPostState(old, postId),
+      );
+
+      return { previousQueries };
+    },
+    onError: (err, _variables, context) => {
+      console.log(err);
+      context?.previousQueries?.forEach(([queryKey, data]) => {
+        queryClient.setQueryData(queryKey, data);
       });
     },
-    onError: err => console.log(err),
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: postsQueryKey });
+    },
   });
 };

@@ -5,10 +5,7 @@ import { CardItem } from "@/shared/ui/CardItem";
 import { Loading } from "@/shared/ui/Loading";
 import { useCompanyStore } from "../model/useCompanyStore";
 import useUserStore from "@/shared/model/useUserStore";
-import type {
-  CardItemProps,
-  PostResponseDto,
-} from "../api/post.types";
+import type { CardItemProps, PostResponseDto } from "../api/post.types";
 import { useRef, useEffect } from "react";
 
 interface PostCardListProps {
@@ -51,18 +48,13 @@ const PostCardList = ({ selectedTab }: PostCardListProps) => {
           (page: PostResponseDto) => page.data.posts,
         ) ?? []);
 
-  // console.log(posts);
-
   return (
     <>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {posts.map((item: CardItemProps) => (
-          <CardItem
-            key={item.id || item.postId}
-            {...item}
-            id={selectedTab === 1 ? item.postId : item.id}
-          />
-        ))}
+        {posts.map((item: CardItemProps) => {
+          const postId = item.postId ?? item.id;
+          return <CardItem key={postId} {...item} id={postId} />;
+        })}
       </ul>
       {activeQuery?.isFetchingNextPage && <Loading />}
       {selectedTab !== 1 && <div ref={infiniteRef} className="h-10 w-full" />}
