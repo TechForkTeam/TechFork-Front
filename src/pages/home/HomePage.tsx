@@ -72,13 +72,22 @@ const HomePage = () => {
       <Helmet>
         <title>
           {isSearching
-            ? `"${debouncedInput}" 검색 결과 | TechFork`
-            : `${TAB_MAP[selectedTab]} | TechFork`}
+            ? `"${debouncedInput}" | TechFork`
+            : `TechFork | ${TAB_MAP[selectedTab]}`}
         </title>
-        <meta property="og:title" content="기업 테크 블로그 모음 | TechFork" />
+        <meta property="og:title" content="TechFork | 기업 기술 블로그 모음" />
         <meta
           property="og:description"
-          content="네이버, 카카오, 토스 등 최신 기술 아티클을 한눈에 확인하세요."
+          content="기업 기술 블로그를 한 곳에서 모아보고 최신 개발 트렌드를 발견하세요."
+        />
+        <meta
+          name="keywords"
+          content="기업 기술 블로그, 기술 블로그 모음, 기업 블로그, 회사 기술 블로그, 개발 블로그 모음, 테크 블로그"
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://techfork-fe.vercel.app/sub_logo.png"
         />
       </Helmet>
       <div className="bg-bgPrimary  py-12" onClick={() => setModal(false)}>
