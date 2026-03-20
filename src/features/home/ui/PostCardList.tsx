@@ -16,7 +16,7 @@ const PostCardList = ({ selectedTab }: PostCardListProps) => {
   const { companies } = useCompanyStore();
   const infiniteRef = useRef<HTMLDivElement | null>(null);
 
-  const companyQuery = useInfiniteCompaniesPosts({ companies });
+  const companyQuery = useInfiniteCompaniesPosts({ companies }); //기업별 post List
   const recentQuery = useInfinitePosts({ sortBy: "LATEST" });
   const popularQuery = useInfinitePosts({ sortBy: "POPULAR" });
   const { user } = useUserStore();

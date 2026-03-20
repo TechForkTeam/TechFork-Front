@@ -13,7 +13,7 @@ export const getRecommendPostList = async () => {
 export const useGetRecommendPostList = (isLogin: boolean) => {
   return useQuery({
     queryKey: [
-      HOME_QUERY_KEY.POSTS,
+      SHARED_QUERY_KEY.POSTS,
       SHARED_QUERY_KEY.MY,
       HOME_QUERY_KEY.POSTS_RECOMMEND,
     ],
@@ -32,7 +32,7 @@ export const postRecommendList = async () => {
 export const usePostRecommendPostList = () => {
   const queryClient = useQueryClient();
   const queryKey = [
-    HOME_QUERY_KEY.POSTS,
+    SHARED_QUERY_KEY.POSTS,
     SHARED_QUERY_KEY.MY,
     HOME_QUERY_KEY.POSTS_RECOMMEND,
   ] as const;

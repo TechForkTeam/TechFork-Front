@@ -1,13 +1,10 @@
 import { getPostList } from "../api/post";
-import { HOME_QUERY_KEY } from "../consts/queryKeys";
-import type {
-  PageParamType,
-  PostResponseDto,
-} from "../api/post.types";
+import type { PageParamType, PostResponseDto } from "../api/post.types";
 import {
   useSuspenseInfiniteQuery,
   type QueryFunctionContext,
 } from "@tanstack/react-query";
+import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 
 interface UseInfinitePostsParams {
   sortBy: "LATEST" | "POPULAR";
@@ -22,14 +19,14 @@ export const useInfinitePosts = ({
     PostResponseDto,
     Error,
     PostResponseDto[],
-    readonly [typeof HOME_QUERY_KEY.POSTS, "LATEST" | "POPULAR"],
+    readonly [typeof SHARED_QUERY_KEY.POSTS, "LATEST" | "POPULAR"],
     PageParamType
   >({
-    queryKey: [HOME_QUERY_KEY.POSTS, sortBy] as const,
+    queryKey: [SHARED_QUERY_KEY.POSTS, sortBy] as const,
     queryFn: ({
       pageParam,
     }: QueryFunctionContext<
-      readonly [typeof HOME_QUERY_KEY.POSTS, "LATEST" | "POPULAR"],
+      readonly [typeof SHARED_QUERY_KEY.POSTS, "LATEST" | "POPULAR"],
       PageParamType
     >) =>
       getPostList({

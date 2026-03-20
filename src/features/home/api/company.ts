@@ -12,7 +12,7 @@ export const getCompanyList = async () => {
 export const useGetCompany = () => {
   return useSuspenseQuery({
     queryFn: getCompanyList,
-    queryKey: [HOME_QUERY_KEY.COMPANY],
+    queryKey: [HOME_QUERY_KEY.COMPANIES],
     select: res => res.data,
   });
 };
