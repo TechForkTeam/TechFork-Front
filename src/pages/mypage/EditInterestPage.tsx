@@ -1,4 +1,4 @@
-import { TAG_MAP } from "@/shared/consts/tags";
+import { TAG_CATEGORY_MAP, TAG_MAP } from "@/shared/consts/tags";
 import { tagCodeToLabel } from "@/shared/lib/tagCodeToLabel";
 import {
   INTERESTS_MOCK,
@@ -47,6 +47,13 @@ const EditInterestPage = () => {
   const selectedCategoryData = INTERESTS_MOCK.interests.find(
     item => item.code === selectedCategory,
   );
+  const selectedCategoryTags = selectedCategoryData
+    ? TAG_MAP[
+        TAG_CATEGORY_MAP[
+          selectedCategoryData.code as keyof typeof TAG_CATEGORY_MAP
+        ]
+      ]
+    : [];
 
   const isEqual =
     originalTags.length === selectedTags.length &&
@@ -160,23 +167,17 @@ const EditInterestPage = () => {
               </p>
 
               <div className="grid grid-cols-5 gap-4">
-                {selectedCategoryData?.keywords.map(keyword => {
-                  const categoryLabel = selectedCategoryData.label;
-                  const keywordCode = TAG_MAP[
-                    categoryLabel as keyof typeof TAG_MAP
-                  ]?.find(item => item.label === keyword)?.code;
-
-                  if (!keywordCode) return null;
-
-                  const value = `${selectedCategoryData.code}:${keywordCode}`;
+                {selectedCategoryTags.map(({ code, label }) => {
+                  const value = `${selectedCategoryData?.code}:${code}`;
 
                   return (
                     <TechSelection
                       key={value}
-                      label={keyword}
+                      label={label}
                       selected={selectedTags.includes(value)}
                       onClick={() =>
-                        toggleTag(selectedCategoryData.code, keywordCode)
+                        selectedCategoryData &&
+                        toggleTag(selectedCategoryData.code, code)
                       }
                     />
                   );
