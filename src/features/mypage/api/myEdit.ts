@@ -7,6 +7,7 @@ import { useEditTagStore } from "../model/useEditTagStore";
 import api from "@/shared/api/api";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
+import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // 내 관심사 수정 =>mypage
@@ -18,14 +19,21 @@ export const putMyInterst = async (body: InterestDataDto) => {
 export const usePutMyInterst = () => {
   const queryClient = useQueryClient();
   const queryKey = [SHARED_QUERY_KEY.MY, SHARED_QUERY_KEY.MY_INTEREST] as const;
+  const recommendQueryKey = [
+    SHARED_QUERY_KEY.POSTS,
+    SHARED_QUERY_KEY.MY,
+    HOME_QUERY_KEY.POSTS_RECOMMEND,
+  ] as const;
 
   return useMutation({
     mutationFn: (body: InterestDataDto) => putMyInterst(body),
 
     onMutate: async (payload: InterestDataDto) => {
       await queryClient.cancelQueries({ queryKey });
+      await queryClient.cancelQueries({ queryKey: recommendQueryKey });
 
       const previous = queryClient.getQueryData<InterestTypeDto[]>(queryKey);
+      const previousRecommend = queryClient.getQueryData(recommendQueryKey);
       queryClient.setQueryData<InterestTypeDto[]>(queryKey, payload.interests);
 
       const { selectedTags } = useEditTagStore.getState();
@@ -33,16 +41,20 @@ export const usePutMyInterst = () => {
         originalTags: [...selectedTags],
       });
 
-      return { previous };
+      return { previous, previousRecommend };
     },
     onError: (_err, _payload, context) => {
       if (context?.previous) {
         queryClient.setQueryData(queryKey, context.previous);
       }
+      if (context?.previousRecommend) {
+        queryClient.setQueryData(recommendQueryKey, context.previousRecommend);
+      }
     },
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey });
+      queryClient.invalidateQueries({ queryKey: recommendQueryKey });
     },
   });
 };
