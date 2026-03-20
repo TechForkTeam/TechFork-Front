@@ -1,4 +1,5 @@
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
+import { QUERY_CACHE_TIME } from "@/shared/consts/cacheTimes";
 import { getCompaniesPostList } from "../api/post";
 import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
@@ -7,7 +8,7 @@ interface UseInfiniteCompaniesPostsParams {
   companies: string[];
   size?: number;
 }
-
+//기업별 게시글 필터링 조회
 export const useInfiniteCompaniesPosts = ({
   companies,
   size = 20,
@@ -37,7 +38,7 @@ export const useInfiniteCompaniesPosts = ({
     },
 
     select: res => res.pages,
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
+    staleTime: QUERY_CACHE_TIME.POSTS.staleTime,
+    gcTime: QUERY_CACHE_TIME.POSTS.gcTime,
   });
 };

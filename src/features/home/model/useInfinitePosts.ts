@@ -1,5 +1,6 @@
 import { getPostList } from "../api/post";
 import type { PageParamType, PostResponseDto } from "../api/post.types";
+import { QUERY_CACHE_TIME } from "@/shared/consts/cacheTimes";
 import {
   useSuspenseInfiniteQuery,
   type QueryFunctionContext,
@@ -11,6 +12,7 @@ interface UseInfinitePostsParams {
   size?: number;
 }
 
+//인기순, 최근생성된 게시글
 export const useInfinitePosts = ({
   sortBy,
   size = 20,
@@ -53,7 +55,7 @@ export const useInfinitePosts = ({
     },
 
     select: res => res.pages,
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10,
+    staleTime: QUERY_CACHE_TIME.POSTS.staleTime,
+    gcTime: QUERY_CACHE_TIME.POSTS.gcTime,
   });
 };

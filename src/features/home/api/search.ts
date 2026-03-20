@@ -3,7 +3,9 @@ import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import type { SearchType } from "./search.types";
 import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import api from "@/shared/api/api";
+import { QUERY_CACHE_TIME } from "@/shared/consts/cacheTimes";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
+import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 
 export const getSearchPost = async (query: string) => {
   const { data } = await api.get(API_ENDPOINTS.search, { params: { query } });
@@ -12,9 +14,11 @@ export const getSearchPost = async (query: string) => {
 
 export const useGetSearchPost = (query: string) => {
   return useSuspenseQuery({
-    queryKey: [HOME_QUERY_KEY.POSTS, HOME_QUERY_KEY.POSTS_SEARCH, query],
+    queryKey: [SHARED_QUERY_KEY.POSTS, HOME_QUERY_KEY.POSTS_SEARCH, query],
     queryFn: () => getSearchPost(query),
     select: res => res.data,
+    staleTime: QUERY_CACHE_TIME.POSTS.staleTime,
+    gcTime: QUERY_CACHE_TIME.POSTS.gcTime,
   });
 };
 

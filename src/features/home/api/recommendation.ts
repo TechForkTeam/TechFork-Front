@@ -1,4 +1,5 @@
 import api from "@/shared/api/api";
+import { QUERY_CACHE_TIME } from "@/shared/consts/cacheTimes";
 import { HOME_QUERY_KEY } from "../consts/queryKeys";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { API_ENDPOINTS } from "@/shared/consts/endpoints";
@@ -20,6 +21,8 @@ export const useGetRecommendPostList = (isLogin: boolean) => {
     queryFn: getRecommendPostList,
     select: res => res.data,
     enabled: isLogin,
+    staleTime: QUERY_CACHE_TIME.POSTS.staleTime,
+    gcTime: QUERY_CACHE_TIME.POSTS.gcTime,
   });
 };
 

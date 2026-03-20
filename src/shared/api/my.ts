@@ -1,6 +1,7 @@
 //사용자와 관련된 정보를 가져옵니다.
 
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { QUERY_CACHE_TIME } from "../consts/cacheTimes";
 import type {
   InterestResponseDto,
   InterestTypeDto,
@@ -21,6 +22,8 @@ export const useGetMyProfile = (enabled?: boolean) => {
     queryFn: getMyProfile,
     select: res => res.data,
     enabled,
+    staleTime: QUERY_CACHE_TIME.MY_PROFILE.staleTime,
+    gcTime: QUERY_CACHE_TIME.MY_PROFILE.gcTime,
   });
 };
 
@@ -35,5 +38,7 @@ export const useGetMyInterest = () => {
     queryKey: [SHARED_QUERY_KEY.MY, SHARED_QUERY_KEY.MY_INTEREST],
     queryFn: getMyInterest,
     select: res => res.data.interests,
+    staleTime: QUERY_CACHE_TIME.MY_INTEREST.staleTime,
+    gcTime: QUERY_CACHE_TIME.MY_INTEREST.gcTime,
   });
 };

@@ -2,6 +2,7 @@ import {
   getActivityPostList,
   type ActivityPostType,
 } from "@/shared/api/activity";
+import { QUERY_CACHE_TIME } from "@/shared/consts/cacheTimes";
 import { MYPAGE_QUERY_KEY } from "../consts/queryKeys";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
@@ -31,6 +32,7 @@ export const useInfiniteActivityPosts = (type: ActivityPostType, size = 20) => {
     },
 
     select: res => res.pages,
-    gcTime: 1000 * 60 * 5,
+    staleTime: QUERY_CACHE_TIME.POSTS.staleTime,
+    gcTime: QUERY_CACHE_TIME.POSTS.gcTime,
   });
 };
