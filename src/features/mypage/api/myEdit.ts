@@ -32,8 +32,8 @@ export const usePutMyInterst = () => {
       await queryClient.cancelQueries({ queryKey });
       await queryClient.cancelQueries({ queryKey: recommendQueryKey });
 
-      const previous = queryClient.getQueryData<InterestTypeDto[]>(queryKey);
-      const previousRecommend = queryClient.getQueryData(recommendQueryKey);
+      const previous = queryClient.getQueryData<InterestTypeDto[]>(queryKey); //수정 전 관심사
+      const previousRecommend = queryClient.getQueryData(recommendQueryKey); //수정 전 추천글 캐시
       queryClient.setQueryData<InterestTypeDto[]>(queryKey, payload.interests);
 
       const { selectedTags } = useEditTagStore.getState();
