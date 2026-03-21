@@ -10,4 +10,4 @@ Disallow: /interested
 Disallow: /setting
 Disallow: /ask
 
-Sitemap: https://techfork-fe.vercel.app/sitemap.xml
+Sitemap: https://techfork.site/sitemap.xml
