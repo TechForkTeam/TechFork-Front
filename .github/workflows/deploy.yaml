@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "develop"]
 
 jobs:
   build:
@@ -27,6 +27,7 @@ jobs:
           destination-repository-name: TechFork-Front
           user-email: ${{ secrets.EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
-          target-branch: main
+          target-branch: ${{ github.ref_name }}
+          create-target-branch-if-needed: true
       - name: Test get variable exported by push-to-another-repository
         run: echo $DESTINATION_CLONED_DIRECTORY
