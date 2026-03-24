@@ -29,6 +29,7 @@ export const SystemHeader = () => {
   const [searchParams] = useSearchParams();
   const [input, setInput] = useState<string>("");
 
+  //api
   const handleLogout = async () => {
     try {
       await postLogout();
@@ -46,6 +47,7 @@ export const SystemHeader = () => {
     }
   };
 
+  //로그아웃
   const handleNavClick = (item: { name: string; nav?: string }) => {
     if (item.name === "로그아웃") {
       handleLogout();
@@ -87,11 +89,11 @@ export const SystemHeader = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (userModal) {
-      setInput("");
-    }
-  }, [userModal]);
+  // useEffect(() => {
+  //   if (userModal) {
+  //     setInput("");
+  //   }
+  // }, [userModal]);
 
   return (
     <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14   ")}>
@@ -101,8 +103,8 @@ export const SystemHeader = () => {
           alt="로고"
           className="w-35 h-12 cursor-pointer"
           onClick={() => {
-            navigate("/");
-            setInput("");
+            resetCompanies();
+            navigate("/?tab=0");
           }}
           fetchPriority="high"
         />

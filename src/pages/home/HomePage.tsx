@@ -29,10 +29,11 @@ const SearchPostList = lazy(() =>
 );
 
 const HomePage = () => {
-  const [selectedTab, setSelectedTab] = useState(0);
   const [modal, setModal] = useState(false);
   const { companies, toggleCompany, resetCompanies } = useCompanyStore();
-
+  const { user } = useUserStore();
+  const isLogin = !!user?.accessToken;
+  const navigate = useNavigate();
   const { data: companyData } = useGetCompany();
   const { mutate: postRecommendList, isPending: isRefreshing } =
     usePostRecommendPostList();
@@ -41,24 +42,31 @@ const HomePage = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
+  const selectedTab = Number(searchParams.get("tab") ?? 0);
+
+  useEffect(() => {
+    if (!searchParams.get("tab")) {
+      const tabParams = new URLSearchParams(searchParams);
+      tabParams.set("tab", "0");
+      setSearchParams(tabParams, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
+
   const debouncedInput = useDebounce(searchQuery, 200);
   const isSearching = debouncedInput && debouncedInput.trim() !== "";
-  const { user } = useUserStore();
-  const isLogin = !!user?.accessToken;
-  const navigate = useNavigate();
 
   const handleTabChange = (tab: number) => {
     if (tab === 1 && !isLogin) {
       toast.info("로그인이 필요한 서비스입니다.", {
         icon: <img src={Alert} alt="login으로 이동" />,
       });
-
       navigate("/login");
-
       return;
     }
-    setSearchParams({});
-    setSelectedTab(tab);
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete("search");
+    nextParams.set("tab", String(tab));
+    setSearchParams(nextParams);
   };
 
   useEffect(() => {
