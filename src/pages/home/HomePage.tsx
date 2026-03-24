@@ -45,7 +45,7 @@ const HomePage = () => {
   const selectedTab = Number(searchParams.get("tab") ?? 0);
 
   useEffect(() => {
-    if (!searchParams.get("tab")) {
+    if (!searchParams.get("tab") && !searchParams.get("search")) {
       const tabParams = new URLSearchParams(searchParams);
       tabParams.set("tab", "0");
       setSearchParams(tabParams, { replace: true });
