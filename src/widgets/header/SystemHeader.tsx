@@ -89,12 +89,6 @@ export const SystemHeader = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (userModal) {
-  //     setInput("");
-  //   }
-  // }, [userModal]);
-
   return (
     <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14   ")}>
       <div className="flex items-center justify-between w-full relative">
