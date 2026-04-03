@@ -1,7 +1,6 @@
 import Search from "@/assets/icons/search.svg";
 import User from "@/assets/images/user.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
 import { useThemeToggle } from "@/shared/lib/useThemeToggle";
@@ -11,58 +10,42 @@ import { useGetMyProfile } from "@/shared/api/my";
 import { cn } from "@/shared/lib/cn";
 import { Button } from "@/shared/ui/button/Button";
 import { useUserMenu } from "./model/useUserMenu";
+import { useEffect, useState } from "react";
+import { useDebounce } from "@/shared/lib/useDebounce";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
-  // const location = useLocation();
   const { isDark } = useThemeToggle();
-
   const { resetCompanies } = useCompanyStore();
   const { isLogin, userModal, setUserModal, modalRef, handleNavClick } =
-    useUserMenu(); //모달 관리
-
+    useUserMenu();
   const { data } = useGetMyProfile(isLogin);
-  const [searchParams] = useSearchParams();
-  const [input, setInput] = useState<string>(
-    () => searchParams.get("search") || "",
-  );
+  const [searchParams] = useSearchParams(); //tab
+  const [input, setInput] = useState(() => searchParams.get("search") ?? "");
+  const urlSearch = searchParams.get("search") ?? "";
 
   useEffect(() => {
-    const searchQuery = searchParams.get("search") || "";
-    if (input !== searchQuery) {
-      setInput(searchQuery);
-    }
-  }, [searchParams]);
-
-  // useEffect(() => {
-  //   if (location.pathname !== "/") return;
-
-  //   if (input === "") {
-  //     if (searchParams.get("search")) {
-  //       navigate("/", { replace: true });
-  //     }
-  //     return;
-  //   }
-  //   if (input !== searchParams.get("search")) {
-  //     navigate(`/?search=${input}`, { replace: true });
-  //   }
-  // }, [input, navigate, searchParams]);
-
+    setInput(urlSearch);
+  }, [urlSearch]);
+  const debouncedInput = useDebounce(input, 300);
   useEffect(() => {
-    const trimmed = input.trim();
-    const currentSearch = searchParams.get("search") || "";
+    const trimmed = debouncedInput.trim();
+    const currentSearch = searchParams.get("search") ?? "";
+
+    if (trimmed === currentSearch) return;
 
     if (!trimmed) {
-      if (location.pathname === "/" && currentSearch) {
-        navigate("/?tab=0", { replace: true });
-      }
-      return;
-    }
-
-    if (trimmed !== currentSearch) {
+      navigate("/?tab=0", { replace: true });
+    } else {
       navigate(`/?search=${encodeURIComponent(trimmed)}`, { replace: true });
     }
-  }, [input, location.pathname, navigate, searchParams]);
+  }, [debouncedInput]);
+
+  const handleLogoClick = () => {
+    resetCompanies();
+    setInput("");
+    navigate("/?tab=0");
+  };
 
   return (
     <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14   ")}>
@@ -71,10 +54,7 @@ export const SystemHeader = () => {
           src={isDark ? "/dark_logo.svg" : "/logo.svg"}
           alt="로고"
           className="w-35 h-12 cursor-pointer"
-          onClick={() => {
-            resetCompanies();
-            navigate("/?tab=0");
-          }}
+          onClick={handleLogoClick}
           fetchPriority="high"
         />
         <div className="w-160 flex  bg-bgPrimary rounded-lg border border-bgNormal px-3">

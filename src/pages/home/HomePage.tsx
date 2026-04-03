@@ -7,8 +7,6 @@ import {
   useGetCompany,
   usePostRecommendPostList,
 } from "@/features/home";
-import { useDebounce } from "@/shared/lib/useDebounce";
-
 import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
 import { Loading } from "@/shared/ui/Loading";
 import { SkeletonList } from "@/shared/ui/SkeletonList";
@@ -41,19 +39,16 @@ const HomePage = () => {
   const maxCompany = companyData?.companies.slice(0, 8) ?? [];
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("search");
+  const searchQuery = searchParams.get("search") ?? "";
   const selectedTab = Number(searchParams.get("tab") ?? 0);
 
   useEffect(() => {
     if (!searchParams.get("tab") && !searchParams.get("search")) {
-      const tabParams = new URLSearchParams(searchParams);
-      tabParams.set("tab", "0");
-      setSearchParams(tabParams, { replace: true });
+      setSearchParams({ tab: "0" }, { replace: true });
     }
-  }, [searchParams, setSearchParams]);
+  }, []);
 
-  const debouncedInput = useDebounce(searchQuery, 200);
-  const isSearching = debouncedInput && debouncedInput.trim() !== "";
+  const isSearching = !!searchQuery.trim();
 
   const handleTabChange = (tab: number) => {
     if (tab === 1 && !isLogin) {
@@ -63,10 +58,7 @@ const HomePage = () => {
       navigate("/login");
       return;
     }
-    const nextParams = new URLSearchParams(searchParams);
-    nextParams.delete("search");
-    nextParams.set("tab", String(tab));
-    setSearchParams(nextParams);
+    setSearchParams({ tab: String(tab) }, { replace: true });
   };
 
   useEffect(() => {
@@ -80,7 +72,7 @@ const HomePage = () => {
       <Helmet>
         <title>
           {isSearching
-            ? `"${debouncedInput}" | TechFork`
+            ? `"${searchQuery}" | TechFork`
             : `TechFork | ${TAB_MAP[selectedTab]}`}
         </title>
         <meta property="og:title" content="TechFork | 기업 기술 블로그 모음" />
@@ -111,7 +103,7 @@ const HomePage = () => {
           <>
             <ErrorBoundary>
               <Suspense fallback={<SkeletonList />}>
-                <SearchPostList query={debouncedInput ?? ""} />
+                <SearchPostList query={searchQuery ?? ""} />
               </Suspense>
             </ErrorBoundary>
           </>
