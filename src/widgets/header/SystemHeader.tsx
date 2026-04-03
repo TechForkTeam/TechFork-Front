@@ -1,61 +1,31 @@
 import Search from "@/assets/icons/search.svg";
 import User from "@/assets/images/user.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Alert from "@/assets/icons/alert2.svg";
-import Logout from "@/assets/icons/confirm.svg";
 import { useThemeToggle } from "@/shared/lib/useThemeToggle";
-import useUserStore from "@/shared/model/useUserStore";
 import { MYPAGE_NAV } from "@/features/mypage";
 import { useCompanyStore } from "@/features/home";
 import { useGetMyProfile } from "@/shared/api/my";
-import { postLogout } from "@/features/Login";
 import { cn } from "@/shared/lib/cn";
 import { Button } from "@/shared/ui/button/Button";
+import { useUserMenu } from "./model/useUserMenu";
 
 export const SystemHeader = () => {
   const navigate = useNavigate();
-  const [userModal, setUserModal] = useState(false);
-  const modalRef = useRef<HTMLDivElement | null>(null);
+  // const location = useLocation();
   const { isDark } = useThemeToggle();
 
-  const { user, logout } = useUserStore();
-  const { resetCompanies, companies } = useCompanyStore();
-  console.log(companies);
-  const isLogin = !!user?.accessToken;
+  const { resetCompanies } = useCompanyStore();
+  const { isLogin, userModal, setUserModal, modalRef, handleNavClick } =
+    useUserMenu(); //모달 관리
 
   const { data } = useGetMyProfile(isLogin);
   const [searchParams] = useSearchParams();
-  const [input, setInput] = useState<string>("");
-
-  //api
-  const handleLogout = async () => {
-    try {
-      await postLogout();
-
-      toast.info(`로그아웃 되었습니다.`, {
-        icon: <img src={Logout} alt="logout" />,
-      });
-    } catch (error) {
-      console.error("로그아웃 실패:", error);
-    } finally {
-      logout();
-      resetCompanies();
-      setUserModal(false);
-      navigate("/");
-    }
-  };
-
-  //로그아웃
-  const handleNavClick = (item: { name: string; nav?: string }) => {
-    if (item.name === "로그아웃") {
-      handleLogout();
-    } else if (item.nav) {
-      setUserModal(false);
-      navigate(item.nav);
-    }
-  };
+  const [input, setInput] = useState<string>(
+    () => searchParams.get("search") || "",
+  );
 
   useEffect(() => {
     const searchQuery = searchParams.get("search") || "";
@@ -64,30 +34,35 @@ export const SystemHeader = () => {
     }
   }, [searchParams]);
 
+  // useEffect(() => {
+  //   if (location.pathname !== "/") return;
+
+  //   if (input === "") {
+  //     if (searchParams.get("search")) {
+  //       navigate("/", { replace: true });
+  //     }
+  //     return;
+  //   }
+  //   if (input !== searchParams.get("search")) {
+  //     navigate(`/?search=${input}`, { replace: true });
+  //   }
+  // }, [input, navigate, searchParams]);
+
   useEffect(() => {
-    if (input === "") {
-      if (searchParams.get("search")) {
-        navigate("/", { replace: true });
+    const trimmed = input.trim();
+    const currentSearch = searchParams.get("search") || "";
+
+    if (!trimmed) {
+      if (location.pathname === "/" && currentSearch) {
+        navigate("/?tab=0", { replace: true });
       }
       return;
     }
-    if (input !== searchParams.get("search")) {
-      navigate(`/?search=${input}`, { replace: true });
+
+    if (trimmed !== currentSearch) {
+      navigate(`/?search=${encodeURIComponent(trimmed)}`, { replace: true });
     }
-  }, [input, navigate]);
-
-  useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (!modalRef.current?.contains(e.target as Node))
-        return setUserModal(false);
-    };
-
-    document.addEventListener("click", handleClick);
-    return () => {
-      //cleanup
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
+  }, [input, location.pathname, navigate, searchParams]);
 
   return (
     <header className={cn("max-w-480  mx-auto gap-2 pb-5 pt-7   px-14   ")}>
@@ -147,7 +122,11 @@ export const SystemHeader = () => {
           >
             {MYPAGE_NAV.map(item => {
               return (
-                <div className="p-4" onClick={() => handleNavClick(item)}>
+                <div
+                  key={item.name}
+                  className="p-4"
+                  onClick={() => handleNavClick(item)}
+                >
                   {item.name}
                 </div>
               );
