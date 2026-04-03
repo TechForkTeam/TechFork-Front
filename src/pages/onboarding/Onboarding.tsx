@@ -77,8 +77,25 @@ const Onboarding = () => {
               </div>
 
               <p className="body-r-14 flex gap-1 font-alternative">
-                <p className="text-blue-500">이용약관</p>및
-                <p className="text-blue-500">개인정보취급방침에</p>
+                <p className="text-blue-500">
+                  <a
+                    href="https://lily-reptile-b33.notion.site/334d0aa99dcf8066a9abc2e9a2aca4fd?source=copy_link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    이용약관
+                  </a>
+                </p>
+                및
+                <p className="text-blue-500">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://lily-reptile-b33.notion.site/334d0aa99dcf8083bd3bf5e51e609a54?source=copy_link"
+                  >
+                    개인정보취급방침에
+                  </a>
+                </p>
                 동의합니다.
               </p>
             </div>
