@@ -37,7 +37,7 @@ export const CompanyFilterList = ({
       <div className="flex items-center gap-4 flex-wrap pb-6 font-strong">
         {companyData.companies.length !== 0 && (
           <>
-            <div className="body-sb-14 text-red-300">선택된 기업:</div>
+            <div className="body-sb-14">선택된 기업:</div>
             {companies.map(company => {
               const matchedCompany = companyMap[company];
               return (
