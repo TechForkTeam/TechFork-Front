@@ -31,7 +31,6 @@ export const CompanyFilterList = ({
       ),
     [companyData.companies],
   );
-
   return (
     <>
       <div className="flex items-center gap-4 flex-wrap pb-6 font-strong">
@@ -64,15 +63,7 @@ export const CompanyFilterList = ({
             onClick={() => toggleCompany(item.company)}
           />
         ))}
-        {/* <img
-          src={modal ? PopOn : PopOff}
-          alt="toggle modal"
-          className="mb-6 cursor-pointer "
-          onClick={e => {
-            e.stopPropagation();
-            setModal(pre => !pre);
-          }}
-        /> */}
+
         <div
           onClick={e => {
             e.stopPropagation();
