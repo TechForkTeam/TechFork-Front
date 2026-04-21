@@ -17,9 +17,13 @@ export const TagItem = ({ tag, selected, length, onClick }: TagItemProps) => {
       onClick={onClick}
     >
       <p className="body-r-14"> {tag}</p>
-      <span className="rounded-full bg-blue-50 text-blue-500 size-6 px-2 hover:bg-white">
-        {length}
-      </span>
+      {length == 0 ? (
+        ""
+      ) : (
+        <span className="rounded-full bg-blue-50 text-blue-500 size-6 px-2 hover:bg-white">
+          {length}
+        </span>
+      )}
     </li>
   );
 };
