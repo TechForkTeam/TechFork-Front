@@ -1,20 +1,14 @@
-import Alert from "@/assets/icons/alert2.svg";
 import {
   CompanyFilterList,
   PostCardList,
   TAB_MAP,
-  useCompanyStore,
-  useGetCompany,
-  usePostRecommendPostList,
+  useHomePage,
 } from "@/features/home";
 import { ErrorBoundary } from "@/shared/ui/ErrorBoundary";
 import { Loading } from "@/shared/ui/Loading";
 import { SkeletonList } from "@/shared/ui/SkeletonList";
-import useUserStore from "@/shared/model/useUserStore";
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import { TabSelectList } from "@/shared/ui/TabSelectList";
 
 const InterestPage = lazy(() =>
@@ -27,53 +21,15 @@ const SearchPostList = lazy(() =>
 );
 
 const HomePage = () => {
-  const [modal, setModal] = useState(false);
-  const { companies, toggleCompany, resetCompanies } = useCompanyStore();
-  const { user } = useUserStore();
-  const isLogin = !!user?.accessToken;
-  const navigate = useNavigate();
-  const { data: companyData } = useGetCompany();
-  const { mutate: postRecommendList, isPending: isRefreshing } =
-    usePostRecommendPostList();
-
-  const maxCompany = companyData?.companies.slice(0, 8) ?? [];
-
-  const [searchParams, setSearchParams] = useSearchParams();
-  const searchQuery = searchParams.get("search") ?? "";
-  const selectedTab = Number(searchParams.get("tab") ?? 0);
-
-  useEffect(() => {
-    if (!searchParams.get("tab") && !searchParams.get("search")) {
-      setSearchParams({ tab: "0" }, { replace: true });
-    }
-  }, []);
-
-  const isSearching = !!searchQuery.trim();
-
-  const handleTabChange = (tab: number) => {
-    if (tab === 1 && !isLogin) {
-      toast.info("로그인이 필요한 서비스입니다.", {
-        icon: <img src={Alert} alt="login으로 이동" />,
-      });
-      navigate("/login");
-      return;
-    }
-    setSearchParams({ tab: String(tab) }, { replace: true });
-  };
-
-  useEffect(() => {
-    return () => {
-      resetCompanies();
-    };
-  }, []);
+  const home = useHomePage();
 
   return (
     <>
       <Helmet>
         <title>
-          {isSearching
-            ? `"${searchQuery}" | TechFork`
-            : `TechFork | ${TAB_MAP[selectedTab]}`}
+          {home.isSearching
+            ? `"${home.searchQuery}" | TechFork`
+            : `TechFork | ${TAB_MAP[home.selectedTab]}`}
         </title>
         <meta property="og:title" content="TechFork | 기업 기술 블로그 모음" />
         <meta
@@ -90,52 +46,50 @@ const HomePage = () => {
           content="https://techfork-fe.vercel.app/sub_logo.png"
         />
       </Helmet>
-      <div className="bg-bgPrimary  py-12" onClick={() => setModal(false)}>
+      <div className="bg-bgPrimary py-12" onClick={() => home.setModal(false)}>
         <TabSelectList
           className={
-            isSearching || [2, 3].includes(selectedTab) ? "mb-20" : "mb-8"
+            home.isSearching || [2, 3].includes(home.selectedTab)
+              ? "mb-20"
+              : "mb-8"
           }
-          onChange={handleTabChange}
-          selected={isSearching ? null : selectedTab}
+          onChange={home.handleTabChange}
+          selected={home.isSearching ? null : home.selectedTab}
           tagList={TAB_MAP}
         />
-        {isSearching ? (
-          <>
-            <ErrorBoundary>
-              <Suspense fallback={<SkeletonList />}>
-                <SearchPostList query={searchQuery ?? ""} />
-              </Suspense>
-            </ErrorBoundary>
-          </>
+        {home.isSearching ? (
+          <ErrorBoundary>
+            <Suspense fallback={<SkeletonList />}>
+              <SearchPostList query={home.searchQuery} />
+            </Suspense>
+          </ErrorBoundary>
         ) : (
           <>
-            {selectedTab === 0 && (
+            {home.selectedTab === 0 && (
               <>
                 <CompanyFilterList
-                  companies={companies}
-                  companyData={companyData}
-                  maxCompany={maxCompany}
-                  modal={modal}
-                  setModal={setModal}
-                  toggleCompany={toggleCompany}
+                  companies={home.companies}
+                  companyData={home.companyData}
+                  maxCompany={home.maxCompany}
+                  modal={home.modal}
+                  setModal={home.setModal}
+                  toggleCompany={home.toggleCompany}
                 />
                 <PostCardList selectedTab={0} />
               </>
             )}
-            {/* 나와맞는 게시글 */}
-            {selectedTab === 1 && isLogin && (
+            {home.selectedTab === 1 && home.isLogin && (
               <ErrorBoundary>
                 <Suspense fallback={<Loading />}>
                   <InterestPage
-                    onRefresh={postRecommendList}
-                    isRefreshing={isRefreshing}
+                    onRefresh={home.postRecommendList}
+                    isRefreshing={home.isRefreshing}
                   />
                 </Suspense>
               </ErrorBoundary>
             )}
-
-            {(selectedTab === 2 || selectedTab === 3) && (
-              <PostCardList selectedTab={selectedTab} />
+            {[2, 3].includes(home.selectedTab) && (
+              <PostCardList selectedTab={home.selectedTab} />
             )}
           </>
         )}
