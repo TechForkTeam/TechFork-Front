@@ -32,6 +32,7 @@
     --color-text-alternative: var(--color-dark-text-alternative);
     --color-text-assistive: var(--color-dark-text-assistive);
     --color-text-disabled: var(--color-dark-text-disabled);
+    --color-text-alert: var(--color-dark-text-alert);
 
     --color-bgNormal: var(--color-dark-bgNormal);
     --color-bgPrimary: var(--color-dark-bgPrimary);

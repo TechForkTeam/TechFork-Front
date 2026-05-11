@@ -35,8 +35,8 @@ export const InputField = ({
           <input
             type="text "
             className={clsx(
-              "w-full p-3 body-r-14  rounded-xl  border font-assitive bg-bgPrimary  border-normal  focus:outline-none focus:border-blue-300 ",
-              disabled && "text-gray-400 ",
+              "w-full p-3 body-r-14  rounded-xl  border font-alternative bg-bgPrimary  border-normal  focus:outline-none focus:border-blue-300",
+              disabled && "opacity-65",
             )}
             placeholder={placeholder}
             value={value}
@@ -45,7 +45,7 @@ export const InputField = ({
           />
         ) : (
           <textarea
-            className="w-full    p-3 body-r-14  rounded-xl border bg-bgPrimary border-normal  focus:outline-none focus:border-blue-300
+            className="w-full  p-3 body-r-14 font-alternative rounded-xl border bg-bgPrimary border-normal  focus:outline-none focus:border-blue-300
         h-30 resize-none
         "
             placeholder={placeholder}

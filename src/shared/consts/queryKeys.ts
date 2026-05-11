@@ -3,4 +3,5 @@ export const SHARED_QUERY_KEY = {
   MY: "my",
   MY_PROFILE: "profile",
   MY_INTEREST: "interest",
+  ACTIVITY: "activity",
 } as const;
