@@ -3,7 +3,6 @@ import {
   type ActivityPostType,
 } from "@/shared/api/activity";
 import { QUERY_CACHE_TIME } from "@/shared/consts/cacheTimes";
-import { MYPAGE_QUERY_KEY } from "../consts/queryKeys";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 
@@ -11,7 +10,7 @@ export const useInfiniteActivityPosts = (type: ActivityPostType, size = 20) => {
   return useSuspenseInfiniteQuery({
     queryKey: [
       SHARED_QUERY_KEY.POSTS,
-      MYPAGE_QUERY_KEY.POSTS_ACTIVITY,
+      SHARED_QUERY_KEY.ACTIVITY,
       type,
     ] as const,
 
@@ -32,7 +31,7 @@ export const useInfiniteActivityPosts = (type: ActivityPostType, size = 20) => {
     },
 
     select: res => res.pages,
-    staleTime: QUERY_CACHE_TIME.POSTS.staleTime,
+    staleTime: 0,
     gcTime: QUERY_CACHE_TIME.POSTS.gcTime,
   });
 };
