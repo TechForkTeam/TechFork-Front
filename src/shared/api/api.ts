@@ -1,6 +1,7 @@
 import axios, { type InternalAxiosRequestConfig } from "axios";
 import useUserStore from "@/shared/model/useUserStore";
 import { postRefreshToken } from "./auth";
+import { AUTH_ERROR } from "@/shared/consts/errorCodes";
 
 // const TEMP_TOKEN = import.meta.env.VITE_APP_DEV_TOKEN;
 interface CustomInternalAxiosRequestConfig extends InternalAxiosRequestConfig {
@@ -35,11 +36,23 @@ api.interceptors.response.use(
   async error => {
     const originalRequest = error.config as CustomInternalAxiosRequestConfig;
 
+    // 서버 응답 없음 => 네트워크 에러
+    if (!error.response) {
+      return Promise.reject(error);
+    }
+
+    const code = (error.response?.data as { code?: string })?.code;
+
+    // 세션 무효화 또는 탈퇴 회원=> refresh 시도 없이 즉시 로그아웃
+    if (code === AUTH_ERROR.REFRESH_MISMATCH || code === AUTH_ERROR.WITHDRAWN) {
+      useUserStore.getState().logout();
+      return Promise.reject(error);
+    }
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        // 이미 refresh 중이면
         if (!refreshPromise) {
           refreshPromise = postRefreshToken();
         }
@@ -54,7 +67,6 @@ api.interceptors.response.use(
       } catch (e) {
         refreshPromise = null;
         useUserStore.getState().logout();
-        // window.location.href = "/login";
         return Promise.reject(e);
       }
     }
