@@ -38,6 +38,7 @@
   --color-light-text-normal: #14181f;
   --color-light-text-disabled: #d4d8dd;
   --color-light-text-strong: #14181f;
+  --color-light-text-alert: #f33326;
 
   /* 라인 */
   --color-light-strong: #000000;
@@ -81,6 +82,7 @@
   --color-dark-text-assistive: #4e5968;
   --color-dark-text-normal: #e0e4eb;
   --color-dark-text-disabled: #333;
+  --color-dark-text-alert: #e5484d;
 
   /* 라인 border */
   --color-dark-normal: #1f2428; /**/
@@ -130,6 +132,7 @@
   --color-text-alternative: var(--color-light-text-alternative);
   --color-text-assistive: var(--color-light-text-assistive);
   --color-text-disabled: var(--color-light-text-disabled);
+  --color-text-alert: var(--color-light-text-alert);
 
   --color-bgNormal: var(--color-light-bgNormal);
   --color-bgPrimary: var(--color-light-bgPrimary);

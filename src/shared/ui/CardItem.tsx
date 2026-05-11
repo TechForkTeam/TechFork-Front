@@ -1,6 +1,6 @@
 import BookOn from "@/assets/icons/book-on.svg";
 import BookOff from "@/assets/icons/book-off.svg";
-import Eye from "@/assets/icons/eye.svg";
+import { Eye } from "lucide-react";
 import { forwardRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -128,7 +128,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <img src={Eye} alt="본 횟수" />
+          <Eye className="size-3.5 font-assistive" />
           <p className="text-xs ">{viewCount}</p>
           <p className="text-xs font-assistive">{publishedAt?.split("T")[0]}</p>
         </div>
