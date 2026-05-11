@@ -1,3 +1,4 @@
+import { NotFoundPage } from "@/pages/NotFound";
 import { OnboardingLayout } from "@/widgets/layout/OnboardingLayout";
 import { PrivateRoute } from "@/widgets/layout/PrivateRoiute";
 import { SystemLayout } from "@/widgets/layout/SystemLayout";
@@ -10,15 +11,9 @@ const HomePage = lazy(() => import("@/pages/home/HomePage"));
 const LoginPage = lazy(() => import("@/pages/login/LoginPage"));
 const KakaoLogin = lazy(() => import("@/pages/login/KakaoLogin"));
 const Onboarding = lazy(() => import("@/pages/onboarding/Onboarding"));
-const OnboardingTag = lazy(
-  () => import("@/pages/onboarding/OnboardingTag"),
-);
-const EditInterestPage = lazy(
-  () => import("@/pages/mypage/EditInterestPage"),
-);
-const MyIntersListPage = lazy(
-  () => import("@/pages/mypage/MyInterstListPage"),
-);
+const OnboardingTag = lazy(() => import("@/pages/onboarding/OnboardingTag"));
+const EditInterestPage = lazy(() => import("@/pages/mypage/EditInterestPage"));
+const MyIntersListPage = lazy(() => import("@/pages/mypage/MyInterstListPage"));
 const SettingPage = lazy(() => import("@/pages/mypage/SettingPage"));
 const AskPage = lazy(() => import("@/pages/mypage/AskPage"));
 const router = createBrowserRouter([
@@ -36,6 +31,10 @@ const router = createBrowserRouter([
         ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 
   {
