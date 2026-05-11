@@ -2,6 +2,7 @@ import { NotFoundPage } from "@/pages/NotFound";
 import { OnboardingLayout } from "@/widgets/layout/OnboardingLayout";
 import { PrivateRoute } from "@/widgets/layout/PrivateRoiute";
 import { SystemLayout } from "@/widgets/layout/SystemLayout";
+import RouteErrorElement from "@/app/ui/RouteErrorElement";
 
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
@@ -19,6 +20,7 @@ const AskPage = lazy(() => import("@/pages/mypage/AskPage"));
 const router = createBrowserRouter([
   {
     element: <SystemLayout />,
+    errorElement: <RouteErrorElement />,
     children: [
       { index: true, element: <HomePage /> },
       {
