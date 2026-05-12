@@ -11,6 +11,5 @@ export const useDeleteAccount = (onSuccess: () => void) => {
   return useMutation({
     mutationFn: deleteAccount,
     onSuccess: () => onSuccess?.(),
-    onError: err => console.error(err),
   });
 };

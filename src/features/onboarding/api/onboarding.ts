@@ -15,6 +15,6 @@ export const useSubmitOnboarding = () => {
   return useMutation({
     mutationFn: (body: OnboardingRequestType) => postOnboarding(body),
     onSuccess: () => navigate("/"),
-    onError: err => console.log(err),
+    // onError: err => console.log(err),
   });
 };

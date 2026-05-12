@@ -133,8 +133,5 @@ export const usePostReadPost = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: postsQueryKey });
     },
-    onError: err => {
-      console.log(err);
-    },
   });
 };
