@@ -22,7 +22,7 @@ export const DefaultErrorFallback = ({
     <div className="min-h-dvh flex items-center justify-center pb-20">
       <div className="flex justify-center flex-col items-center font-assistive ">
         <CircleAlert className="size-36 mb-10" />
-        <p>"서버에 문제가 발생했습니다."</p>
+        <p>서버에 문제가 발생했습니다.</p>
         <p className="mb-5 ">잠시 후 다시 시도해주세요.</p>
 
         <Button
