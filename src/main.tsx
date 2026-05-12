@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "@/app/styles/index.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, MutationCache } from "@tanstack/react-query";
 import axios from "axios";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "@/app/providers/ThemProvider.tsx";
@@ -18,6 +18,13 @@ const isServerError = (error: unknown) =>
   (error.response?.status === 500 || error.response?.status === 503);
 
 const queryClient = new QueryClient({
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      if (isServerError(error)) {
+        toast.error("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      }
+    },
+  }),
   defaultOptions: {
     queries: {
       retry: (failureCount, error) => {
@@ -26,13 +33,6 @@ const queryClient = new QueryClient({
         return failureCount < 3;
       },
       throwOnError: (error) => isServerError(error),
-    },
-    mutations: {
-      onError: (error) => {
-        if (isServerError(error)) {
-          toast.error("서버에 문제가 발생했습니다. 잠시 후 다시 시도해주세요.");
-        }
-      },
     },
   },
 });
