@@ -31,31 +31,30 @@ export const AUTH_ERROR = {
   KAKAO_API: "AUTH500_KAKAO_API",
 } as const;
 
-export const POST_ERROR = {
-  NOT_FOUND: "POST404_1",
-} as const;
-
 export const USER_ERROR = {
   INVALID_INTEREST: "USER400_1",
   ALREADY_WITHDRAWN: "USER400_2",
   NOT_FOUND: "USER404_1",
 } as const;
 
-export const ACTIVITY_ERROR = {
-  BOOKMARK_NOT_FOUND: "ACTIVITY404_1",
-  ALREADY_BOOKMARKED: "ACTIVITY409_1",
+export const BOOKMARK_ERROR = {
+  BOOKMARK_NOT_FOUND: "BOOKMARK404_1",
+  ALREADY_BOOKMARKED: "BOOKMARK409_1",
 } as const;
+
+//읽은 게시글 ,
+export const READPOST_ERROR = {
+  READ_POST: "READ_POST500_1",
+};
 
 export type CommonErrorCode = (typeof COMMON_ERROR)[keyof typeof COMMON_ERROR];
 export type AuthErrorCode = (typeof AUTH_ERROR)[keyof typeof AUTH_ERROR];
-export type PostErrorCode = (typeof POST_ERROR)[keyof typeof POST_ERROR];
 export type UserErrorCode = (typeof USER_ERROR)[keyof typeof USER_ERROR];
-export type ActivityErrorCode =
-  (typeof ACTIVITY_ERROR)[keyof typeof ACTIVITY_ERROR];
+export type BookmarkErrorCode =
+  (typeof BOOKMARK_ERROR)[keyof typeof BOOKMARK_ERROR];
 
 export type ErrorCode =
   | CommonErrorCode
   | AuthErrorCode
-  | PostErrorCode
   | UserErrorCode
-  | ActivityErrorCode;
+  | BookmarkErrorCode;
