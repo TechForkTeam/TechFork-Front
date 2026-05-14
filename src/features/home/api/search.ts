@@ -35,6 +35,6 @@ export const useSearchHistory = () => {
     onSuccess: () => {
       console.log("검색 히스토리 저장");
     },
-    onError: err => console.log(err),
+    // onError: err => console.log(err),
   });
 };

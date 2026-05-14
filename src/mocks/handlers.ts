@@ -1,9 +1,10 @@
-import { http, HttpResponse } from "msw";
+import { http, HttpResponse, passthrough } from "msw";
 import {
   AUTH_ERROR,
-  ACTIVITY_ERROR,
-  USER_ERROR,
+  BOOKMARK_ERROR,
   POST_ERROR,
+  READPOST_ERROR,
+  USER_ERROR,
   COMMON_ERROR,
 } from "@/shared/consts/errorCodes";
 
@@ -44,22 +45,36 @@ export const scenarioAuth = {
 
 /** 북마크 에러 시나리오 */
 export const scenarioBookmark = {
-  /** 북마크 추가 => 이미 북마크한 게시글 */
+  // POST /api/v1/activities/bookmarks
+  /** 북마크 추가 => 이미 북마크한 게시글 (BOOKMARK409_1) */
   alreadyBookmarked: http.post(url("/api/v1/activities/bookmarks"), () =>
-    err(ACTIVITY_ERROR.ALREADY_BOOKMARKED, "이미 북마크한 게시글입니다.", 409),
+    err(BOOKMARK_ERROR.ALREADY_BOOKMARKED, "이미 북마크한 게시글입니다.", 409),
+  ),
+  /** 북마크 추가 => 게시글을 찾을 수 없음 (POST404_1) */
+  postPostNotFound: http.post(url("/api/v1/activities/bookmarks"), () =>
+    err(POST_ERROR.NOT_FOUND, "게시글을 찾을 수 없습니다.", 404),
   ),
 
-  /** 북마크 삭제 => 북마크를 찾을 수 없음 */
+  // DELETE /api/v1/activities/bookmarks
+  /** 북마크 삭제 => 북마크를 찾을 수 없음 (BOOKMARK404_1) */
   bookmarkNotFound: http.delete(url("/api/v1/activities/bookmarks"), () =>
-    err(ACTIVITY_ERROR.BOOKMARK_NOT_FOUND, "북마크를 찾을 수 없습니다.", 404),
+    err(BOOKMARK_ERROR.BOOKMARK_NOT_FOUND, "북마크를 찾을 수 없습니다.", 404),
+  ),
+  /** 북마크 삭제 => 게시글을 찾을 수 없음 (POST404_1) */
+  deletePostNotFound: http.delete(url("/api/v1/activities/bookmarks"), () =>
+    err(POST_ERROR.NOT_FOUND, "게시글을 찾을 수 없습니다.", 404),
   ),
 };
 
-/** 게시글 에러 시나리오 */
-export const scenarioPost = {
-  /** 게시글 조회 => 찾을 수 없음 */
-  notFound: http.get(url("/api/v2/posts/*"), () =>
+/** 읽은 게시글 에러 시나리오 (POST /api/v1/activities/read-posts) */
+export const scenarioReadPost = {
+  /** 게시글을 찾을 수 없음 (POST404_1) */
+  postNotFound: http.post(url("/api/v1/activities/read-posts"), () =>
     err(POST_ERROR.NOT_FOUND, "게시글을 찾을 수 없습니다.", 404),
+  ),
+  /** 조회수 증가 실패 (READ_POST500_1) — 전역 toast 동작 확인 */
+  readPostFailed: http.post(url("/api/v1/activities/read-posts"), () =>
+    err(READPOST_ERROR.READ_POST, "조회수 증가에 실패했습니다.", 500),
   ),
 };
 
@@ -83,8 +98,8 @@ export const scenarioUser = {
 
 /** 공통 에러 시나리오 */
 export const scenarioCommon = {
-  /** 서버 에러 */
-  internalServer: http.get(url("/api/*"), () =>
+  /** 서버 에러 (전체) — query: ErrorBoundary fallback / mutation: toast */
+  internalServer: http.all(url("/api/*"), () =>
     err(
       COMMON_ERROR.INTERNAL_SERVER,
       "서버 에러, 관리자에게 문의 바랍니다.",
@@ -92,8 +107,50 @@ export const scenarioCommon = {
     ),
   ),
 
-  /** 서비스 점검 */
-  serviceUnavailable: http.get(url("/api/*"), () =>
+  /** 서버 에러 (query만) — GET만 막아 mutation은 정상 동작 */
+  internalServerQuery: http.get(url("/api/*"), () =>
+    err(
+      COMMON_ERROR.INTERNAL_SERVER,
+      "서버 에러, 관리자에게 문의 바랍니다.",
+      500,
+    ),
+  ),
+
+  /** 서버 에러 (mutation만) — POST/PATCH/DELETE만 막아 query는 정상 동작 */
+  internalServerMutation: [
+    http.post(url("/api/v1/auth/refresh"), () => passthrough()),
+    http.post(url("/api/*"), () =>
+      err(
+        COMMON_ERROR.INTERNAL_SERVER,
+        "서버 에러, 관리자에게 문의 바랍니다.",
+        500,
+      ),
+    ),
+    http.patch(url("/api/*"), () =>
+      err(
+        COMMON_ERROR.INTERNAL_SERVER,
+        "서버 에러, 관리자에게 문의 바랍니다.",
+        500,
+      ),
+    ),
+    http.delete(url("/api/*"), () =>
+      err(
+        COMMON_ERROR.INTERNAL_SERVER,
+        "서버 에러, 관리자에게 문의 바랍니다.",
+        500,
+      ),
+    ),
+    http.put(url("/api/*"), () =>
+      err(
+        COMMON_ERROR.INTERNAL_SERVER,
+        "서버 에러, 관리자에게 문의 바랍니다.",
+        500,
+      ),
+    ),
+  ],
+
+  /** 서비스 점검 — query: ErrorBoundary fallback / mutation: toast */
+  serviceUnavailable: http.all(url("/api/*"), () =>
     err(
       COMMON_ERROR.SERVICE_UNAVAILABLE,
       "서버가 일시적으로 사용중지 되었습니다.",
@@ -115,18 +172,24 @@ export const scenarioNetwork = {
 
 export const handlers = [
   // 인증
-  // scenarioAuth.refreshMismatch,   // 401: refresh 불일치 => 즉시 로그아웃 확인
-  // scenarioAuth.withdrawn, // 403: 탈퇴 회원 => 즉시 로그아웃 확인
-  // 북마크
-  // scenarioBookmark.alreadyBookmarked, // 409: 중복 북마크
-  // scenarioBookmark.bookmarkNotFound,  // 404: 북마크 없음
+  // scenarioAuth.refreshMismatch,         // 401: refresh 불일치 => 즉시 로그아웃 -O
+  // scenarioAuth.withdrawn,               // 403: 탈퇴 회원 => 즉시 로그아웃 -O
+  // 북마크 POST
+  // scenarioBookmark.alreadyBookmarked,   // 409: 중복 북마크 -O
+  // scenarioBookmark.postPostNotFound,    // 404: 게시글 없음
+  // 북마크 DELETE
+  // scenarioBookmark.bookmarkNotFound,    // 404: 북마크 없음 -O
+  // scenarioBookmark.deletePostNotFound,  // 404: 게시글 없음
+  // 읽은 게시글 POST
+  // scenarioReadPost.postNotFound,        // 404: 게시글 없음
+  // scenarioReadPost.readPostFailed,      // 500: 조회수 증가 실패 => 전역 toast -O
   // 유저
-  // scenarioUser.invalidInterest,   // 400: 유효하지 않은 관심사
-  // scenarioUser.alreadyWithdrawn, // 400: 이미 탈퇴한 회원
+  // scenarioUser.invalidInterest,            // 400: 유효하지 않은 관심사
+  // scenarioUser.alreadyWithdrawn,        // 400: 이미 탈퇴한 회원 -O
   // 공통
-  // scenarioCommon.internalServer,       // 500: 서버 에러
-  // scenarioCommon.serviceUnavailable,   // 503: 서비스 점검
+  // scenarioCommon.internalServer,        // 500: 서버 에러
+  // ...scenarioCommon.internalServerMutation,
+  // scenarioCommon.serviceUnavailable,    // 503: 서비스 점검
   // 네트워크
-  // scenarioNetwork.offline, // 연결 끊김 (ERR_NETWORK)
-  // scenarioNetwork.bookmarkOffline,// 북마크 API만 연결 끊김
+  // scenarioNetwork.offline,              // 연결 끊김 (ERR_NETWORK) -O
 ];
