@@ -174,28 +174,22 @@ export const handlers = [
   // 인증
   // scenarioAuth.refreshMismatch,         // 401: refresh 불일치 => 즉시 로그아웃 -O
   // scenarioAuth.withdrawn,               // 403: 탈퇴 회원 => 즉시 로그아웃 -O
-
   // 북마크 POST
   // scenarioBookmark.alreadyBookmarked,   // 409: 중복 북마크 -O
   // scenarioBookmark.postPostNotFound,    // 404: 게시글 없음
-
   // 북마크 DELETE
   // scenarioBookmark.bookmarkNotFound,    // 404: 북마크 없음 -O
   // scenarioBookmark.deletePostNotFound,  // 404: 게시글 없음
-
   // 읽은 게시글 POST
   // scenarioReadPost.postNotFound,        // 404: 게시글 없음
   // scenarioReadPost.readPostFailed,      // 500: 조회수 증가 실패 => 전역 toast -O
-
   // 유저
-  scenarioUser.invalidInterest,            // 400: 유효하지 않은 관심사
+  // scenarioUser.invalidInterest,            // 400: 유효하지 않은 관심사
   // scenarioUser.alreadyWithdrawn,        // 400: 이미 탈퇴한 회원 -O
-
   // 공통
   // scenarioCommon.internalServer,        // 500: 서버 에러
   // ...scenarioCommon.internalServerMutation,
   // scenarioCommon.serviceUnavailable,    // 503: 서비스 점검
-
   // 네트워크
   // scenarioNetwork.offline,              // 연결 끊김 (ERR_NETWORK) -O
 ];
