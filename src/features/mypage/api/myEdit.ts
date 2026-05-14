@@ -9,6 +9,9 @@ import { API_ENDPOINTS } from "@/shared/consts/endpoints";
 import { SHARED_QUERY_KEY } from "@/shared/consts/queryKeys";
 import { HOME_QUERY_KEY } from "@/features/home/consts/queryKeys";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { USER_ERROR } from "@/shared/consts/errorCodes";
+import { toast } from "react-toastify";
+import type { AxiosError } from "axios";
 
 // 내 관심사 수정 =>mypage
 export const putMyInterst = async (body: InterestDataDto) => {
@@ -25,7 +28,12 @@ export const usePutMyInterst = () => {
     HOME_QUERY_KEY.POSTS_RECOMMEND,
   ] as const;
 
-  return useMutation({
+  return useMutation<
+    unknown,
+    AxiosError<{ code: string; message: string }>,
+    InterestDataDto,
+    { previous: InterestTypeDto[] | undefined; previousRecommend: unknown }
+  >({
     mutationFn: (body: InterestDataDto) => putMyInterst(body),
 
     onMutate: async (payload: InterestDataDto) => {
@@ -43,7 +51,11 @@ export const usePutMyInterst = () => {
 
       return { previous, previousRecommend };
     },
-    onError: (_err, _payload, context) => {
+    onError: (e, _, context) => {
+      if (e?.response?.data?.code == USER_ERROR.INVALID_INTEREST) {
+        toast.error(e.response.data.message);
+      }
+
       if (context?.previous) {
         queryClient.setQueryData(queryKey, context.previous);
       }
@@ -78,6 +90,5 @@ export const usePatchMyProfile = (onSuccess?: () => void) => {
       });
       onSuccess?.();
     },
-    onError: err => console.log(err),
   });
 };
