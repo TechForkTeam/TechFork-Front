@@ -6,9 +6,9 @@ import RouteErrorElement from "@/app/ui/RouteErrorElement";
 
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import HomePage from "@/pages/home/HomePage";
 
 // Lazy Loading 적용
-const HomePage = lazy(() => import("@/pages/home/HomePage"));
 const LoginPage = lazy(() => import("@/pages/login/LoginPage"));
 const KakaoLogin = lazy(() => import("@/pages/login/KakaoLogin"));
 const Onboarding = lazy(() => import("@/pages/onboarding/Onboarding"));
