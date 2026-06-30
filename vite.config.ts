@@ -4,13 +4,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import svgr from "vite-plugin-svgr";
 import react from "@vitejs/plugin-react";
+import { visualizer } from "rollup-plugin-visualizer";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), svgr()],
+  plugins: [react(), tailwindcss(), svgr(), visualizer({ open: true, filename: "stats.html", gzipSize: true })],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
