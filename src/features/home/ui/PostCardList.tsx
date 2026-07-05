@@ -52,9 +52,9 @@ const PostCardList = ({ selectedTab }: PostCardListProps) => {
   return (
     <>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {posts.map((item: CardItemProps) => {
+        {posts.map((item: CardItemProps, index: number) => {
           const postId = item.postId ?? item.id;
-          return <CardItem key={postId} {...item} id={postId} />;
+          return <CardItem key={postId} {...item} id={postId} priority={index === 0 && selectedTab === 0} />;
         })}
       </ul>
       {activeQuery?.isFetchingNextPage && <Loading />}
