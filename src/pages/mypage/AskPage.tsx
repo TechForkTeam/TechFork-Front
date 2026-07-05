@@ -106,8 +106,10 @@ const AskPage = () => {
             <section className="rounded-xl border border-normal bg-bgStrong p-8">
               <h3 className="mb-1 body-sb-18">안내사항</h3>
               <ul className="list-disc pl-5 body-r-14 font-alternative marker:text-xs marker:font-alternative">
-                <li>문의 접수 후 영업일 기준 1~2일 내에 답변드릴 예정입니다.</li>
-                <li>상담은 고객센터(0000-0000)로도 가능합니다.</li>
+                <li>
+                  문의 접수 후 영업일 기준 1~2일 내에 답변드릴 예정입니다.
+                </li>
+                <li>상담은 고객센터(0000-0001)로도 가능합니다.</li>
               </ul>
             </section>
           </>
