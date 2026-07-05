@@ -24,6 +24,7 @@ interface CardItemProps {
   viewCount: number;
   keywords?: string[];
   shortSummary: string;
+  priority?: boolean;
 }
 
 export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
@@ -39,6 +40,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
       publishedAt,
       isBookmarked,
       shortSummary,
+      priority = false,
     },
     ref,
   ) => {
@@ -116,8 +118,7 @@ export const CardItem = forwardRef<HTMLLIElement, CardItemProps>(
                   src={thumbnailUrl}
                   alt={`{${title} - 썸네일}`}
                   className=" w-full h-full object-cover"
-                  // loading="lazy"
-                  // decoding="async"
+                  fetchPriority={priority ? "high" : "auto"}
                 />
               ) : (
                 <p className="line-clamp-9 overflow-hidden text-clip min-h-45 text-sm">
